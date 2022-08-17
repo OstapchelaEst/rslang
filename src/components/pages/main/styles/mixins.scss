@@ -1,0 +1,25 @@
+@import 'values.scss';
+
+@function rem($px) {
+	$result: calc($px/ 16) + rem;
+	@return $result;
+}
+
+@function em($px, $current: 16) {
+	$result: calc($px/ $current) + em;
+	@return $result;
+}
+
+@function lh($px,$size){
+   $result: calc($size/$px);
+   @return $result;
+}
+
+@function adaptivSize($maxWidth,$minWidth,$maxSizeContainer,$minSizeContainer){
+   $result: calc(#{$minWidth}px + (#{$maxWidth} - #{$minWidth}) * ((100vw - #{$minSizeContainer}px) / (#{$maxSizeContainer} - #{$minSizeContainer})));
+   @return $result;
+}
+@function adaptivSizeRem($maxWidth,$minWidth,$maxSizeContainer,$minSizeContainer){
+   $result: calc((#{$minWidth} + (#{$maxWidth} - #{$minWidth}) * ((100vw - #{$minSizeContainer}) / (#{$maxSizeContainer} - #{$minSizeContainer})))/16)+ rem;
+   @return $result;
+}
