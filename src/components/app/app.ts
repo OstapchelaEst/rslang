@@ -7,6 +7,7 @@ const router = new Navigo("/");
 router.on("", async () => {
   await RENDER_BASIC_STRUCTURE.header();
   await RENDER_BASIC_STRUCTURE.footer();
+  await RENDER_BASIC_STRUCTURE.startPage();
   await burgerMenu();
 });
 
