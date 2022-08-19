@@ -3,13 +3,11 @@ export interface User {
   email: string;
   password: string;
 }
-
 export interface CreateUserContent {
   id: string;
   name: string;
   email: string;
 }
-
 export interface AuthorizationContent {
   message: string;
   token: string;
@@ -17,7 +15,6 @@ export interface AuthorizationContent {
   userId: string;
   name: string;
 }
-
 export interface WordContent {
   id: string;
   group: number;
@@ -34,14 +31,40 @@ export interface WordContent {
   textMeaningTranslate: string;
   textExampleTranslate: string;
 }
-
 export interface UserWordContent {
   id: string;
   difficulty: string;
   wordId: string;
 }
-
 export interface StatisticsContent {
   id: string;
   learnedWords: number;
+}
+
+export interface OptionalUserWord {
+  dateWhenItBecameLearned: string | false;
+  dateWhenItBecameNew: string | false;
+  gameInWhichItBecameNew: string | false;
+  sprint: {
+    totalCount: number;
+    trueCount: number;
+  };
+  audioCall: {
+    totalCount: number;
+    trueCount: number;
+  };
+}
+export interface OptionalUserStatistics {
+  [date: string]: {
+    sprint: {
+      bestStreak: number;
+      totalCount: number;
+      trueCount: number;
+    };
+    audioCall: {
+      bestStreak: number;
+      totalCount: number;
+      trueCount: number;
+    };
+  };
 }
