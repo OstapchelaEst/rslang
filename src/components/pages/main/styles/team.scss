@@ -1,6 +1,4 @@
 @import 'mixins.scss';
-@import 'values.scss';
-
 .team-page {
    padding: 70px 0;
    @media (max-width: em(1000)){
@@ -169,7 +167,7 @@
       
    
       & a{
-         color: $fontColorOrenge;
+         color: #F5443B;
       }
    }
    // .team-page__text
@@ -185,7 +183,7 @@
       font-size: rem(36);
       font-weight: 600;
       text-align: center;
-      color: $fontMainColor;
+      color: #FFFFFF99;
       transition: all 0.3s ease 0s;
       @media (max-width: em(660)){
          font-size: rem(24);

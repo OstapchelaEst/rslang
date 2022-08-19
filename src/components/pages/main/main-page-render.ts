@@ -176,7 +176,6 @@ class RenderBasicStructure {
                   <li class="start-page__item">Статистика</li>
                </ul>
             </div>
-         <button class="start-page__button">Давай начнём!</button>
       </div>
    </div>
 </div>`;

@@ -1,8 +1,4 @@
 @import 'mixins.scss';
-@import 'values.scss';
-
-
-
 .start-page{
    min-height: calc(100vh - 72px);
    display: flex;
@@ -55,7 +51,7 @@
       width: 102px;
       height: 102px;
       z-index: 2;
-      left: 0;
+      left: 70%;
       top: 25%;
       @media (max-width: em(767)){
          top:100%;
@@ -86,7 +82,7 @@
       padding: 87px 10px;
       transition: all 0.3s ease 0s;
       @media (max-width: em(1210)){
-         padding: adaptivSize(87,30,$contaier,$mobile) 10px;
+         padding: adaptivSize(87,30,1210,320) 10px;
       }
       @media (max-width: em(1100)){
            max-width: 53%;
@@ -101,7 +97,7 @@
       font-weight: 600;
       font-size: rem(50);
       @media (max-width: em(1210)){
-         font-size: (adaptivSize(50,30,$contaier,$mobile));
+         font-size: (adaptivSize(50,30,1210,320));
       }
       line-height: lh(56,60);
       letter-spacing: -0.01em;
@@ -124,30 +120,6 @@
       letter-spacing: 0em;
       color: #FFFFFF66;
       margin-bottom: 55px;
-   }
-   // .main__button
-   &__button {
-      display: block;
-      font-size: rem(20);
-      font-weight: 600;
-      color: #FFFFFFCC;
-      width: 50%;
-      padding: 15px;
-      background-color: #F5443B;
-      border-radius: 7px;
-      transition: all 0.3s ease 0s;
-      box-shadow: 0px 0px 0px 0px#F5443B;
-      animation-duration: .7s;
-      
-      @media (any-hover: hover){
-         &:hover{
-            animation-name:button-registration;
-         }
-      }
-
-      @media (max-width:em(767)){
-           margin-left: auto;
-      }
    }
 }
 

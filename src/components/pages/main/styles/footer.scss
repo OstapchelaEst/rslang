@@ -1,10 +1,10 @@
-@import 'values.scss';
+
 @import 'animation.scss';
 @import 'mixins.scss';
 
 .footer {
-   background-color:$mainBackgroundLight;
-   color: $fontMainColor;
+   background-color:#2d2e4b;
+   color: #FFFFFF99;
    font-weight: 600;
    padding: 15px 0 20px;
 
@@ -43,7 +43,7 @@
          transition: all 0.3s ease 0s;
          @media (any-hover: hover){
             &:hover{
-               color: $fontHoverColorWhite;
+               color: #FFF;
             }
          }
        }
