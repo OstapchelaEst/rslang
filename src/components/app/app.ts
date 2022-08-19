@@ -8,6 +8,7 @@ router.on("", async () => {
   await RENDER_BASIC_STRUCTURE.header();
   await RENDER_BASIC_STRUCTURE.footer();
   await RENDER_BASIC_STRUCTURE.startPage();
+  await RENDER_BASIC_STRUCTURE.teamPage();
   await burgerMenu();
 });
 

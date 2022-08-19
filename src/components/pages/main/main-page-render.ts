@@ -167,11 +167,95 @@ class RenderBasicStructure {
             заданий в любое удобное для вас время!</h3>
          <p class="start-page__text">Библиотека из 4-х тысяч слов, которые можно отсортировать по популярности и
             сложности.</p>
+            <div class="start-page__chips">
+            <h4>У нас есть:</h4>
+               <ul class="start-page__list">
+                  <li class="start-page__item">Мини-игры</li>
+                  <li class="start-page__item">Уровни сложности</li>
+                  <li class="start-page__item">Словарь</li>
+                  <li class="start-page__item">Статистика</li>
+               </ul>
+            </div>
          <button class="start-page__button">Давай начнём!</button>
       </div>
    </div>
 </div>`;
     (<HTMLElement>document.querySelector(".main__container")).prepend(PAGE);
+  }
+
+  teamPage() {
+    if (document.querySelector(".team-page")) return;
+    const PAGE = document.createElement("div");
+    PAGE.classList.add("team-page");
+    PAGE.innerHTML = `            
+    <div class="team-page">
+   <h3 class="team-page__title">Давай познакомимся?</h3>
+   <div class="team-page__body">
+      <div class="team-page__item">
+         <div class="team-page__picture"><img class="team-page__img"
+               src="https://avatars.githubusercontent.com/u/52502654?v=4" alt="">
+         </div>
+         <h4 class="team-page__sub-title">Наш team-leader <a href="https://github.com/RockStar666by"
+               target="_blank">Артём</a></h4>
+         <p class="team-page__text">
+            Занимался тем и тем Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
+            libero dignissimos aut
+            labore ex nulla maiores alias necessitatibus cupiditate optio voluptate voluptas harum
+            temporibus, officiis incidunt rerum quae reiciendis.
+         </p>
+
+      </div>
+      <div class="team-page__item">
+         <div class="team-page__picture"><img class="team-page__img"
+               src="https://avatars.githubusercontent.com/u/90386861?v=4" alt="">
+         </div>
+
+         <h4 class="team-page__sub-title">Front-end разработчик - <a href="https://github.com/OstapchelaEst"
+               target="_blank">Дмитрий</a></h4>
+         <p class="team-page__text">
+            Занимался тем и тем Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
+            libero dignissimos aut
+            labore ex nulla maiores alias necessitatibus cupiditate optio voluptate voluptas harum
+            temporibus, officiis incidunt rerum quae reiciendis.
+         </p>
+
+      </div>
+      <div class="team-page__item">
+         <div class="team-page__picture"><img class="team-page__img"
+               src="https://avatars.githubusercontent.com/u/96074310?v=4" alt="">
+         </div>
+
+         <h4 class="team-page__sub-title">Front-end разработчик - <a href="https://github.com/LenaStask"
+               target="_blank">Елена</a></h4>
+         <p class="team-page__text">
+            Занимался тем и тем Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
+            libero dignissimos aut
+            labore ex nulla maiores alias necessitatibus cupiditate optio voluptate voluptas harum
+            temporibus, officiis incidunt rerum quae reiciendis.
+         </p>
+
+      </div>
+      <div class="team-page__item">
+         <div class="team-page__picture"><img class="team-page__img"
+               src="https://avatars.githubusercontent.com/u/50177907?v=4" alt="">
+         </div>
+
+         <h4 class="team-page__sub-title">Front-end разработчик - <a href="https://github.com/teame92"
+               target="_blank">Кирилл</a></h4>
+         <p class="team-page__text">
+            Занимался тем и тем Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
+            libero dignissimos aut
+            labore ex nulla maiores alias necessitatibus cupiditate optio voluptate voluptas harum
+            temporibus, officiis incidunt rerum quae reiciendis.
+         </p>
+
+      </div>
+   </div>
+   <p class="team-page__sub-text">
+      Вместе мы трудились не покладая рук, чтоб ты смог учть англйиский комфортно и весело!
+   </p>
+</div>`;
+    (<HTMLElement>document.querySelector(".main__container")).append(PAGE);
   }
 }
 export const RENDER_BASIC_STRUCTURE = new RenderBasicStructure();

@@ -1,0 +1,195 @@
+@import 'mixins.scss';
+@import 'values.scss';
+
+.team-page {
+   padding: 70px 0;
+   @media (max-width: em(1000)){
+      padding: adaptivSize(70,40,1000,320) 0;
+   }
+   background: url('../../../assets/images/main-page/dots-backgtound.png');
+   background-repeat:repeat-y;
+   background-size: 100%;
+   // .team-page__title
+   &__title {
+      color: #FFFFFFCC;
+      font-size: rem(56);
+      transition: all 0.3s ease 0s;
+      @media (max-width: em(800)){
+           font-size: rem(46);
+      }
+      @media (max-width: em(500)){
+           font-size: rem(36);
+      }
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 70px;
+   }
+   // .team-page__body
+   &__body {
+      display: flex;
+      flex-direction: column;
+      row-gap: 70px;
+      margin-bottom: 40px;
+   }
+   // .team-page__item
+   &__item {
+      display: grid;
+      @media (max-width: em(660)){
+           align-items: end;
+      }
+      &:nth-child(odd){
+         grid-template-columns: 180px 70%;
+         @media (max-width: em(660)){
+            grid-template-columns: 100px auto;  
+            gap: 15px;
+         }
+         position: relative;
+         .team-page__img{
+            z-index: 2;
+         }
+   
+         .team-page__picture{
+            position: relative;
+            height: fit-content;
+            &::before,&::after{
+               content:'';
+               position: absolute;
+               display: block;
+            }
+            &::after{
+               top: -5%;
+               left: -5%;
+               width: 70%;
+               height: 70%;
+               z-index: 1;
+               border-radius: 50%;
+               background-color: rgb(89, 90, 126);
+            }
+            &::before{
+               bottom: -5%;
+               left: -5%;
+               width: 100%;
+               height: 100%;
+               border-radius: 50%;
+               background-color: #303254;
+            }
+         }
+
+         .team-page__text{
+            @media (max-width: em(660)){
+               grid-column: 1/3;  
+            }
+         }
+      }
+
+      &:nth-child(even){
+         justify-content: end;
+         grid-template-columns: 70% 180px;
+         text-align: right;
+         @media (max-width: em(660)){
+            grid-template-columns: auto 100px;  
+            column-gap: 15px;
+            row-gap: 10px;
+         }
+         .team-page__picture{
+            order: 2;
+            position: relative;
+            height: fit-content;
+            grid-column: 2/3;
+            &::before,&::after{
+               content:'';
+               position: absolute;
+               display: block;
+            }
+            &::after{
+               top: -5%;
+               right: -5%;
+               width: 70%;
+               height: 70%;
+               z-index: 1;
+               border-radius: 50%;
+               background-color: rgb(89, 90, 126);
+            }
+            &::before{
+               bottom: -5%;
+               right: -5%;
+               width: 100%;
+               height: 100%;
+               border-radius: 50%;
+               background-color: #303254;
+            }
+            .team-page__img{
+               z-index: 2;
+            }
+         } 
+         .team-page__info{
+            text-align: right;
+         }
+         .team-page__text{
+            @media (max-width: em(660)){
+               grid-column: 1/3;  
+            }
+         }
+      }
+   }
+   &__picture{
+      grid-row:1/3 ;
+      @media (max-width: em(660)){
+           max-width: 100px;
+           width: 100%;
+           grid-row:1/2 ;
+      }
+   }
+
+
+   // .team-page__img
+   &__img {
+      max-width: 150px;
+      width: 100%;
+      border-radius: 50%;
+      position: relative;
+      z-index: 1;
+   }
+   &__info{
+      position: relative;
+      z-index:3;
+      max-width: 70%;
+      @media (max-width: em(900)){
+           max-width: 100%;
+      }
+   }
+   // .team-page__sub-title
+   &__sub-title {
+      color: #FFFFFFCC;
+      font-size: rem(36);
+      margin-bottom: 20px;
+      @media (max-width: em(600)){
+           font-size: rem(24);
+      }
+      
+   
+      & a{
+         color: $fontColorOrenge;
+      }
+   }
+   // .team-page__text
+   &__text {
+      color: #ffffffb3;
+      font-size: rem(26);
+      @media (max-width: em(768)){
+           font-size: rem(20);
+      }
+      text-align: justify;
+   }
+   &__sub-text{
+      font-size: rem(36);
+      font-weight: 600;
+      text-align: center;
+      color: $fontMainColor;
+      transition: all 0.3s ease 0s;
+      @media (max-width: em(660)){
+         font-size: rem(24);
+      }
+   }
+
+}
