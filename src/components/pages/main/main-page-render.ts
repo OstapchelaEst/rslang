@@ -189,7 +189,7 @@ class RenderBasicStructure {
     PAGE.classList.add("team-page");
     PAGE.innerHTML = `            
     <div class="team-page">
-   <h3 class="team-page__title">Давай познакомимся?</h3>
+   <h3 class="team-page__title">Наша команда</h3>
    <div class="team-page__body">
       <div class="team-page__item">
          <div class="team-page__picture"><img class="team-page__img"
@@ -255,6 +255,59 @@ class RenderBasicStructure {
       Вместе мы трудились не покладая рук, чтоб ты смог учть англйиский комфортно и весело!
    </p>
 </div>`;
+    (<HTMLElement>document.querySelector(".main__container")).append(PAGE);
+  }
+  functionalPage() {
+    if (document.querySelector(".we-prepared")) return;
+    const PAGE = document.createElement("div");
+    PAGE.classList.add("we-prepared");
+    PAGE.innerHTML = `
+    <div class="functional">
+    <h3 class="functional__title">Функционал</h3>
+    <p class="functional__info">Зарегестрируйся, чтоб получить все возможности</p>
+    <div class="functional__body">
+       <div class="functional__item">
+          <div class="functional__sub-title">Учебник</div>
+          <div class="functional__text">
+             Более 3500 тысяч слов для изучения, разбитых на разделы по уровню твоей подготовки с удобной
+             навигацией.
+          </div>
+          <div class="functional__link">
+             <a href="">Открыть</a>
+          </div>
+       </div>
+       <div class="functional__item">
+          <div class="functional__sub-title">Статистика</div>
+          <div class="functional__text">
+             Отслеживай свой прогресс в индивидуальной статистике, ставь цели и вдохновляйся на и достижение
+             новых результатов каждый день!
+          </div>
+          <div class="functional__link">
+             <a href="">Открыть</a>
+          </div>
+       </div>
+       <div class="functional__item">
+          <div class="functional__sub-title">Словарь</div>
+          <div class="functional__text">
+             Создай свой персональный словарь для изучения слов - добавляй слова, которым хочешь уделить
+             особое внимание и удаляй, если слово тебе уже известно.
+          </div>
+          <div class="functional__link">
+             <a href="">Открыть</a>
+          </div>
+       </div>
+       <div class="functional__item">
+          <div class="functional__sub-title">Игры</div>
+          <div class="functional__text">
+             2 увлекательных игры на развитие запоминания слов и восприятия на слух.
+          </div>
+          <div class="functional__link">
+             <a href="">Открыть</a>
+          </div>
+       </div>
+    </div>
+ </div>
+    `;
     (<HTMLElement>document.querySelector(".main__container")).append(PAGE);
   }
 }

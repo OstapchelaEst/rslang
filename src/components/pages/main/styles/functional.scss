@@ -1,0 +1,104 @@
+@import 'mixins.scss';
+@import 'values.scss';
+@import 'animation.scss';
+
+.functional {
+   background: linear-gradient(#23265C,#352A56);
+   border-radius: 45px;
+   padding: 35px;
+   @media (max-width: em(660)){
+        padding: adaptivSize(35,20,660,320) adaptivSize(35,15,660,320);
+   }
+   
+
+   // .functional__title
+   &__title {
+      text-align: center;
+      font-weight: 700;
+      font-size: rem(40);
+      color: #fff;
+      margin-bottom: 10px;
+      transition: all 0.3s ease 0s;
+      @media (max-width: em(460)){
+           font-size: rem(30);
+      }
+   }
+   &__info{
+      text-align: center;
+      font-weight: 600;
+      font-size: rem(20);
+      color:rgba(255, 255, 255, 0.4);
+      margin-bottom: 30px;
+      @media (max-width: em(460)){
+         font-size: rem(18);
+      }
+   }
+   // .functional__body
+   &__body {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      row-gap: 35px;
+      column-gap: 20px;
+      @media (max-width: em(1000)){
+         grid-template-columns: repeat(3,1fr);
+      }
+      @media (max-width: em(768)){
+         grid-template-columns: repeat(2,1fr);
+      }
+      @media (max-width: em(640)){
+         grid-template-columns: repeat(1,1fr);
+      }
+   }
+   // .functional__item
+   &__item {
+      flex: 1 1 50%;
+      display: flex;
+      flex-direction: column;
+      border: 3px solid $menuBorderColor;
+      border-radius: 20px;
+      padding: 25px 20px;
+   }
+   // .functional__sub-title
+   &__sub-title {
+      font-size: rem(36);
+      font-weight: 600;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 20px;
+      @media (max-width: em(460)){
+         font-size: rem(24);
+      }
+   }
+   // .functional__text
+   &__text {
+      font-size: rem(18);
+      color: $fontMainColor;
+      height: 100%;
+      margin-bottom: 20px;
+      @media (max-width: em(460)){
+         font-size: rem(16);
+      }
+   }
+   &__link{
+      & a {
+         display: block;
+         padding: 15px 10px;
+         background-color: $fontColorOrenge;
+         text-align: center;
+         border-radius: 10px;
+         color: #fff;
+         font-weight: 600;
+         font-size: rem(20);
+         box-shadow: 0px 0px 0px 0px$fontColorOrenge;
+         animation-duration: .7s;
+         @media (max-width: em(460)){
+            font-size: rem(18);
+         }
+         @media (any-hover: hover){
+            &:hover{
+               animation-name:button-registration;
+            }
+         }
+      }
+   }
+}
