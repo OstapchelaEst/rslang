@@ -51,11 +51,12 @@
       width: 102px;
       height: 102px;
       z-index: 2;
-      left: 70%;
+      left: 0%;
       top: 25%;
       @media (max-width: em(767)){
          top:100%;
          transform: translateY(-120%);
+         left: 70%;
     }
    }
    // .decoration-main__img-2
