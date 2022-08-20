@@ -41,3 +41,6 @@ class Users {
     return content;
   };
 }
+
+const user = new Users();
+export default user;
