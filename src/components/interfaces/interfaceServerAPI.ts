@@ -1,5 +1,5 @@
 export interface User {
-  name: string;
+  name?: string;
   email: string;
   password: string;
 }
@@ -16,6 +16,11 @@ export interface AuthorizationContent {
   refreshToken: string;
   userId: string;
   name: string;
+}
+
+export interface WordLocation {
+  group: number;
+  page: number;
 }
 
 export interface WordContent {
@@ -35,17 +40,6 @@ export interface WordContent {
   textExampleTranslate: string;
 }
 
-export interface UserWordContent {
-  id: string;
-  difficulty: string;
-  wordId: string;
-}
-
-export interface StatisticsContent {
-  id: string;
-  learnedWords: number;
-}
-
 export interface OptionalUserWord {
   dateWhenItBecameLearned: string | false;
   dateWhenItBecameNew: string | false;
@@ -58,6 +52,14 @@ export interface OptionalUserWord {
     totalCount: number;
     trueCount: number;
   };
+}
+
+export interface UserWord {
+  token: string;
+  id: string;
+  wordId?: string;
+  difficulty?: string;
+  optional?: OptionalUserWord;
 }
 
 export interface OptionalUserStatistics {
@@ -73,4 +75,17 @@ export interface OptionalUserStatistics {
       trueCount: number;
     };
   };
+}
+
+export interface UserWordContent {
+  id: string;
+  difficulty: string;
+  wordId: string;
+  optional: OptionalUserWord;
+}
+
+export interface StatisticsContent {
+  token?: string;
+  id?: string;
+  optional: OptionalUserStatistics;
 }
