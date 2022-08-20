@@ -321,12 +321,15 @@ class RenderBasicStructure {
                      <input type="email" autocomplete="on" id="email" class="sing-in__input-email">
                      <label for="password">Пароль*</label>
                      <input type="password" id="password"  class="sing-in__input-password">
-                     <p>Ещё не <span class="sing-in__registration">зарегестрированя?</span></p>
+                     <p>Ещё не <span class="sing-in__registration">зарегистрировался?</span></p>
                      <button type="submit"  class="sing-in__input-button">Войти</button>
                   </form>
                </div>
    `;
     document.body.append(MODAL);
+    setTimeout(() => {
+      (<HTMLElement>document.querySelector(".sing-in")).classList.add("active");
+    }, 0);
   }
   registration() {
     (<HTMLElement>(
@@ -341,6 +344,13 @@ class RenderBasicStructure {
       <input type="password-2" id="password-2"  class="registration__input-password-2">
       <button type="submit"  class="registration__input-button">Зарегистрироваться</button>
    </form>`;
+  }
+  buildMainPage() {
+    this.header();
+    this.footer();
+    this.startPage();
+    this.functionalPage();
+    this.teamPage();
   }
 }
 export const RENDER_BASIC_STRUCTURE = new RenderBasicStructure();

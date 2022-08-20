@@ -5,7 +5,6 @@ class User {
     (<HTMLElement>(
       document.querySelector(".menu__link-registration")
     )).addEventListener("click", async () => {
-      console.log("aaaaa");
       await RENDER_BASIC_STRUCTURE.singIn();
       this.registrationModalWindow();
       this.closeModalWindow();
@@ -25,9 +24,12 @@ class User {
       "click",
       (e) => {
         if ((<HTMLElement>e.target).classList.contains("sing-in")) {
-          console.log(document.querySelector(".sing-in"));
-
-          (<HTMLElement>document.querySelector(".sing-in")).remove();
+          (<HTMLElement>document.querySelector(".sing-in")).classList.remove(
+            "active"
+          );
+          setTimeout(() => {
+            (<HTMLElement>document.querySelector(".sing-in")).remove();
+          }, 300);
         }
       }
     );

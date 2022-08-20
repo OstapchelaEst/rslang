@@ -1,4 +1,13 @@
 .sing-in {
+   transform: scale(0);
+   opacity: 0;
+  
+   &.active{
+      transition: transform 0.2s ease 0s, opacity 0.4s ease .1s;
+      opacity: 1;
+      transform: scale(1);
+   }
+   transition: transform 0.4s ease 0.2s, opacity 0.2s ease 0s;
    overflow-y: auto;
    position: fixed;
    padding: 15px;
