@@ -1,2 +1,4 @@
 import "./global.scss";
-import "./components/app/app.ts";
+import "./pages/main/styles/main-page.scss";
+import "./components/header/styles/header.scss";
+import "./app/app.ts";

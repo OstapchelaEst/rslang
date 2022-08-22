@@ -1,0 +1,192 @@
+@import '../../../mixins.scss';
+@import './sing-in.scss';
+
+.icon-menu {
+   display: none;
+   user-select: none;
+   @media (max-width: em(900)) {
+      margin-left: auto;
+      display: block;
+      position: relative;
+      width: 40px;
+      height: 24px;
+      cursor: pointer;
+      z-index: 15;
+      span,
+      &::before,
+      &::after {
+         content: "";
+         transition: all 0.3s ease 0s;
+         left: 0px;
+         position: absolute;
+         width: 100%;
+         height: 2px;
+         background-color: #FFF;
+         user-select: none;
+      }
+      &::before {
+         top: 0px;
+      }
+      &::after {
+         bottom: 0px;
+      }
+      span {
+         top: calc(50% - 1px);
+         user-select: none;
+      }
+      .menu-open & {
+         span {
+            transform: scale(0);
+         }
+         &::before {
+            transform: rotate(-45deg);
+            top: calc(50% - 1px);
+         }
+         &::after {
+            transform: rotate(45deg);
+            bottom: calc(50% - 1px);
+         }
+      }
+   }
+}
+
+.header {
+   padding: 15px 20px;
+   // .header__container
+   &__container {
+   }
+   // .header__menu
+   &__menu {
+      color: #FFFFFF99;
+      font-weight: 600;
+      font-size: rem(18);
+      display: flex;
+      align-items: center;
+   }
+   // .header__logo
+   &__logo {
+      display: block;
+      margin-right: auto;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: em(1);
+      font-size: rem(32);
+      transition: all 0.3s ease 0s;
+      @media (any-hover: hover){
+         &:hover{
+            transform: scale(1.03);
+            .header__logo-svg{
+               fill: #F5443B;
+            }
+         }
+      }
+   }
+   &__logo-svg{
+      transition: all 0.3s ease 0s;
+      fill: #FFFFFF99;
+   }
+}
+.menu {
+   // .menu__icon
+   &__icon {
+   }
+   // .menu__body
+   &__body {
+      @media (max-width: em(900)){
+           position: fixed;
+           z-index: 10;
+           top: 0;
+           right: -100%;
+           height: 100%;
+           padding: 65px 20px 15px;
+           width: max-content;
+           background-color: #2b2c54;
+           overflow-y: auto;
+           border-left: 10px solid #393975;
+            transition: all 0.5s ease 0s;
+
+           .menu-open & {
+            right: 0%;
+           }
+      }
+
+   }
+   // .menu__list
+   &__list {
+      display: flex;
+      align-items: center;
+      @media (max-width: em(900)){
+         flex-direction: column;
+         row-gap: 15px;
+         font-size: rem(26);
+         align-items: start;
+      }
+   }
+   // .menu__item
+   &__item {
+      display: flex;
+      &:not(:last-child){
+         margin-right: 20px;
+      }
+
+      @media (any-hover: hover){
+         &:hover{
+            .menu__link {
+            //transform: translateY(-3px);
+            padding-bottom: 4px;
+            color: #FFF;
+            &::after{
+               opacity: 1;
+               bottom: -3px;
+            }
+         }
+         }
+      }
+   }
+   // .menu__link
+   &__link {
+   display: block;
+   position: relative;
+   transition: all 0.3s ease 0s;
+   &::after{
+      content:'';
+      display: block;
+      position: absolute;
+      width: 90%;
+      height: 2px;
+      background-color: #FFF;
+      left: 50%;
+      bottom: -15px;
+      transform: translateX(-50%);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease 0s; 
+   }
+
+   }
+   &__link-registration,
+   &__link-logout {
+      margin-left: 40px;
+      display: block;
+      padding: 12px 32px;
+      background-color: #F5443B;
+      color: #FFF;
+      border-radius: 5px;
+      box-shadow: 0px 0px 0px 0px#F5443B;
+   
+      animation-duration: .7s;
+      transition: all 0.3s ease 0s;
+      @media (any-hover: hover){
+         &:hover{
+            animation-name:button;
+         }
+      }
+      @media (max-width: em(900)){
+           margin-left: 0px;
+           margin-top: 30px;
+      }
+      &:active{
+        transform: scale(0.98);
+      }
+   }
+}

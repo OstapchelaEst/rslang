@@ -1,0 +1,62 @@
+@import '../../../pages/main/styles/animation.scss';
+@import '../../../../mixins.scss';
+
+.footer {
+   background-color:#2d2e4b;
+   color: #FFFFFF99;
+   font-weight: 600;
+   padding: 15px 0 20px;
+
+   // .footer__container
+   &__container {
+   }
+   // .footer__list
+   &__list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: flex;
+       align-items: center;
+       justify-content: space-between;
+      @media (max-width:500px) {
+            flex-direction: column;
+            row-gap: 20px;
+      }
+
+       
+   }
+   // .footer__item
+   &__item {
+      display: flex;
+      align-items: center;
+      &:not(:last-child){
+         margin-right: 25px;
+        }
+      & a:not(:last-child){
+         margin-right: 10px;
+      }
+       & svg{
+         margin-right: 20px;
+       }
+       & a {
+         transition: all 0.3s ease 0s;
+         @media (any-hover: hover){
+            &:hover{
+               color: #FFF;
+            }
+         }
+       }
+
+       & span {
+        white-space: nowrap;
+       }
+       
+   }
+   // .footer__logo
+   &__logo {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      transition: all 0.3s ease 0s;
+   }
+}
