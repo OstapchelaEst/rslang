@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic");
-
+@import './mixins.scss';
 * {
    padding: 0px;
    margin: 0px;
@@ -94,4 +94,24 @@ h6 {
 
 .wrapper > main {
    flex: 1 1 auto;
+}
+
+.load-screan{
+  position: fixed;
+  background-color: #171836bb;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &__img{
+    width: 200px;
+    height: 200px;
+    background: url('./assets/images/main-page/load.gif');
+    background-size: contain;
+  }
 }

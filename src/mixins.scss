@@ -17,7 +17,3 @@
    $result: calc(#{$minWidth}px + (#{$maxWidth} - #{$minWidth}) * ((100vw - #{$minSizeContainer}px) / (#{$maxSizeContainer} - #{$minSizeContainer})));
    @return $result;
 }
-@function adaptivSizeRem($maxWidth,$minWidth,$maxSizeContainer,$minSizeContainer){
-   $result: calc((#{$minWidth} + (#{$maxWidth} - #{$minWidth}) * ((100vw - #{$minSizeContainer}) / (#{$maxSizeContainer} - #{$minSizeContainer})))/16)+ rem;
-   @return $result;
-}

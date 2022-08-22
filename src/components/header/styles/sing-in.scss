@@ -1,3 +1,5 @@
+@import '../../../pages/main/styles/animation.scss';
+
 .sing-in {
    transform: scale(0);
    opacity: 0;
@@ -53,12 +55,41 @@
             margin-bottom: 20px;
          }
       }
+      & .registration__form label.false{
+        position: relative;
+        &::after{
+          content:'';
+          position: absolute;
+          right: 7px;
+          top: 30px;
+          width: 10px;
+          height: 10px;
+          z-index: 200;
+          background-color: #F5443B;
+          border-radius: 50%;
+        }
+      }
+      & .registration__form label.true{
+        position: relative;
+        &::after{
+          content:'';
+          position: absolute;
+          right: 7px;
+          top: 30px;
+          width: 10px;
+          height: 10px;
+          z-index: 200;
+          background-color: #53E7CD;
+          border-radius: 50%;
+        }
+      }
       & label{
          display: block;
          margin-bottom: 5px;
          cursor: pointer;
       }
       & button{
+        user-select: none;
          display: block;
          width: 100%;
          margin-top: 30px;
@@ -70,6 +101,7 @@
          font-weight: 600;
          font-size: rem(20);
          box-shadow: 0px 0px 0px 0px#F5443B;
+         transition: all 0.3s ease 0s;
          animation-duration: .7s;
          @media (max-width: em(460)){
             font-size: rem(18);
@@ -80,7 +112,18 @@
             }
          }
       }
+      & button.disable{
+        transition: all 0.3s ease 0s;
+        background-color: rgb(90, 90, 90);
+        pointer-events: none;
+        @media (any-hover: hover){
+          &:hover{
+            animation-name: none;
+          }
+        }
+      }
    }
+
    // .sing-in__form
    &__form {
       & p{
@@ -97,6 +140,13 @@
                }
             }
          }
+      }
+      & p.sing-in__error{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: rem(16);
+        color: #F5443B;
       }
    }
    // .sing-in__input-email
