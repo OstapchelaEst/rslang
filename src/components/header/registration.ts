@@ -30,7 +30,7 @@ class Registration {
         (<HTMLElement>(
           document.querySelector(".sing-in__button-close")
         )).addEventListener("click", () => {
-          SING_IN_MODAL_WINDOW.closeModalWindowListener();
+          SING_IN_MODAL_WINDOW.closeModalWindow();
         });
       })
       .catch(() => {

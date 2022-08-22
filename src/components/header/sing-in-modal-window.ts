@@ -16,7 +16,7 @@ class SingInModalWindow {
     SING_IN_MODAL_WINDOW.registrationModalWindow();
     SING_IN_MODAL_WINDOW.closeModalWindowListener();
     AUTHORIZATION.AuthorizationListener();
-    console.log("Хочу зайти в аккаунт!");
+    ("Хочу зайти в аккаунт!");
   }
 
   registrationModalWindow() {
