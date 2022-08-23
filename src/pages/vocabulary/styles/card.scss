@@ -1,0 +1,102 @@
+.vocabulary{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 30px;
+}
+.vocabulary__header {
+  width: 100%;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  .vocabulary__link {
+    padding: 0 1rem;
+    &:first-child {
+      padding-left: 3px;
+    }
+    &:last-child {
+      padding-right: 3px;
+    }
+    &:hover {
+      color: #fff;
+    }
+  }
+  .vocabulary__sections {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+.card {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(180deg, #202246 -53.38%, rgba(40, 43, 87, 0.31) 100%);
+  padding: 1rem;
+  margin: 1rem;
+  .card__image {
+    width: 200px;
+    img {
+      width: 100%;
+    }
+  }
+  .card__content {
+    margin-left: 30px;
+  }
+  .card__word {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color:#fff;
+    .m10 {
+      margin-right: 10px;
+    }
+    .word {
+      color: #3BF5BD;
+    }
+  }
+  .word__button {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    transition: 250ms ease-in-out;
+    svg {
+      height: 100%;
+      width: 100%;
+      margin: 9px 0 0 7px;
+    }
+    &:hover {
+      background-color: #F5443B
+      ;
+    }
+  }
+  .card__word-meaning {
+    padding: 10px 10px 10px 0;
+  }
+  .card__word-example {
+    padding: 10px 10px 10px 0;
+  }
+  .card__buttons {
+    color: #F5443B;
+    margin-top: 10px;
+    .card__button {
+      border: 1px solid #F5443B;
+      border-radius: 3px;
+      padding: 8px 30px;
+      transition: 300ms ease-in-out;
+      margin-right: 20px;
+      &:hover {
+        background-color: #F5443B;
+        color: #fff;
+      }
+    }
+  }  
+}
+.pagination__button {
+  margin: 0 20px;
+}
