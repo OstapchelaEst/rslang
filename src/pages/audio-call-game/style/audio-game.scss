@@ -1,0 +1,210 @@
+@import '../../../mixins.scss';
+@import '../../main/styles/animation.scss';
+
+.audio-call-rules {
+  padding: 40px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:#FFFFFF99;
+  font-weight: 600;
+  // .audio-call-rules__title
+  &__body{
+    max-width: 650px;
+  }
+  &__title {
+    color:#FFFFFF;
+    font-size: rem(54);
+
+    letter-spacing: em(3);
+    text-align: center;
+    margin-bottom: 40px;
+
+  }
+  // .audio-call-rules__info
+  &__info {
+    color:rgba(255, 255, 255, 0.855);
+    font-size: rem(24);
+    line-height: lh(24,27);
+    margin-bottom: 30px;
+  }
+  // .audio-call-rules__list
+  &__list {
+    margin-left: 25px;
+    margin-bottom: 40px;
+  }
+  // .audio-call-rules__item
+  &__item {
+    font-size: rem(20);
+    &:not(:last-child){
+      margin-bottom: 10px;
+    }
+    position: relative;
+    &::after{
+      content:'';
+      position: absolute;
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #F5443B;
+      left: -15px;
+      top: 5px;
+    }
+  }
+
+  // .audio-call-rules__controlls
+  &__controlls {
+    display: block;
+    display: flex;
+    column-gap: 20px;
+    justify-content: center;
+  }
+  &__select{
+    outline: none;
+    border-radius: 5px;
+    padding: 0px 10px;
+    width: 60px;
+    font-size: rem(24);
+    font-weight: 800;
+    box-shadow: 0px 0px 0px 3px #FFFFFF66;
+    transition: all 0.3s ease 0s;
+    background-color: transparent;
+    color: #FFFFFF;
+    & option{
+      color: #000;
+    }
+    &:focus{
+      box-shadow: 0px 0px 0px 3px #F5443B;
+    }
+  }
+  // .audio-call-rules__button
+  &__button {
+    display: block;
+    
+    padding: 15px 25px;
+    background-color: #F5443B;
+    text-align: center;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: rem(20);
+    box-shadow: 0px 0px 0px 0px#F5443B;
+    animation-duration: .7s;
+    @media (max-width: em(460)){
+       font-size: rem(18);
+    }
+    @media (any-hover: hover){
+       &:hover{
+          animation-name:button;
+       }
+    }
+ }
+}
+
+
+.audio-call-game {
+  padding: 100px 0px 40px;
+
+  // .audio-call-game__body
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  // .audio-call-game__play-button
+  &__play-button {
+    padding: 30px;
+    margin-bottom: 100px;
+    background-color: rgba(255, 255, 255, 0.074);
+    border-radius: 50%;
+    transition: all 0.3s ease 0s;
+    @media (any-hover: hover){
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.266);
+      }
+    }
+
+  }
+  // .audio-call-game__buttons
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+
+    & button{
+      display: block;
+      padding: 15px 25px;
+      text-align: center;
+      border-radius: 10px;
+      color: #fff;
+      font-weight: 600;
+      font-size: rem(20);
+      box-shadow: 0px 0px 0px 4px#FFFFFF90;
+      transition: all 0.3s ease 0s;
+      @media (max-width: em(460)){
+        font-size: rem(18);
+      }
+      @media (any-hover: hover){
+        &:hover{
+          box-shadow: 0px 0px 0px 4px#ffffff;
+        }
+      }
+      &:active{
+        transform: scale(0.93);
+      }
+    }
+    & button.false{
+      box-shadow: 0px 0px 0px 4px #F5443B;
+    }
+    & button.true{
+      box-shadow: 0px 0px 0px 4px #53E7CD;
+    }
+    & button.disable{
+      pointer-events: none;
+    }
+    margin-bottom: 50px;
+  }
+  // .audio-call-game__button-choice-1
+  &__button-choice-1 {
+  }
+  // .audio-call-game__button-choice-2
+  &__button-choice-2 {
+  }
+  // .audio-call-game__button-choice-3
+  &__button-choice-3 {
+  }
+  // .audio-call-game__button-choice-4
+  &__button-choice-4 {
+  }
+  // .audio-call-game__button-choice-5
+  &__button-choice-5 {
+  }
+  // .audio-call-game__select
+  &__select {
+    display: block;
+    padding: 15px 25px;
+    background-color: #F5443B;
+    text-align: center;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: rem(20);
+    box-shadow: 0px 0px 0px 0px#F5443B;
+    animation-duration: .7s;
+    opacity: 0;
+    visibility: hidden;
+    
+    @media (max-width: em(460)){
+       font-size: rem(18);
+    }
+    @media (any-hover: hover){
+       &:hover{
+          animation-name:button;
+       }
+    }
+  }
+}
+
+
