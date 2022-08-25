@@ -17,25 +17,30 @@ export default class Vocabulary {
   }
 
   async render(): Promise<void> {
+    this.el.innerHTML = `
+      ${this.renderHeader()}
+      <div class="vocabulary__content"></div>
+    `;
+
     this.refresh();
   }
 
   async refresh(): Promise<void> {
-    const words: WordContent[] = await wordsService.getWords({
-      group: this.group,
-      page: this.page,
-    });
+    const el: HTMLElement | null = this.el.querySelector(
+      ".vocabulary__content"
+    );
 
-    let html = "";
-    words.forEach((word: WordContent) => {
-      html += this.renderCard(word);
-    });
+    if (el) {
+      const words: WordContent[] = await wordsService.getWords({
+        group: this.group,
+        page: this.page,
+      });
 
-    this.el.innerHTML = `
-      ${this.renderHeader()}
-      ${html}
-      ${this.renderPagination()}
-    `;
+      el.innerHTML = `
+        ${words.map((word: WordContent) => this.renderCard(word)).join("")}
+        ${this.renderPagination()}
+      `;
+    }
   }
 
   bindEvents(): void {
@@ -47,6 +52,12 @@ export default class Vocabulary {
         target.dataset.group
       ) {
         e.preventDefault();
+
+        (<HTMLElement[]>(
+          Array.from(this.el.querySelectorAll(".vocabulary__link"))
+        )).forEach((el: HTMLElement) => el.classList.remove("active"));
+
+        target.classList.add("active");
 
         this.group = target.dataset.group;
         this.refresh();
