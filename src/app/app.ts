@@ -13,16 +13,11 @@ router.on("/", async () => {
   COMPONENT_FOOTER.createFooter();
 });
 
-router.on("/audio-call-rules", async () => {
+router.on("/audio-call-game", async () => {
   COMPONENT_HEADER.createHeader();
   COMPONENT_FOOTER.createFooter();
   AUDIO_CALL_GAME.renderRules();
   AUDIO_CALL_GAME.AudioCallListenerStart();
-});
-
-router.on("/audio-call-game", async () => {
-  COMPONENT_HEADER.createHeader();
-  AUDIO_CALL_GAME.renderGame();
 });
 
 router.resolve();

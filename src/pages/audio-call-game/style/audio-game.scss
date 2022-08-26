@@ -44,12 +44,12 @@
       content:'';
       position: absolute;
       display: block;
-      width: 10px;
-      height: 10px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background-color: #F5443B;
       left: -15px;
-      top: 5px;
+      top: 7px;
     }
   }
 
@@ -59,14 +59,20 @@
     display: flex;
     column-gap: 20px;
     justify-content: center;
+    align-items: center;
+  }
+  &__complexity{
+    font-size: rem(18);
+    color: #FFFFFF90;
   }
   &__select{
     outline: none;
     border-radius: 5px;
     padding: 0px 10px;
-    width: 60px;
+    width: 55px;
+    min-height: 50px;
     font-size: rem(24);
-    font-weight: 800;
+    font-weight: 700;
     box-shadow: 0px 0px 0px 3px #FFFFFF66;
     transition: all 0.3s ease 0s;
     background-color: transparent;
@@ -81,7 +87,6 @@
   // .audio-call-rules__button
   &__button {
     display: block;
-    
     padding: 15px 25px;
     background-color: #F5443B;
     text-align: center;
@@ -113,24 +118,87 @@
     justify-content: center;
     align-items: center;
   }
+    // .audio-call-game__visual
+    &__visual {
+    }
+    &__visual.active {
+      min-height: 210px;
+    }
+    // .audio-call-game__picture
+    .active &__picture {
+    }
+    &__word{
+      transition: all 0.3s ease .3s;
+      opacity: 0;
+      font-size: rem(0);
+      color: #FFFFFF99;
+    }
+    .active &__word{
+      font-size: rem(30);
+      color: #FFFFFF99;
+      opacity: 1;
+      font-weight: 900;
+      margin-left: 35px;
+    }
+    // .audio-call-game__img
+    &__img {
+      display: block;
+      margin: 0 auto;
+      width:0px;
+      height: 0px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      transition: opacity 1s ease 0s;
+      opacity: 0;
+    }
+   .active &__img {
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    width: 226px;
+    height: 226px;
+    }
+    &__show{
+      display: flex;
+      align-items: center;
+      margin-bottom: 100px;
+    }
+    .active &__show{
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
   // .audio-call-game__play-button
-  &__play-button {
+  &__play-button{
+    transition: background-color 0.3s ease 0s, transform 0.3s ease 0s;
+    user-select: none;
+    & svg {
+      user-select: none;
+      width: 150px;
+    }
     padding: 30px;
-    margin-bottom: 100px;
     background-color: rgba(255, 255, 255, 0.074);
     border-radius: 50%;
-    transition: all 0.3s ease 0s;
     @media (any-hover: hover){
       &:hover{
         background-color: rgba(255, 255, 255, 0.266);
       }
     }
-
+    &:active{
+      transform: scale(0.95);
+    }
+  }
+  .active &__play-button {
+    & svg{
+      width: 50px;
+    } 
+    padding: 5px;
   }
   // .audio-call-game__buttons
   &__buttons {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 25px;
 
     & button{
@@ -195,7 +263,7 @@
     animation-duration: .7s;
     opacity: 0;
     visibility: hidden;
-    
+    transition: all 0.3s ease 0s;
     @media (max-width: em(460)){
        font-size: rem(18);
     }
@@ -205,6 +273,94 @@
        }
     }
   }
+  &__select.active{
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 
+
+
+
+
+.audio-call-finish {
+  padding: 40px 10px;
+  background-color:#765ddb40;
+  border-radius: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+  color: #ffffffe8;
+  // .audio-call-finish__title
+  &__title {
+    text-align: center;
+    font-size: rem(50);
+    font-weight: 800;
+    margin-bottom: 35px;
+  }
+  // .audio-call-finish__true
+  &__true {
+    margin-bottom: 20px;
+  }
+  // .audio-call-finish__sub-title
+  &__sub-title {
+    text-align: center;
+    color: #ffffffa1;
+    font-size: rem(30);
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+  // .audio-call-finish__list
+  &__list {
+  }
+  // .audio-call-finish__item
+  &__item {
+    margin-left: 50px;
+    font-size: rem(24);
+    font-weight: 600;
+    color: #ffffffa1;
+    &:not(:last-child){
+      margin-bottom: 10px;
+    }
+  }
+  // .audio-call-finish__false
+  &__false {
+  }
+
+    // .audio-call-finish__controlls
+    &__controlls {
+      margin-top: 25px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      & a,button {
+        display: block;
+        padding: 15px 25px;
+        background-color: #F5443B;
+        text-align: center;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 600;
+        font-size: rem(20);
+        box-shadow: 0px 0px 0px 0px#F5443B;
+        animation-duration: .7s;
+        @media (max-width: em(460)){
+           font-size: rem(18);
+        }
+        @media (any-hover: hover){
+           &:hover{
+              animation-name:button;
+           }
+        }
+      }
+
+    }
+    // .audio-call-finish__repeat
+    &__repeat {
+    }
+    // .audio-call-finish__games
+    &__games {
+    }
+}
