@@ -4,9 +4,9 @@ import { COMPONENT_HEADER } from "../components/header/header";
 import { COMPONENT_FOOTER } from "../components/footer/footer";
 import Vocabulary from "../pages/vocabulary/Vocabulary";
 
-const router = new Navigo("/");
+const router = new Navigo("/", { hash: true });
 
-router.on("/", () => {
+router.on("", () => {
   COMPONENT_HEADER.createHeader();
   RENDER_BASIC_STRUCTURE.buildMainPage();
   COMPONENT_FOOTER.createFooter();
