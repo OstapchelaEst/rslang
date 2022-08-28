@@ -1,16 +1,16 @@
 import {
   UserWordContent,
   UserWord,
-  OptionalUserWord,
+  AuthorizationContent,
 } from "../../interfaces/interfaceServerAPI";
 
 const axios = require("axios").default;
 
 class UsersWords {
-  baseUrl = new URL("https://rslang-app-2022.herokuapp.com/");
+  baseUrl = new URL("https://rs-learnwords-example.herokuapp.com/");
 
-  getUserWords = async (user: UserWord) => {
-    const url = new URL(`users/${user.id}/words`, this.baseUrl);
+  getUserWords = async (user: AuthorizationContent) => {
+    const url = new URL(`users/${user.userId}/words`, this.baseUrl);
 
     const response = await axios.get(url.href, {
       headers: {
@@ -69,17 +69,10 @@ class UsersWords {
       this.baseUrl
     );
 
-    const body: {
-      difficulty?: string;
-      optional?: OptionalUserWord;
-    } = {};
-
-    if (userWord.difficulty) {
-      body.difficulty = userWord.difficulty;
-    }
-    if (userWord.optional) {
-      body.optional = userWord.optional;
-    }
+    const body = {
+      difficulty: userWord.difficulty,
+      optional: userWord.optional,
+    };
 
     const response = await axios({
       method: "put",

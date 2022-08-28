@@ -1,6 +1,15 @@
+import aggregatedWordsService from "../../controller/services/aggregatedWords";
+import usersWordsService from "../../controller/services/usersWords";
 import wordsService from "../../controller/services/words";
 import { LOCAL_STORAGE } from "../../controller/local-storage/local-storage";
-import { WordContent } from "../../interfaces/interfaceServerAPI";
+import {
+  AggregatedWordsRequest,
+  AuthorizationContent,
+  FullWord,
+  OptionalUserWord,
+  UserWord,
+  UserWordContent,
+} from "../../interfaces/interfaceServerAPI";
 import "./styles/card.scss";
 import AudioPlayer from "./AudioPlayer";
 
@@ -9,7 +18,7 @@ export default class Vocabulary {
 
   private audioPlayer: AudioPlayer;
 
-  private words: WordContent[] = [];
+  private words: FullWord[] = [];
 
   private group = "0";
   private page = 0;
@@ -38,20 +47,47 @@ export default class Vocabulary {
     );
 
     if (el) {
-      this.words = await wordsService.getWords({
-        group: this.group,
-        page: this.page,
-      });
+      const userData: AuthorizationContent = LOCAL_STORAGE.getDataUser();
+
+      if (this.group != "6") {
+        this.words = await wordsService.getWords({
+          group: this.group,
+          page: this.page,
+        });
+
+        if (userData) {
+          const userWords: UserWordContent[] =
+            await usersWordsService.getUserWords(userData);
+
+          this.words.forEach((word: FullWord) => {
+            userWords.some((userWord: UserWordContent) => {
+              if (userWord.wordId === word.id) {
+                word.userWord = userWord;
+
+                return true;
+              }
+            });
+          });
+        }
+      } else {
+        this.words = await aggregatedWordsService.getAggregatedWords(
+          userData.token,
+          <AggregatedWordsRequest>{
+            id: userData.userId,
+            filter: JSON.stringify({ "userWord.difficulty": "hard" }),
+          }
+        );
+      }
 
       el.innerHTML = `
-        ${this.words.map((word: WordContent) => this.renderCard(word)).join("")}
+        ${this.words.map((word: FullWord) => this.renderCard(word)).join("")}
         ${this.renderPagination()}
       `;
     }
   }
 
   bindEvents(): void {
-    this.el.addEventListener("click", (e: Event) => {
+    this.el.addEventListener("click", async (e: Event) => {
       const target: HTMLElement = <HTMLElement>e.target;
 
       if (
@@ -67,6 +103,7 @@ export default class Vocabulary {
         target.classList.add("active");
 
         this.group = target.dataset.group;
+        this.page = 0;
         this.refresh();
 
         return;
@@ -90,10 +127,37 @@ export default class Vocabulary {
 
       const btn: HTMLButtonElement | null = target.closest(".word__button");
       if (btn) {
-        const word: WordContent = this.getWord(target);
+        const word: FullWord = this.getWord(target);
         if (word) {
           this.audioPlayer.play(word);
         }
+
+        return;
+      }
+
+      if (target.classList.contains("button-add-to-difficult")) {
+        const word: FullWord = this.getWord(target);
+
+        await this.setDifficulty(word, "hard");
+        this.refresh();
+
+        return;
+      }
+
+      if (target.classList.contains("button-remove-from-difficult")) {
+        const word: FullWord = this.getWord(target);
+
+        await this.setDifficulty(word, "easy");
+        this.refresh();
+
+        return;
+      }
+
+      if (target.classList.contains("button-learned")) {
+        const word: FullWord = this.getWord(target);
+
+        await this.addToLearned(word);
+        this.refresh();
 
         return;
       }
@@ -104,7 +168,7 @@ export default class Vocabulary {
     return `
       <div class="vocabulary__header">
         <div class="vocabulary__sections">
-          <a href="#" class="vocabulary__link" data-group="0">Группа&nbsp;1</a>
+          <a href="#" class="vocabulary__link active" data-group="0">Группа&nbsp;1</a>
           <a href="#" class="vocabulary__link" data-group="1">Группа&nbsp;2</a>
           <a href="#" class="vocabulary__link" data-group="2">Группа&nbsp;3</a>
           <a href="#" class="vocabulary__link" data-group="3">Группа&nbsp;4</a>
@@ -124,11 +188,11 @@ export default class Vocabulary {
     `;
   }
 
-  renderCard(word: WordContent): string {
+  renderCard(word: FullWord): string {
     return `
       <div class="card" data-word-id="${word.id}">
         <div class="card__image">
-            <img src="https://rslang-app-2022.herokuapp.com/${
+            <img src="https://rs-learnwords-example.herokuapp.com/${
               word.image
             }"></img>
         </div>
@@ -152,8 +216,16 @@ export default class Vocabulary {
             ${
               LOCAL_STORAGE.getDataUser()
                 ? `<div class="card__buttons">
-                    <button class="card__button">Сложное</button>
-                    <button class="card__button">Изученное</button>
+                  ${
+                    word.userWord?.optional?.dateWhenItBecameLearned
+                      ? `<p class="learned">Изученное слово</p>`
+                      : `${
+                          word.userWord?.difficulty === "hard"
+                            ? `<button class="card__button button-remove-from-difficult">Удалить из сложных</button>`
+                            : `<button class="card__button button-add-to-difficult">Сложное</button>`
+                        }
+                      <button class="card__button button-learned">Изученное</button>`
+                  }
                   </div>`
                 : ""
             }
@@ -174,13 +246,13 @@ export default class Vocabulary {
     `;
   }
 
-  getWord(el: HTMLElement): WordContent {
+  getWord(el: HTMLElement): FullWord {
     const card: HTMLElement | null = el.closest(".card");
     if (card) {
       const wordId: string | undefined = card.dataset.wordId;
       if (wordId) {
-        const word: WordContent | undefined = this.words.find(
-          (word: WordContent) => word.id == wordId
+        const word: FullWord | undefined = this.words.find(
+          (word: FullWord) => word.id == wordId
         );
         if (word) {
           return word;
@@ -189,5 +261,41 @@ export default class Vocabulary {
     }
 
     throw new Error("Card is not linked to a word.");
+  }
+
+  setDifficulty(word: FullWord, difficulty: string): Promise<UserWordContent> {
+    return this.createOrUpdateUserWord(
+      word,
+      difficulty,
+      word.userWord?.optional
+    );
+  }
+
+  addToLearned(word: FullWord) {
+    const optional: OptionalUserWord = word.userWord.optional || {};
+    optional.dateWhenItBecameLearned = new Date().toISOString();
+
+    return this.createOrUpdateUserWord(word, "easy", optional);
+  }
+
+  createOrUpdateUserWord(
+    word: FullWord,
+    difficulty: string,
+    optional: OptionalUserWord
+  ): Promise<UserWordContent> {
+    const userData: AuthorizationContent = LOCAL_STORAGE.getDataUser();
+    const userWord: UserWord = {
+      token: userData.token,
+      id: userData.userId,
+      wordId: word.id,
+      difficulty: difficulty,
+      optional: optional,
+    };
+
+    if (word.userWord) {
+      return usersWordsService.updateUserWord(userWord);
+    } else {
+      return usersWordsService.createUserWord(userWord);
+    }
   }
 }

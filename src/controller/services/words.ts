@@ -1,9 +1,13 @@
-import { WordContent, WordLocation } from "../../interfaces/interfaceServerAPI";
+import {
+  FullWord,
+  WordContent,
+  WordLocation,
+} from "../../interfaces/interfaceServerAPI";
 
 const axios = require("axios").default;
 
 class Words {
-  baseUrl = new URL("https://rslang-app-2022.herokuapp.com/");
+  baseUrl = new URL("https://rs-learnwords-example.herokuapp.com/");
 
   getWords = async (wordLocation: WordLocation) => {
     const url = new URL("words", this.baseUrl);
@@ -16,7 +20,7 @@ class Words {
       },
     });
 
-    const content: Array<WordContent> = await response.data;
+    const content: Array<FullWord> = await response.data;
     return content;
   };
 
