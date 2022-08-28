@@ -7,7 +7,6 @@ import {
 const axios = require("axios").default;
 
 class UsersWords {
-  //baseUrl = new URL("https://rslang-app-2022.herokuapp.com/");
   baseUrl = new URL("https://rs-learnwords-example.herokuapp.com/");
 
   getUserWords = async (user: UserWord) => {
