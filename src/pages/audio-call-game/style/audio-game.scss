@@ -3,9 +3,10 @@
 
 .audio-call-rules {
   padding: 40px 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @media (max-width: em(550)){
+    padding: adaptivSize(40,20,550,320) 0px;
+  }
+
   color:#FFFFFF99;
   font-weight: 600;
   // .audio-call-rules__title
@@ -15,10 +16,14 @@
   &__title {
     color:#FFFFFF;
     font-size: rem(54);
-
+    font-weight: 800;
     letter-spacing: em(3);
     text-align: center;
     margin-bottom: 40px;
+    @media (max-width: em(550)){
+      font-size: adaptivSize(54,24,550,320);
+      margin-bottom: adaptivSize(40,15,550,320);
+    }
 
   }
   // .audio-call-rules__info
@@ -27,6 +32,10 @@
     font-size: rem(24);
     line-height: lh(24,27);
     margin-bottom: 30px;
+    @media (max-width: em(550)){
+      font-size: adaptivSize(24,20,550,320);
+      margin-bottom: adaptivSize(30,15,550,320);
+    }
   }
   // .audio-call-rules__list
   &__list {
@@ -36,6 +45,9 @@
   // .audio-call-rules__item
   &__item {
     font-size: rem(20);
+    @media (max-width: em(550)){
+      font-size: adaptivSize(20,18,550,320);
+    }
     &:not(:last-child){
       margin-bottom: 10px;
     }
@@ -108,8 +120,12 @@
 }
 
 
+
 .audio-call-game {
   padding: 100px 0px 40px;
+  @media (max-width: em(1000)){
+    padding: adaptivSize(100,40,1000,320) 0px 40px;  
+  }
 
   // .audio-call-game__body
   &__body {
@@ -285,16 +301,26 @@
 
 
 .audio-call-finish {
+  padding: 60px 0;
+  @media (max-width: em(1000)){
+      padding: adaptivSize(60,20,1000,320) 0;
+  }
+  &__body{
   padding: 40px 10px;
-  background-color:#765ddb40;
+  background-color:#382973;
   border-radius: 15px;
   max-width: 500px;
   margin: 0 auto;
   color: #ffffffe8;
+}
   // .audio-call-finish__title
   &__title {
     text-align: center;
     font-size: rem(50);
+    transition: all 0.3s ease 0s;
+    @media (max-width: em(550)){
+      font-size: rem(36);
+    }
     font-weight: 800;
     margin-bottom: 35px;
   }
@@ -306,7 +332,11 @@
   &__sub-title {
     text-align: center;
     color: #ffffffa1;
+    
     font-size: rem(30);
+    @media (max-width: em(550)){
+      font-size: rem(26);
+    }
     font-weight: 800;
     margin-bottom: 10px;
   }
@@ -317,6 +347,9 @@
   &__item {
     margin-left: 50px;
     font-size: rem(24);
+    @media (max-width: em(550)){
+      font-size: rem(20);
+    }
     font-weight: 600;
     color: #ffffffa1;
     &:not(:last-child){
@@ -363,4 +396,60 @@
     // .audio-call-finish__games
     &__games {
     }
+}
+
+.fullscrea-audio {
+  display: flex;
+  justify-content: center;
+  column-gap: 40px;
+  margin-bottom: 10px;
+  // .fullscrea-audio__screan
+  &__screan,
+  &__audio {
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  @media (any-hover: hover){
+    &:hover{
+      transform: scale(1.1);
+    }
+  }
+  }
+  // .fullscrea-audio__audio
+  &__audio {
+    
+
+  }
+}
+.fullscrea-audio__audio .audio-on {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.fullscrea-audio__screan .screan-on {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+//===================================================
+
+.audio-false .audio-on {
+  opacity: 1;
+  position: relative;
+}
+.audio-false .audio-off {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.screan-false .screan-on {
+  opacity: 1;
+  position: relative;
+}
+.screan-false .screan-off {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
 }

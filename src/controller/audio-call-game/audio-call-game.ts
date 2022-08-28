@@ -4,13 +4,20 @@ import { AUDIO_CALL_RENDER } from "../../pages/audio-call-game/audio-game-render
 import { COMPONENT_LOAD_SCREAN } from "../../components/load-screan/load-screan";
 import words from "../services/words";
 import { KEY_BOARD } from "./key-board";
+//import usersWords from "../services/usersWords";
+//import { LOCAL_STORAGE } from "../local-storage/local-storage";
+//import { WORDS_INFO } from "../words-info/words-info";
 
 class AudioGame {
+  statusAudio: string;
+  statusScrean: string;
   data: WordContent[];
   page: number;
   wordNumber: number;
   statistic: IStatistic[];
   constructor() {
+    this.statusAudio = "";
+    this.statusScrean = "";
     this.data = [
       {
         id: "string",
@@ -29,7 +36,8 @@ class AudioGame {
         textExampleTranslate: "string",
       },
     ];
-    this.page = 1;
+
+    this.page = 1; //Math.floor(Math.random() * 30);
     this.wordNumber = 0;
     this.statistic = [
       {
@@ -53,11 +61,12 @@ class AudioGame {
       (<HTMLFormElement>document.querySelector(".audio-call-rules__select"))
         .value
     );
-    AUDIO_CALL_GAME.data = (await words.getWords({ group: COUNT, page: AUDIO_CALL_GAME.page })).sort(
-      () => Math.random() - 0.5
-    );
+    AUDIO_CALL_GAME.data = (
+      await words.getWords({ group: COUNT, page: AUDIO_CALL_GAME.page })
+    ).sort(() => Math.random() - 0.5);
     COMPONENT_LOAD_SCREAN.removeLoadScrean();
     AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
+    console.log(AUDIO_CALL_GAME.data);
   }
 
   treatmentData(data: WordContent[]) {
@@ -75,6 +84,7 @@ class AudioGame {
     this.addListenerPlayWord();
     KEY_BOARD.addKeyBoardChoiseListener();
   }
+
   addListenersChoise() {
     document.querySelectorAll("[data-choise]").forEach((e) => {
       e.addEventListener("click", (e) =>
@@ -84,7 +94,7 @@ class AudioGame {
   }
 
   userChoise(button: HTMLButtonElement) {
-    const CHOISE = button.getAttribute("data-choise");
+    const CHOISE = button.getAttribute("data-choise") || "false";
     if (CHOISE === "true") {
       button.classList.add("true");
       this.statistic.push({
@@ -105,7 +115,7 @@ class AudioGame {
     this.choiseIsMade(CHOISE);
   }
 
-  choiseIsMade(choise: string | null) {
+  choiseIsMade(choise: string) {
     const ALL_BUTTONS = document.querySelectorAll("[data-choise]");
     ALL_BUTTONS.forEach((e) => {
       e.classList.add("disable");
@@ -115,6 +125,7 @@ class AudioGame {
     });
     this.showNextButton();
     this.showWord();
+    //WORDS_INFO.uppdateWordInfo(choise, "audioCall");
   }
 
   showNextButton() {
@@ -135,13 +146,13 @@ class AudioGame {
     )).classList.add("active");
   }
 
-  finishGame() {
+  async finishGame() {
     AUDIO_CALL_GAME.wordNumber++;
     if (AUDIO_CALL_GAME.wordNumber == AUDIO_CALL_GAME.data.length) {
       KEY_BOARD.removeKeyBoardChoiseListener();
       AUDIO_CALL_GAME.wordNumber = 0;
       AUDIO_CALL_RENDER.renderFinish(AUDIO_CALL_GAME.statistic);
-      this.addRepeatPlayListener();
+      AUDIO_CALL_GAME.addRepeatPlayListener();
     } else {
       AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
     }
@@ -160,16 +171,31 @@ class AudioGame {
   }
 
   playSongTrue() {
+    if (
+      (<HTMLElement>document.querySelector(".main")).classList.contains(
+        "audio-false"
+      )
+    ) {
+      return;
+    }
     (<HTMLAudioElement>(
       document.querySelector(".audio-call-game__audio-true")
     )).play();
   }
 
   playSongFalse() {
+    if (
+      (<HTMLElement>document.querySelector(".main")).classList.contains(
+        "audio-false"
+      )
+    ) {
+      return;
+    }
     (<HTMLAudioElement>(
       document.querySelector(".audio-call-game__audio-false")
     )).play();
   }
+
   addRepeatPlayListener() {
     (<HTMLButtonElement>(
       document.querySelector(".audio-call-finish__repeat")

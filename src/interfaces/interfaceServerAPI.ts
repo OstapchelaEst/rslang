@@ -79,9 +79,9 @@ export interface OptionalUserStatistics {
 
 export interface UserWordContent {
   id: string;
-  difficulty: string;
+  difficulty?: string;
   wordId: string;
-  optional: OptionalUserWord;
+  optional?: OptionalUserWord;
 }
 
 export interface StatisticsContent {

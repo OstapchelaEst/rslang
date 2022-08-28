@@ -7,11 +7,11 @@ import {
 const axios = require("axios").default;
 
 class UsersWords {
-  baseUrl = new URL("https://rslang-app-2022.herokuapp.com/");
+  //baseUrl = new URL("https://rslang-app-2022.herokuapp.com/");
+  baseUrl = new URL("https://rs-learnwords-example.herokuapp.com/");
 
   getUserWords = async (user: UserWord) => {
     const url = new URL(`users/${user.id}/words`, this.baseUrl);
-
     const response = await axios.get(url.href, {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -25,14 +25,12 @@ class UsersWords {
 
   getUserWordByWordId = async (user: UserWord) => {
     const url = new URL(`users/${user.id}/words/${user.wordId}`, this.baseUrl);
-
     const response = await axios.get(url.href, {
       headers: {
         Authorization: `Bearer ${user.token}`,
         Accept: "application/json",
       },
     });
-
     const content: UserWordContent = await response.data;
     return content;
   };
@@ -42,6 +40,7 @@ class UsersWords {
       `users/${userWord.id}/words/${userWord.wordId}`,
       this.baseUrl
     );
+    console.log(url);
 
     const body = {
       difficulty: userWord.difficulty,
