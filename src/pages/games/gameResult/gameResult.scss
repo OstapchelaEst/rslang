@@ -1,3 +1,92 @@
-.gameResult{
-    
+.gameResult {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 1.6rem;
+    background-color: #0000002e;
+    z-index: 8;
+  
+    ::-webkit-scrollbar-thumb {
+      background-color: #1d3557;
+    }
+  
+    &__container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+      max-height: 500px;
+      padding: 25px 40px;
+      
+      background-color: #f7faf6;
+      border-radius: 10px;
+      box-shadow: 1px 3px 4px rgba(0, 0, 0, .1);
+      position: fixed;
+      z-index: 15;
+      top: 53%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  
+    &__title {
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+  
+    &__item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+  
+    &__audio {
+      cursor: pointer;
+    }
+  
+    &__btns {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+  
+      button {
+        width: 50%;
+        height: 50px;
+        padding: 5px 10px;
+        background-color: #1d3557;
+        font-size: 10px;
+        color: #FFF;
+        text-transform: uppercase;
+      
+        border: 1px solid #1d3557;
+        border-radius: 4px;
+      
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        
+        &:hover {
+          background-color: #e63946;
+          border-color: #e63946;
+        }
+      
+        &:active {
+          background-color: #e63946d9;
+        }
+      
+        &:disabled {
+          opacity: .8;
+          cursor: not-allowed;
+      
+          &:hover {
+            background-color: #1d3557;
+            border-color: #1d3557;
+            color: #FFF;
+          }
+        }
+        }
+          }
 }
