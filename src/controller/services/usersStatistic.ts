@@ -6,7 +6,7 @@ import {
 const axios = require("axios").default;
 
 class Statistic {
-  baseUrl = new URL("https://rslang-app-2022.herokuapp.com/");
+  baseUrl = new URL("https://rs-learnwords-example.herokuapp.com");
 
   getStatistics = async (user: UserWord) => {
     const url = new URL(`users/${user.id}/statistics`, this.baseUrl);
