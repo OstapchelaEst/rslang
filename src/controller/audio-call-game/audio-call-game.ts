@@ -35,7 +35,7 @@ class AudioGame {
       },
     ];
 
-    this.page = 1; //Math.floor(Math.random() * 30);
+    this.page = 0;
     this.wordNumber = 0;
     this.statistic = [
       {
@@ -59,6 +59,27 @@ class AudioGame {
       (<HTMLFormElement>document.querySelector(".audio-call-rules__select"))
         .value
     );
+    AUDIO_CALL_GAME.data = (
+      await words.getWords({ group: GROUP_WORDS, page: AUDIO_CALL_GAME.page })
+    ).sort(() => Math.random() - 0.5);
+    AUDIO_CALL_GAME.page = Math.floor(Math.random() * 30);
+    COMPONENT_LOAD_SCREAN.removeLoadScrean();
+    AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
+  }
+
+  async startGameFromVocabulary() {
+    COMPONENT_LOAD_SCREAN.renderLoadScrean();
+    const GROUP_WORDS = Number(
+      (<HTMLElement>(
+        document.querySelector(".vocabulary__link.active")
+      )).getAttribute("data-group")
+    );
+    const PAGE_WORDS = Number(
+      (<HTMLElement>document.querySelector(".pagination__button-numbered"))
+        .textContent
+    );
+    AUDIO_CALL_GAME.statistic = [];
+    AUDIO_CALL_GAME.page = PAGE_WORDS;
     AUDIO_CALL_GAME.data = (
       await words.getWords({ group: GROUP_WORDS, page: AUDIO_CALL_GAME.page })
     ).sort(() => Math.random() - 0.5);
