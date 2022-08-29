@@ -1,4 +1,5 @@
 import { AUDIO_CALL_GAME } from "./audio-call-game";
+import { SONG_AUDIO_CALL } from "./song-audio-call";
 
 class KeyBoard {
   addKeyBoardChoiseListener() {
@@ -58,7 +59,7 @@ class KeyBoard {
 
     switch (e.code) {
       case "Space":
-        AUDIO_CALL_GAME.playWord();
+        SONG_AUDIO_CALL.playWord();
         break;
       case "Enter":
         if (

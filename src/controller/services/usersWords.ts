@@ -39,8 +39,6 @@ class UsersWords {
       `users/${userWord.id}/words/${userWord.wordId}`,
       this.baseUrl
     );
-    console.log(url);
-
     const body = {
       difficulty: userWord.difficulty,
       optional: userWord.optional,

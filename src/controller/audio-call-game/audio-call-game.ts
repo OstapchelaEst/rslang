@@ -4,9 +4,7 @@ import { AUDIO_CALL_RENDER } from "../../pages/audio-call-game/audio-game-render
 import { COMPONENT_LOAD_SCREAN } from "../../components/load-screan/load-screan";
 import words from "../services/words";
 import { KEY_BOARD } from "./key-board";
-//import usersWords from "../services/usersWords";
-//import { LOCAL_STORAGE } from "../local-storage/local-storage";
-//import { WORDS_INFO } from "../words-info/words-info";
+import { SONG_AUDIO_CALL } from "./song-audio-call";
 
 class AudioGame {
   statusAudio: string;
@@ -57,16 +55,15 @@ class AudioGame {
   async startGame() {
     AUDIO_CALL_GAME.statistic = [];
     COMPONENT_LOAD_SCREAN.renderLoadScrean();
-    const COUNT = Number(
+    const GROUP_WORDS = Number(
       (<HTMLFormElement>document.querySelector(".audio-call-rules__select"))
         .value
     );
     AUDIO_CALL_GAME.data = (
-      await words.getWords({ group: COUNT, page: AUDIO_CALL_GAME.page })
+      await words.getWords({ group: GROUP_WORDS, page: AUDIO_CALL_GAME.page })
     ).sort(() => Math.random() - 0.5);
     COMPONENT_LOAD_SCREAN.removeLoadScrean();
     AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
-    console.log(AUDIO_CALL_GAME.data);
   }
 
   treatmentData(data: WordContent[]) {
@@ -80,8 +77,8 @@ class AudioGame {
     NUMBERS_WORDS.sort(() => Math.random() - 0.5);
     AUDIO_CALL_RENDER.renderGame(data, NUMBERS_WORDS, this.wordNumber);
     this.addListenersChoise();
-    this.playWord();
-    this.addListenerPlayWord();
+    SONG_AUDIO_CALL.playWord();
+    SONG_AUDIO_CALL.addListenerPlayWord();
     KEY_BOARD.addKeyBoardChoiseListener();
   }
 
@@ -102,7 +99,7 @@ class AudioGame {
         wordTranslate: this.data[this.wordNumber].wordTranslate,
         choise: true,
       });
-      this.playSongTrue();
+      SONG_AUDIO_CALL.playSongTrue();
     } else {
       button.classList.add("false");
       this.statistic.push({
@@ -110,7 +107,7 @@ class AudioGame {
         wordTranslate: this.data[this.wordNumber].wordTranslate,
         choise: false,
       });
-      this.playSongFalse();
+      SONG_AUDIO_CALL.playSongFalse();
     }
     this.choiseIsMade(CHOISE);
   }
@@ -125,7 +122,6 @@ class AudioGame {
     });
     this.showNextButton();
     this.showWord();
-    //WORDS_INFO.uppdateWordInfo(choise, "audioCall");
   }
 
   showNextButton() {
@@ -156,44 +152,6 @@ class AudioGame {
     } else {
       AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
     }
-  }
-
-  addListenerPlayWord() {
-    (<HTMLButtonElement>(
-      document.querySelector(".audio-call-game__play-button")
-    )).addEventListener("click", this.playWord);
-  }
-
-  playWord() {
-    (<HTMLAudioElement>(
-      document.querySelector(".audio-call-game__audio")
-    )).play();
-  }
-
-  playSongTrue() {
-    if (
-      (<HTMLElement>document.querySelector(".main")).classList.contains(
-        "audio-false"
-      )
-    ) {
-      return;
-    }
-    (<HTMLAudioElement>(
-      document.querySelector(".audio-call-game__audio-true")
-    )).play();
-  }
-
-  playSongFalse() {
-    if (
-      (<HTMLElement>document.querySelector(".main")).classList.contains(
-        "audio-false"
-      )
-    ) {
-      return;
-    }
-    (<HTMLAudioElement>(
-      document.querySelector(".audio-call-game__audio-false")
-    )).play();
   }
 
   addRepeatPlayListener() {
