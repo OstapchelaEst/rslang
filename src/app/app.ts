@@ -7,48 +7,46 @@ import GameResult from "../pages/games/gameResult/gameResult";
 
 const router = new Navigo("/", { hash: true });
 
-router.on({
-  "/": async () => {
-    COMPONENT_HEADER.createHeader();
-    RENDER_BASIC_STRUCTURE.buildMainPage();
-    COMPONENT_FOOTER.createFooter();
-  },
-  "/sprint": async () => {
-    const container: HTMLElement | null =
-      document.querySelector(".main__container");
+router.on("/", async () => {
+  const container: HTMLElement | null =
+    document.querySelector(".main__container");
+  if (!container) return;
+  container.innerHTML = "";
+  COMPONENT_HEADER.createHeader();
+  RENDER_BASIC_STRUCTURE.buildMainPage();
+  COMPONENT_FOOTER.createFooter();
+  // "/sprint": async () => {
 
-    if (!container) return;
-    const contentURL = "https://rs-learnwords-example.herokuapp.com";
-    const gameResult: GameResult = new GameResult(contentURL);
-    const sprint: Sprint = new Sprint(contentURL, gameResult);
+  //   if (!container) return;
+  //   const contentURL = "https://rs-learnwords-example.herokuapp.com";
+  //   const gameResult: GameResult = new GameResult(contentURL);
+  //   const sprint: Sprint = new Sprint(contentURL, gameResult);
 
-    await sprint.createComponent();
-    await gameResult.createComponent();
+  //   await sprint.createComponent();
+  //   await gameResult.createComponent();
 
-    COMPONENT_HEADER.createHeader();
+  //   COMPONENT_HEADER.createHeader();
 
-    container.innerHTML = "";
-    sprint.startGame(1);
-  },
+  //   container.innerHTML = "";
+  //   sprint.startGame(1);
+  // },
 });
 
-// router.on("/sprint", async () => {
-//   const container: HTMLElement | null =
-//     document.querySelector(".main__container");
+router.on("/sprint", async () => {
+  const container: HTMLElement | null =
+    document.querySelector(".main__container");
 
-//   if (!container) return;
-//   const contentURL = "https://rslang-app-2022.herokuapp.com/";
-//   const gameResult: GameResult = new GameResult(contentURL);
-//   const sprint: Sprint = new Sprint(contentURL, gameResult);
+  if (!container) return;
+  const contentURL = "https://rs-learnwords-example.herokuapp.com";
+  const gameResult: GameResult = new GameResult(contentURL);
+  const sprint: Sprint = new Sprint(contentURL, gameResult);
 
-//   await sprint.createComponent();
-//   await gameResult.createComponent();
+  await sprint.createComponent();
+  await gameResult.createComponent();
 
-//   COMPONENT_HEADER.createHeader();
+  COMPONENT_HEADER.createHeader();
 
-//   container.innerHTML = "";
-//   sprint.startGame(1);
-//   // container.append(await sprint.createComponent());
-// });
+  sprint.startGame(1);
+});
 
 router.resolve();

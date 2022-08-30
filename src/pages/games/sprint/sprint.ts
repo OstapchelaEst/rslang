@@ -104,6 +104,8 @@ export default class Sprint {
   }
 
   async startGameWithHardWords() {
+    const footerElem = document.querySelector(".footer") as HTMLElement;
+    if (footerElem) footerElem.remove();
     const contentElem = document.querySelector(
       ".main__container"
     ) as HTMLElement;
@@ -198,6 +200,8 @@ export default class Sprint {
   }
 
   async startGameFromPage({ group, page }: { group: number; page: number }) {
+    const footerElem = document.querySelector(".footer") as HTMLElement;
+    if (footerElem) footerElem.remove();
     const contentElem = document.querySelector(
       ".main__container"
     ) as HTMLElement;
@@ -257,6 +261,8 @@ export default class Sprint {
   }
 
   async startGame(group: number) {
+    const footerElem = document.querySelector(".footer") as HTMLElement;
+    if (footerElem) footerElem.remove();
     const contentElem = document.querySelector(
       ".main__container"
     ) as HTMLElement;
@@ -387,18 +393,22 @@ export default class Sprint {
     const yesBtn = document.querySelector(".sprint__yes") as HTMLButtonElement;
     const noBtn = document.querySelector(".sprint__no") as HTMLButtonElement;
 
-    // const truthyAnswerSound = new Audio("./assets/sounds/truthy-answer.mp3");
-    // const falsyAnswerSound = new Audio("./assets/sounds/falsy-answer.mp3");
+    const truthyAnswerSound = new Audio(
+      "https://zvukipro.com/uploads/files/2020-11/1604628139_d0d8bbb34c203ff.mp3"
+    );
+    const falsyAnswerSound = new Audio(
+      "https://zvukitop.com/wp-content/uploads/2021/08/icq-oshybka.mp3"
+    );
 
     yesBtn.addEventListener("click", () => {
       let result: boolean;
       if (isOptionTruthy === true) {
         result = true;
-        // truthyAnswerSound.play();
+        truthyAnswerSound.play();
         this.updateStat(result);
       } else {
         result = false;
-        // falsyAnswerSound.play();
+        falsyAnswerSound.play();
         this.updateStat(result);
       }
 
@@ -415,11 +425,11 @@ export default class Sprint {
       let result: boolean;
       if (isOptionTruthy === true) {
         result = false;
-        // falsyAnswerSound.play();
+        falsyAnswerSound.play();
         this.updateStat(result);
       } else {
         result = true;
-        // truthyAnswerSound.play();
+        truthyAnswerSound.play();
         this.updateStat(result);
       }
 

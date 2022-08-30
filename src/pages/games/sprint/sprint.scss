@@ -136,13 +136,13 @@
         }
   
         &.sprint__no {
-          background-color: #9e2121;
-          border-color: #9e2121;          
+          border-color: #f5443b;
+          box-shadow: 0px 0px 0px 4px #f5443b;          
         }
   
         &.sprint__yes {
-          background-color: #1c7448;
-          border-color: #1c7448;
+          border-color: #53e7cd;
+          box-shadow: 0px 0px 0px 4px #53e7cd;
         }
       }
     }

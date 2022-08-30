@@ -20,8 +20,8 @@ export default class GameResult {
 
       </div>
       <div class="gameResult__btns">
-        <button class="gameResult__btn gameResult__btn_main">Главаная страница</button>
-        <button class="gameResult__btn gameResult__btn_games">Сыграть еще раз</button>
+        <a href="/" data-navigo class="gameResult__btn gameResult__btn_main">Главная страница</a>
+        <a href="#/all-games" data-navigo class="gameResult__btn gameResult__btn_games">Другие игры</a>
       </div>
     </div>
   `;
