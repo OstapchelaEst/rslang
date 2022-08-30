@@ -6,7 +6,7 @@ import {
 const axios = require("axios").default;
 
 class SignIn {
-  baseUrl = new URL("https://rslang-app-2022.herokuapp.com/");
+  baseUrl = new URL("https://rs-learnwords-example.herokuapp.com/");
 
   signIn = async (user: User) => {
     const url = new URL("signin", this.baseUrl);

@@ -17,7 +17,7 @@ class ComponentHeader {
          <nav class="menu__body">
             <ul class="menu__list">
                <li class="menu__item"><a href="" class="menu__link">Наша команда</a></li>
-               <li class="menu__item"><a href="" class="menu__link">Учебник</a></li>
+               <li class="menu__item"><a href="#vocabulary" class="menu__link">Учебник</a></li>
                <li class="menu__item"><a href="" class="menu__link">Игры</a></li>
                <li class="menu__item"><a href="" class="menu__link">Статистика</a></li>
                <li class="menu__item"><button type="button" class="menu__link-registration">${
