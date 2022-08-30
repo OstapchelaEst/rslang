@@ -209,10 +209,9 @@ export default class GameResult {
     gameName: "sprint" | "audioCall",
     answers: { result: boolean; wordContent: WordContent }[]
   ) {
-    const userWordsContent = await usersWords.getUserWords({
-      token: this.localStorageUser.token,
-      id: this.localStorageUser.userId,
-    });
+    const userWordsContent = await usersWords.getUserWords(
+      LOCAL_STORAGE.getDataUser()
+    );
 
     answers.forEach(async (answer) => {
       const relatedUserWordContent = userWordsContent.find(

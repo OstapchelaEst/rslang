@@ -51,7 +51,7 @@ export default class Vocabulary {
 
       if (this.group != "6") {
         this.words = await wordsService.getWords({
-          group: this.group,
+          group: Number(this.group),
           page: this.page,
         });
 
