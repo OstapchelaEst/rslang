@@ -2,6 +2,7 @@ import Navigo from "navigo";
 import { RENDER_BASIC_STRUCTURE } from "../pages/main/main-page-render";
 import { COMPONENT_HEADER } from "../components/header/header";
 import { COMPONENT_FOOTER } from "../components/footer/footer";
+import Vocabulary from "../pages/vocabulary/Vocabulary";
 import Sprint from "../pages/games/sprint/sprint";
 import GameResult from "../pages/games/gameResult/gameResult";
 
@@ -25,6 +26,23 @@ router.on("/sprint", async () => {
   COMPONENT_HEADER.createHeader();
 
   sprint.startGame(1);
+  });
+
+router.on("/vocabulary", async () => {
+  const container: HTMLElement | null =
+    document.querySelector(".main__container");
+
+  if (!container) return;
+
+  const vocabulary: Vocabulary = new Vocabulary();
+  await vocabulary.render();
+
+  COMPONENT_HEADER.createHeader();
+
+  container.innerHTML = "";
+  container.append(vocabulary.el);
+
+  COMPONENT_FOOTER.createFooter();
 });
 
 router.resolve();

@@ -19,7 +19,7 @@ export interface AuthorizationContent {
 }
 
 export interface WordLocation {
-  group: number;
+  group: string;
   page: number;
 }
 
@@ -82,6 +82,18 @@ export interface UserWordContent {
   difficulty: string;
   wordId: string;
   optional: OptionalUserWord;
+}
+
+export type FullWord = WordContent & {
+  userWord: UserWordContent;
+};
+
+export interface AggregatedWordsRequest {
+  id: string;
+  group?: string;
+  page?: number;
+  wordsPerPage: number;
+  filter: string;
 }
 
 export interface StatisticsContent {
