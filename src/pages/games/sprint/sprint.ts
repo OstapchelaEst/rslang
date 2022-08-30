@@ -11,7 +11,7 @@ import {
 
 export default class Sprint {
   innerHtmlTemplate = `
-    <div class="wrapper">
+    <div class="sprint__wrapper">
       <div class="sprint__content">
         <div class="sprint__timer-container">
           <div class="sprint__timer"></div>

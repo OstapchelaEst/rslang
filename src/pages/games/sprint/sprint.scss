@@ -5,7 +5,7 @@
     font-size: 3rem;
     color: #FFF;
   
-    .wrapper {
+    .sprint__wrapper {
       gap: 40px;
     }
   
@@ -40,10 +40,10 @@
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        border: 3px solid #1d3557bd;
+        border: 3px solid rgb(255 255 255 / 74%);
   
         &.active {
-          background-color: #1d3557;
+          background-color: #f5443b;
         }
       }
     }
