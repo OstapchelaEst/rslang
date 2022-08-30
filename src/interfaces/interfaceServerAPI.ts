@@ -19,7 +19,7 @@ export interface AuthorizationContent {
 }
 
 export interface WordLocation {
-  group: number;
+  group: string;
   page: number;
 }
 
