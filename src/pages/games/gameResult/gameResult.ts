@@ -54,38 +54,11 @@ export default class GameResult {
     this.createThisComponent();
   }
 
-  setThisListeners() {
-    const mainBtn = this.componentElem.querySelector(
-      ".gameResult__btn_main"
-    ) as HTMLButtonElement;
-    const gamesBtn = this.componentElem.querySelector(
-      ".gameResult__btn_games"
-    ) as HTMLButtonElement;
-
-    mainBtn.addEventListener("click", () => {
-      const mainNavBtn = document.querySelector(
-        "#mainBtn"
-      ) as HTMLButtonElement;
-      mainNavBtn.dispatchEvent(new Event("click"));
-    });
-    gamesBtn.addEventListener("click", () => {
-      const gamesNavBtn = document.querySelector(
-        "#gamesBtn"
-      ) as HTMLButtonElement;
-      gamesNavBtn.dispatchEvent(new Event("click"));
-    });
-  }
-
-  setListeners() {
-    this.setThisListeners();
-  }
-
   async showComponent(
     gameName: "sprint" | "audioCall",
     answers: Array<{ result: boolean; wordContent: WordContent }>
   ) {
     this.createComponent();
-    this.setListeners();
 
     if (localStorage.getItem("user")) {
       await this.updateUserWords_OptionalProperty(gameName, answers);
