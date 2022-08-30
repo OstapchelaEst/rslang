@@ -1,6 +1,12 @@
-import { AuthorizationContent, FullWord, OptionalUserWord, UserWord, UserWordContent } from "../../interfaces/interfaceServerAPI";
+import {
+  AuthorizationContent,
+  FullWord,
+  OptionalUserWord,
+  UserWord,
+  UserWordContent,
+} from "../../interfaces/interfaceServerAPI";
 import { LOCAL_STORAGE } from "../local-storage/local-storage";
-import usersWordsService  from "../services/usersWords";
+import usersWordsService from "../services/usersWords";
 
 class Difficulty {
   setDifficulty(word: FullWord, difficulty: string): Promise<UserWordContent> {
