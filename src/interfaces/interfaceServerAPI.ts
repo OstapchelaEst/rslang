@@ -79,9 +79,21 @@ export interface OptionalUserStatistics {
 
 export interface UserWordContent {
   id: string;
-  difficulty?: string;
+  difficulty: string;
   wordId: string;
-  optional?: OptionalUserWord;
+  optional: OptionalUserWord;
+}
+
+export type FullWord = WordContent & {
+  userWord: UserWordContent;
+};
+
+export interface AggregatedWordsRequest {
+  id: string;
+  group?: string;
+  page?: number;
+  wordsPerPage: number;
+  filter: string;
 }
 
 export interface StatisticsContent {

@@ -1,4 +1,8 @@
-import { WordContent, WordLocation } from "../../interfaces/interfaceServerAPI";
+import {
+  FullWord,
+  WordContent,
+  WordLocation,
+} from "../../interfaces/interfaceServerAPI";
 
 const axios = require("axios").default;
 
@@ -16,7 +20,7 @@ class Words {
       },
     });
 
-    const content: Array<WordContent> = await response.data;
+    const content: Array<FullWord> = await response.data;
     return content;
   };
 

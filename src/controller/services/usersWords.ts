@@ -1,7 +1,7 @@
 import {
   UserWordContent,
   UserWord,
-  OptionalUserWord,
+  AuthorizationContent,
 } from "../../interfaces/interfaceServerAPI";
 
 const axios = require("axios").default;
@@ -9,8 +9,9 @@ const axios = require("axios").default;
 class UsersWords {
   baseUrl = new URL("https://rs-learnwords-example.herokuapp.com/");
 
-  getUserWords = async (user: UserWord) => {
-    const url = new URL(`users/${user.id}/words`, this.baseUrl);
+  getUserWords = async (user: AuthorizationContent) => {
+    const url = new URL(`users/${user.userId}/words`, this.baseUrl);
+
     const response = await axios.get(url.href, {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -24,12 +25,14 @@ class UsersWords {
 
   getUserWordByWordId = async (user: UserWord) => {
     const url = new URL(`users/${user.id}/words/${user.wordId}`, this.baseUrl);
+
     const response = await axios.get(url.href, {
       headers: {
         Authorization: `Bearer ${user.token}`,
         Accept: "application/json",
       },
     });
+
     const content: UserWordContent = await response.data;
     return content;
   };
@@ -39,6 +42,7 @@ class UsersWords {
       `users/${userWord.id}/words/${userWord.wordId}`,
       this.baseUrl
     );
+
     const body = {
       difficulty: userWord.difficulty,
       optional: userWord.optional,
@@ -65,17 +69,10 @@ class UsersWords {
       this.baseUrl
     );
 
-    const body: {
-      difficulty?: string;
-      optional?: OptionalUserWord;
-    } = {};
-
-    if (userWord.difficulty) {
-      body.difficulty = userWord.difficulty;
-    }
-    if (userWord.optional) {
-      body.optional = userWord.optional;
-    }
+    const body = {
+      difficulty: userWord.difficulty,
+      optional: userWord.optional,
+    };
 
     const response = await axios({
       method: "put",
