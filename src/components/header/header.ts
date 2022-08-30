@@ -5,7 +5,6 @@ import { SING_IN_MODAL_WINDOW } from "./sing-in-modal-window";
 
 class ComponentHeader {
   renderHeader() {
-    if (document.querySelector(".header")) return;
     const HEADER = document.createElement("header");
     HEADER.classList.add("header");
     HEADER.innerHTML = `
@@ -16,9 +15,9 @@ class ComponentHeader {
          <button type="button" class="menu__icon icon-menu"><span></span></button>
          <nav class="menu__body">
             <ul class="menu__list">
-               <li class="menu__item"><a href="" class="menu__link">Наша команда</a></li>
-               <li class="menu__item"><a href="#vocabulary" class="menu__link">Учебник</a></li>
-               <li class="menu__item"><a href="" class="menu__link">Игры</a></li>
+               <li class="menu__item"><a href="/" class="menu__link">Наша команда</a></li>
+               <li class="menu__item"><a href="/vocabulary" data-navigo class="menu__link">Учебник</a></li>
+               <li class="menu__item"><a href="/sprint" data-navigo class="menu__link">Игры</a></li>
                <li class="menu__item"><a href="" class="menu__link">Статистика</a></li>
                <li class="menu__item"><button type="button" class="menu__link-registration">${
                  LOCAL_STORAGE.getDataUser() === null ? "Войти" : "Выйти"
@@ -100,6 +99,7 @@ class ComponentHeader {
   }
 
   async createHeader() {
+    if (document.querySelector(".header")) return;
     this.renderHeader();
     this.openBurgerMenu();
     (await LOCAL_STORAGE.getDataUser()) === null
