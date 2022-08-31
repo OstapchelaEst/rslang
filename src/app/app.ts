@@ -22,7 +22,6 @@ router.on("/all-games", async () => {
   COMPONENT_HEADER.createHeader();
   COMPONENT_FOOTER.createFooter();
   ALL_GAME_PAGE.renderPage();
-});
 
 router.on("/all-games/audio-call", async () => {
   COMPONENT_HEADER.createHeader();
@@ -35,12 +34,12 @@ router.on("/all-games/sprint", async () => {
   const gameResult: GameResult = new GameResult(contentURL);
   const sprint: Sprint = new Sprint(contentURL, gameResult);
 
-  await sprint.createComponent();
-  await gameResult.createComponent();
+  sprint.createComponent();
+  gameResult.createComponent();
 
   COMPONENT_HEADER.createHeader();
 
-  sprint.startGame(1);
+  sprint.sprintListenerStart();
 });
 
 router.on("/vocabulary", async () => {
