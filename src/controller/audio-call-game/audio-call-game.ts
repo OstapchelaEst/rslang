@@ -67,22 +67,11 @@ class AudioGame {
     AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
   }
 
-  async startGameFromVocabulary() {
+  async startGameFromVocabulary(data: WordContent[]) {
     COMPONENT_LOAD_SCREAN.renderLoadScrean();
-    const GROUP_WORDS = Number(
-      (<HTMLElement>(
-        document.querySelector(".vocabulary__link.active")
-      )).getAttribute("data-group")
-    );
-    const PAGE_WORDS = Number(
-      (<HTMLElement>document.querySelector(".pagination__button-numbered"))
-        .textContent
-    );
     AUDIO_CALL_GAME.statistic = [];
-    AUDIO_CALL_GAME.page = PAGE_WORDS;
-    AUDIO_CALL_GAME.data = (
-      await words.getWords({ group: GROUP_WORDS, page: AUDIO_CALL_GAME.page })
-    ).sort(() => Math.random() - 0.5);
+    AUDIO_CALL_GAME.page = data[0].page;
+    AUDIO_CALL_GAME.data = data;
     COMPONENT_LOAD_SCREAN.removeLoadScrean();
     AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
   }
@@ -164,6 +153,9 @@ class AudioGame {
   }
 
   async finishGame() {
+    console.log("NUMBER PAGE BEFORE", AUDIO_CALL_GAME.wordNumber);
+    console.log("DATA", AUDIO_CALL_GAME.data);
+
     AUDIO_CALL_GAME.wordNumber++;
     if (AUDIO_CALL_GAME.wordNumber == AUDIO_CALL_GAME.data.length) {
       KEY_BOARD.removeKeyBoardChoiseListener();

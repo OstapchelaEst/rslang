@@ -12,6 +12,7 @@ import {
 } from "../../interfaces/interfaceServerAPI";
 import "./styles/card.scss";
 import AudioPlayer from "./AudioPlayer";
+import { AUDIO_CALL_GAME } from "../../controller/audio-call-game/audio-call-game";
 
 export default class Vocabulary {
   public el: HTMLElement;
@@ -33,11 +34,7 @@ export default class Vocabulary {
   }
 
   async render(): Promise<void> {
-    this.el.innerHTML = `
-      ${this.renderHeader()}
-      <div class="vocabulary__content"></div>
-    `;
-
+    this.el.innerHTML = `${this.renderHeader()}<div class="vocabulary__content"></div>`;
     this.refresh();
   }
 
@@ -89,6 +86,12 @@ export default class Vocabulary {
   bindEvents(): void {
     this.el.addEventListener("click", async (e: Event) => {
       const target: HTMLElement = <HTMLElement>e.target;
+
+      if (target.classList.contains("vocabulary__link-audio-call")) {
+        e.preventDefault();
+        console.log(this.words);
+        AUDIO_CALL_GAME.startGameFromVocabulary(this.words);
+      }
 
       if (
         target.classList.contains("vocabulary__link") &&
@@ -181,7 +184,7 @@ export default class Vocabulary {
           }
         </div>
         <div>
-          <a href="#" class="vocabulary__link">Аудиовызов</a>
+          <a href="#" class="vocabulary__link vocabulary__link-audio-call">Аудиовызов</a>
           <a href="#" class="vocabulary__link">Спринт</a>
         </div>
       </div>
