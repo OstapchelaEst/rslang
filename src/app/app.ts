@@ -22,6 +22,7 @@ router.on("/all-games", async () => {
   COMPONENT_HEADER.createHeader();
   COMPONENT_FOOTER.createFooter();
   ALL_GAME_PAGE.renderPage();
+});
 
 router.on("/all-games/audio-call", async () => {
   COMPONENT_HEADER.createHeader();

@@ -122,7 +122,7 @@ export default class Sprint {
     this.componentElem = document.createElement("div");
     this.localStorageUser = LOCAL_STORAGE.getDataUser();
     this.contentURL = contentURL;
-    this.gameResult = gameResult;    
+    this.gameResult = gameResult;
   }
 
   createThisComponent() {
@@ -130,7 +130,7 @@ export default class Sprint {
     this.componentElem.classList.add("sprint");
   }
 
- async createStartGameComponent() {
+  async createStartGameComponent() {
     const contentElem = document.querySelector(
       ".main__container"
     ) as HTMLElement;
@@ -141,7 +141,7 @@ export default class Sprint {
   }
 
   createComponent() {
-   this.createStartGameComponent();
+    this.createStartGameComponent();
   }
 
   sprintListenerStart() {
