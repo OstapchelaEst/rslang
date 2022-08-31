@@ -69,7 +69,7 @@ export default class GameResult {
       ".main__container"
     ) as HTMLElement;
     contentElem.append(this.componentElem);
-
+    document.querySelector("body")?.classList.add("_lock");
     const truthyAnswerObjs = answers.filter(
       (answerObj) => answerObj.result === true
     );

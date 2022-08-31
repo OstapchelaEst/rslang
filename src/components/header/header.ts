@@ -17,7 +17,7 @@ class ComponentHeader {
             <ul class="menu__list">
                <li class="menu__item"><a href="/" data-navigo class="menu__link">Наша команда</a></li>
                <li class="menu__item"><a href="" class="menu__link">Учебник</a></li>
-               <li class="menu__item"><a href="/sprint" data-navigo class="menu__link">Игры</a></li>
+               <li class="menu__item"><a href="/all-games" data-navigo class="menu__link">Игры</a></li>
                <li class="menu__item"><a href="" class="menu__link">Статистика</a></li>
                <li class="menu__item"><button type="button" class="menu__link-registration">${
                  LOCAL_STORAGE.getDataUser() === null ? "Войти" : "Выйти"
