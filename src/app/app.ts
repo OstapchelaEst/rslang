@@ -14,12 +14,11 @@ router.on("/", async () => {
   COMPONENT_FOOTER.createFooter();
 });
 
-router.on("/sprint", async () => {
+router.on("/all-games/sprint", async () => {
   const contentURL = "https://rs-learnwords-example.herokuapp.com";
   const gameResult: GameResult = new GameResult(contentURL);
   const sprint: Sprint = new Sprint(contentURL, gameResult);
 
-  // sprint.createStartGameComponent();
   sprint.createComponent();
   gameResult.createComponent();
 
