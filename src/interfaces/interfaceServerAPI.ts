@@ -84,6 +84,18 @@ export interface UserWordContent {
   optional: OptionalUserWord;
 }
 
+export type FullWord = WordContent & {
+  userWord: UserWordContent;
+};
+
+export interface AggregatedWordsRequest {
+  id: string;
+  group?: string;
+  page?: number;
+  wordsPerPage: number;
+  filter: string;
+}
+
 export interface StatisticsContent {
   token?: string;
   id?: string;

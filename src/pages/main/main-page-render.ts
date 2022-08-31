@@ -101,7 +101,9 @@ class MainPage {
             ${FUNCTIONAL_TEXT[key as keyof typeof FUNCTIONAL_TEXT].text}
       </div>
       <div class="functional__link">
-         <a href="">Открыть</a>
+         <a href="${
+           FUNCTIONAL_TEXT[key as keyof typeof FUNCTIONAL_TEXT].link
+         }" data-navigo>Открыть</a>
       </div>
       `;
       (<HTMLElement>FUNCTIONA_BODY).append(BLOCK);

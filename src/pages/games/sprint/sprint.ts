@@ -173,10 +173,9 @@ export default class Sprint {
     contentElem.innerHTML = ``;
     contentElem.append(this.componentElem);
 
-    const userWordsContent = await usersWords.getUserWords({
-      token: this.localStorageUser.token,
-      id: this.localStorageUser.userId,
-    });
+    const userWordsContent = await usersWords.getUserWords(
+      LOCAL_STORAGE.getDataUser()
+    );
 
     const userHardWordsContent = userWordsContent.filter(
       (userWord) => userWord.difficulty === "hard"
@@ -272,10 +271,7 @@ export default class Sprint {
     if (localStorage.getItem("user")) {
       const [wordsContent, userWordsContent] = await Promise.all([
         words.getWords({ group, page }),
-        usersWords.getUserWords({
-          token: this.localStorageUser.token,
-          id: this.localStorageUser.userId,
-        }),
+        usersWords.getUserWords(LOCAL_STORAGE.getDataUser()),
       ]);
 
       const userLearnedWordsContent = userWordsContent.filter(
