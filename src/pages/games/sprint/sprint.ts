@@ -1,6 +1,7 @@
 import words from "../../../controller/services/words";
 import usersWords from "../../../controller/services/usersWords";
 import { LOCAL_STORAGE } from "../../../controller/local-storage/local-storage";
+import { keyBoardSprint } from "./key-board-sprint";
 import GameResult from "../gameResult/gameResult";
 import { COMPONENT_LOAD_SCREAN } from "../../../components/load-screan/load-screan";
 import { getRandomInt, getRandomTrueOrFalse } from "../utils";
@@ -121,7 +122,7 @@ export default class Sprint {
     this.componentElem = document.createElement("div");
     this.localStorageUser = LOCAL_STORAGE.getDataUser();
     this.contentURL = contentURL;
-    this.gameResult = gameResult;
+    this.gameResult = gameResult;    
   }
 
   createThisComponent() {
@@ -129,7 +130,7 @@ export default class Sprint {
     this.componentElem.classList.add("sprint");
   }
 
-  createStartGameComponent() {
+ async createStartGameComponent() {
     const contentElem = document.querySelector(
       ".main__container"
     ) as HTMLElement;
@@ -140,7 +141,7 @@ export default class Sprint {
   }
 
   createComponent() {
-    this.createStartGameComponent();
+   this.createStartGameComponent();
   }
 
   sprintListenerStart() {
@@ -327,9 +328,9 @@ export default class Sprint {
       ".main__container"
     ) as HTMLElement;
     contentElem.innerHTML = ``;
+    COMPONENT_LOAD_SCREAN.renderLoadScrean();
     contentElem.append(this.componentElem);
 
-    COMPONENT_LOAD_SCREAN.renderLoadScrean();
     const pagesInGroup = 30;
     const page = getRandomInt(0, pagesInGroup - 1);
     const wordsContent = await words.getWords({ group, page });
@@ -347,6 +348,7 @@ export default class Sprint {
       seriesCount: 0,
     };
     COMPONENT_LOAD_SCREAN.removeLoadScrean();
+    keyBoardSprint.hotKey();
     this.startTimer();
     this.startRound({ skipLearnedWords: false });
   }
