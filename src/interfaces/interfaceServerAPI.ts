@@ -41,14 +41,14 @@ export interface WordContent {
 }
 
 export interface OptionalUserWord {
-  dateWhenItBecameLearned: string | false;
-  dateWhenItBecameNew: string | false;
-  gameInWhichItBecameNew: string | false;
-  sprint: {
+  dateWhenItBecameLearned?: string | null;
+  dateWhenItBecameNew?: string | null;
+  gameInWhichItBecameNew?: string | null;
+  sprint?: {
     totalCount: number;
     trueCount: number;
   };
-  audioCall: {
+  audioCall?: {
     totalCount: number;
     trueCount: number;
   };
