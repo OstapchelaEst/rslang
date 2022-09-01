@@ -30,13 +30,9 @@ router.on("/all-games/audio-call", async () => {
   AUDIO_CALL_GAME.AudioCallListenerStart();
 });
 
-// router.on("/vocabulary/audio-call", async () => {
-//   const vocabulary: Vocabulary = new Vocabulary();
-//   COMPONENT_HEADER.createHeader();
-//   console.log(vocabulary.words);
-
-//   AUDIO_CALL_GAME.treatmentData(vocabulary.words);
-// });
+router.on("/vocabulary/audio-call", async () => {
+  COMPONENT_HEADER.createHeader();
+});
 
 router.on("/all-games/sprint", async () => {
   const contentURL = "https://rs-learnwords-example.herokuapp.com";

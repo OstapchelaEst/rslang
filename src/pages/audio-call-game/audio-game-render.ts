@@ -62,14 +62,10 @@ class AudioCallRender {
       <div class="audio-call-game__body">
         <audio class="audio-call-game__audio-false" src="https://zvukitop.com/wp-content/uploads/2021/08/icq-oshybka.mp3"></audio>
         <audio class="audio-call-game__audio-true" src="https://zvukipro.com/uploads/files/2020-11/1604628139_d0d8bbb34c203ff.mp3"></audio>
-        <audio class="audio-call-game__audio" src="https://rs-learnwords-example.herokuapp.com/${
-          data[numberWord].audio
-        }"></audio>
+        <audio class="audio-call-game__audio" src="https://rs-learnwords-example.herokuapp.com/${data[numberWord].audio}"></audio>
         <div class="audio-call-game__visual">
           <div class="audio-call-game__picture">
-          <img src="https://rs-learnwords-example.herokuapp.com/${
-            data[numberWord].image
-          }" class="audio-call-game__img">
+          <img src="https://rs-learnwords-example.herokuapp.com/${data[numberWord].image}" class="audio-call-game__img">
         </div>
         <div class="audio-call-game__show">
         <button class="audio-call-game__play-button"><svg fill="#ffffff90"
@@ -83,41 +79,27 @@ class AudioCallRender {
         </div>
         </div>
         <div class="audio-call-game__buttons">
-          <button data-choise="${this.setTrueOrFalse(
-            numberWord,
-            numbersWords[0]
-          )}" class="audio-call-game__button-choice-1">${
-      data[numbersWords[0]].wordTranslate
-    }</button>
-          <button data-choise="${this.setTrueOrFalse(
-            numberWord,
-            numbersWords[1]
-          )}" class="audio-call-game__button-choice-2">${
-      data[numbersWords[1]].wordTranslate
-    }</button>
-          <button data-choise="${this.setTrueOrFalse(
-            numberWord,
-            numbersWords[2]
-          )}" class="audio-call-game__button-choice-3">${
-      data[numbersWords[2]].wordTranslate
-    }</button>
-          <button data-choise="${this.setTrueOrFalse(
-            numberWord,
-            numbersWords[3]
-          )}" class="audio-call-game__button-choice-4">${
-      data[numbersWords[3]].wordTranslate
-    }</button>
-          <button data-choise="${this.setTrueOrFalse(
-            numberWord,
-            numbersWords[4]
-          )}" class="audio-call-game__button-choice-5">${
-      data[numbersWords[4]].wordTranslate
-    }</button>
+    
         </div>
         <button class="audio-call-game__select">Следующее слово</button>
       </div>
     </div>
       `;
+    const BUTTONS = document.querySelector(
+      ".audio-call-game__buttons"
+    ) as HTMLElement;
+    let count = 1;
+    numbersWords.forEach((e) => {
+      BUTTONS.innerHTML += `
+        <button data-choise="${this.setTrueOrFalse(
+          numberWord,
+          e
+        )}" class="audio-call-game__button-choice-${count}">${
+        data[e].wordTranslate
+      }</button>
+        `;
+      count++;
+    });
     this.renderFullScreanAudio("audio-call-game");
     this.AddListenerAudio();
     this.AddListenerScrean();

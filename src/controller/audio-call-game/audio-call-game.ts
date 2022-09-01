@@ -1,10 +1,18 @@
-import { WordContent } from "../../interfaces/interfaceServerAPI";
+import {
+  FullWord,
+  UserWordContent,
+  WordContent,
+} from "../../interfaces/interfaceServerAPI";
 import { IStatistic } from "../../interfaces/caudio-call-game";
 import { AUDIO_CALL_RENDER } from "../../pages/audio-call-game/audio-game-render";
 import { COMPONENT_LOAD_SCREAN } from "../../components/load-screan/load-screan";
 import words from "../services/words";
+import usersWordsService from "../services/usersWords";
 import { KEY_BOARD } from "./key-board";
 import { SONG_AUDIO_CALL } from "./song-audio-call";
+//import usersWords from "../services/usersWords";
+import { LOCAL_STORAGE } from "../local-storage/local-storage";
+//import user from "../services/users";
 
 class AudioGame {
   statusAudio: string;
@@ -67,13 +75,79 @@ class AudioGame {
     AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
   }
 
-  async startGameFromVocabulary(data: WordContent[]) {
+  async startGameFromVocabulary(data: FullWord[], page: number, group: number) {
     COMPONENT_LOAD_SCREAN.renderLoadScrean();
+
     AUDIO_CALL_GAME.statistic = [];
-    AUDIO_CALL_GAME.page = data[0].page;
-    AUDIO_CALL_GAME.data = data;
-    COMPONENT_LOAD_SCREAN.removeLoadScrean();
+    AUDIO_CALL_GAME.page = page;
+    const FILTRED_DATA = this.filterData(data);
+    console.log("START WORDS", FILTRED_DATA);
+
+    if (FILTRED_DATA.length != 20 && group !== 6) {
+      await AUDIO_CALL_GAME.getNidedWords(
+        group,
+        AUDIO_CALL_GAME.page,
+        20 - FILTRED_DATA.length
+      ).then((datas: FullWord[]) => {
+        AUDIO_CALL_GAME.data = FILTRED_DATA.concat(datas);
+      });
+    } else {
+      AUDIO_CALL_GAME.data = FILTRED_DATA;
+    }
+    console.log("FINISH WORDS", AUDIO_CALL_GAME.data);
+
     AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
+    COMPONENT_LOAD_SCREAN.removeLoadScrean();
+  }
+
+  async getNidedWords(
+    group: number,
+    page: number,
+    countNided: number,
+    neddedWords: FullWord[] = []
+  ): Promise<FullWord[]> {
+    if (group === 0 && page === 0) return neddedWords;
+    if (page === 0) {
+      group--;
+      page = 20;
+    } else {
+      page--;
+    }
+
+    const BEFORE_PAGE_WORDS = await words.getWords({
+      group: group,
+      page: page,
+    });
+
+    const USER_WORDS: UserWordContent[] = await usersWordsService.getUserWords(
+      LOCAL_STORAGE.getDataUser()
+    );
+
+    BEFORE_PAGE_WORDS.forEach((userWord) => {
+      USER_WORDS.forEach((pageWord) => {
+        if (userWord.id === pageWord.wordId) {
+          userWord.userWord = pageWord;
+        }
+      });
+    });
+
+    neddedWords = neddedWords.concat(this.filterData(BEFORE_PAGE_WORDS));
+
+    return neddedWords.length < countNided
+      ? this.getNidedWords(
+          group,
+          page,
+          countNided - neddedWords.length,
+          neddedWords
+        )
+      : neddedWords.slice(0, countNided);
+  }
+
+  filterData(data: FullWord[]): FullWord[] {
+    const result = data.filter((a) => {
+      return a.userWord?.optional?.dateWhenItBecameLearned ? false : true;
+    });
+    return result;
   }
 
   treatmentData(data: WordContent[]) {
@@ -153,9 +227,6 @@ class AudioGame {
   }
 
   async finishGame() {
-    console.log("NUMBER PAGE BEFORE", AUDIO_CALL_GAME.wordNumber);
-    console.log("DATA", AUDIO_CALL_GAME.data);
-
     AUDIO_CALL_GAME.wordNumber++;
     if (AUDIO_CALL_GAME.wordNumber == AUDIO_CALL_GAME.data.length) {
       KEY_BOARD.removeKeyBoardChoiseListener();
