@@ -11,7 +11,7 @@ import {
   AuthorizationContent,
 } from "../../../interfaces/interfaceServerAPI";
 
-export default class Sprint {
+class Sprint {
   innerHtmlTemplateRules = `
     <div class="sprint-rules">
       <div class="sprint-rules__body">
@@ -262,6 +262,7 @@ export default class Sprint {
   async startGameFromPage({ group, page }: { group: number; page: number }) {
     const footerElem = document.querySelector(".footer") as HTMLElement;
     if (footerElem) footerElem.remove();
+
     const contentElem = document.querySelector(
       ".main__container"
     ) as HTMLElement;
@@ -275,7 +276,7 @@ export default class Sprint {
       ]);
 
       const userLearnedWordsContent = userWordsContent.filter(
-        (userWord) => userWord.difficulty === "learned"
+        (userWord) => userWord.difficulty === "easy"
       );
 
       this.gameData = {
@@ -574,3 +575,7 @@ export default class Sprint {
     this.setSprintStat();
   }
 }
+
+const contentURL = "https://rs-learnwords-example.herokuapp.com";
+const gameResult: GameResult = new GameResult(contentURL);
+export const sprint: Sprint = new Sprint(contentURL, gameResult);

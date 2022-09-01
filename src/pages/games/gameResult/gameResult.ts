@@ -257,7 +257,7 @@ export default class GameResult {
             token: this.localStorageUser.token,
             id: this.localStorageUser.userId,
             wordId: answer.wordContent.id,
-            difficulty: answer.result === true ? "learned" : "hard",
+            difficulty: answer.result === true ? "easy" : "hard",
             optional: updatedOptional,
           });
         } else if (currentDifficulty === "hard") {
@@ -268,12 +268,12 @@ export default class GameResult {
             difficulty: answer.result === true ? "basic" : "hard",
             optional: updatedOptional,
           });
-        } else if (currentDifficulty === "learned") {
+        } else if (currentDifficulty === "easy") {
           usersWords.updateUserWord({
             token: this.localStorageUser.token,
             id: this.localStorageUser.userId,
             wordId: answer.wordContent.id,
-            difficulty: answer.result === true ? "learned" : "basic",
+            difficulty: answer.result === true ? "easy" : "basic",
             optional: updatedOptional,
           });
         }
@@ -304,7 +304,7 @@ export default class GameResult {
           token: this.localStorageUser.token,
           id: this.localStorageUser.userId,
           wordId: answer.wordContent.id,
-          difficulty: answer.result === true ? "learned" : "hard",
+          difficulty: answer.result === true ? "easy" : "hard",
           optional,
         });
       }
