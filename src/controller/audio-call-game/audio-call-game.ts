@@ -241,7 +241,6 @@ class AudioGame {
       };
 
       const HAS_PROPERTY = this.data[this.wordNumber].userWord;
-
       if (!HAS_PROPERTY) {
         await usersWords.createUserWord({
           token: USER_INFO.token,
