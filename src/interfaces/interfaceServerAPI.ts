@@ -11,11 +11,11 @@ export interface CreateUserContent {
 }
 
 export interface AuthorizationContent {
-  message: string;
+  message?: string;
   token: string;
-  refreshToken: string;
+  refreshToken?: string;
   userId: string;
-  name: string;
+  name?: string;
 }
 
 export interface WordLocation {

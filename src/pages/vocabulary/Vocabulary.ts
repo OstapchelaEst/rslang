@@ -10,6 +10,7 @@ import {
 } from "../../interfaces/interfaceServerAPI";
 import "./styles/card.scss";
 import AudioPlayer from "./AudioPlayer";
+import { sprint } from "../../pages/games/sprint/sprint";
 import { AUDIO_CALL_GAME } from "../../controller/audio-call-game/audio-call-game";
 import { saveUserWord } from "../../controller/utils/saveUserWord";
 
@@ -119,6 +120,26 @@ export default class Vocabulary {
         return;
       }
 
+      if (target.classList.contains("game-sprint")) {
+        e.preventDefault();
+        const activeLink: HTMLElement = <HTMLElement>(
+          document.querySelector(".active")
+        );
+        const groupValue: string | undefined = activeLink.dataset.group;
+        const btnPage: HTMLElement = <HTMLElement>(
+          document.querySelector(".pagination__button-numbered")
+        );
+        const pageValue = btnPage.innerHTML;
+        if (Number(groupValue) < 6) {
+          sprint.startGameFromPage({
+            group: Number(groupValue),
+            page: +pageValue - 1,
+          });
+        } else {
+          sprint.startGameWithHardWords();
+        }
+      }
+
       if (target.classList.contains("button-to-next")) {
         this.page = this.page + 1;
         this.refresh();
@@ -192,7 +213,7 @@ export default class Vocabulary {
         </div>
         <div>
           <a href="#/all-games/audio-call" data-navigo class="vocabulary__link vocabulary__link-audio-call">Аудиовызов</a>
-          <a href="#" class="vocabulary__link">Спринт</a>
+          <a href="/all-games/sprint" data-navigo class="game-sprint">Спринт</a>
         </div>
       </div>
     `;

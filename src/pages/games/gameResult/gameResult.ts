@@ -209,18 +209,19 @@ export default class GameResult {
     gameName: "sprint" | "audioCall",
     answers: { result: boolean; wordContent: WordContent }[]
   ) {
-    const userWordsContent = await usersWords.getUserWords(
-      LOCAL_STORAGE.getDataUser()
-    );
+    const userWordsContent = await usersWords.getUserWords({
+      token: this.localStorageUser.token,
+      userId: this.localStorageUser.userId,
+    });
+    // console.log(userWordsContent)
 
     answers.forEach(async (answer) => {
       const relatedUserWordContent = userWordsContent.find(
         (userWordContent) => userWordContent.wordId === answer.wordContent.id
       );
-
       let isWordNew: boolean;
       if (relatedUserWordContent) {
-        if (relatedUserWordContent.optional.dateWhenItBecameNew === null) {
+        if (relatedUserWordContent.optional.dateWhenItBecameLearned === false) {
           isWordNew = true;
         } else {
           isWordNew = false;
@@ -259,7 +260,7 @@ export default class GameResult {
             token: this.localStorageUser.token,
             id: this.localStorageUser.userId,
             wordId: answer.wordContent.id,
-            difficulty: answer.result === true ? "learned" : "hard",
+            difficulty: answer.result === true ? "easy" : "hard",
             optional: updatedOptional,
           });
         } else if (currentDifficulty === "hard") {
@@ -270,12 +271,12 @@ export default class GameResult {
             difficulty: answer.result === true ? "basic" : "hard",
             optional: updatedOptional,
           });
-        } else if (currentDifficulty === "learned") {
+        } else if (currentDifficulty === "easy") {
           usersWords.updateUserWord({
             token: this.localStorageUser.token,
             id: this.localStorageUser.userId,
             wordId: answer.wordContent.id,
-            difficulty: answer.result === true ? "learned" : "basic",
+            difficulty: answer.result === true ? "easy" : "basic",
             optional: updatedOptional,
           });
         }
@@ -308,7 +309,7 @@ export default class GameResult {
           token: this.localStorageUser.token,
           id: this.localStorageUser.userId,
           wordId: answer.wordContent.id,
-          difficulty: answer.result === true ? "learned" : "hard",
+          difficulty: answer.result === true ? "easy" : "hard",
           optional,
         });
       }

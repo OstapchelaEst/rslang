@@ -11,7 +11,7 @@ import {
   AuthorizationContent,
 } from "../../../interfaces/interfaceServerAPI";
 
-export default class Sprint {
+class Sprint {
   innerHtmlTemplateRules = `
     <div class="sprint-rules">
       <div class="sprint-rules__body">
@@ -170,12 +170,14 @@ export default class Sprint {
     const contentElem = document.querySelector(
       ".main__container"
     ) as HTMLElement;
+    COMPONENT_LOAD_SCREAN.renderLoadScrean();
     contentElem.innerHTML = ``;
     contentElem.append(this.componentElem);
-
-    const userWordsContent = await usersWords.getUserWords(
-      LOCAL_STORAGE.getDataUser()
-    );
+    this.createThisComponent();
+    const userWordsContent = await usersWords.getUserWords({
+      token: this.localStorageUser.token,
+      userId: this.localStorageUser.userId,
+    });
 
     const userHardWordsContent = userWordsContent.filter(
       (userWord) => userWord.difficulty === "hard"
@@ -201,7 +203,8 @@ export default class Sprint {
       currentScore: 20,
       seriesCount: 0,
     };
-
+    COMPONENT_LOAD_SCREAN.removeLoadScrean();
+    keyBoardSprint.hotKey();
     this.startTimer();
     this.startRoundWithHardWords();
   }
@@ -262,20 +265,26 @@ export default class Sprint {
   async startGameFromPage({ group, page }: { group: number; page: number }) {
     const footerElem = document.querySelector(".footer") as HTMLElement;
     if (footerElem) footerElem.remove();
+
     const contentElem = document.querySelector(
       ".main__container"
     ) as HTMLElement;
+    COMPONENT_LOAD_SCREAN.renderLoadScrean();
     contentElem.innerHTML = ``;
     contentElem.append(this.componentElem);
+    this.createThisComponent();
 
     if (localStorage.getItem("user")) {
       const [wordsContent, userWordsContent] = await Promise.all([
         words.getWords({ group, page }),
-        usersWords.getUserWords(LOCAL_STORAGE.getDataUser()),
+        usersWords.getUserWords({
+          token: this.localStorageUser.token,
+          userId: this.localStorageUser.userId,
+        }),
       ]);
 
       const userLearnedWordsContent = userWordsContent.filter(
-        (userWord) => userWord.difficulty === "learned"
+        (userWord) => userWord.difficulty === "easy"
       );
 
       this.gameData = {
@@ -292,7 +301,8 @@ export default class Sprint {
         currentScore: 20,
         seriesCount: 0,
       };
-
+      COMPONENT_LOAD_SCREAN.removeLoadScrean();
+      keyBoardSprint.hotKey();
       this.startTimer();
       this.startRound({ skipLearnedWords: true });
     } else {
@@ -311,7 +321,8 @@ export default class Sprint {
         currentScore: 20,
         seriesCount: 0,
       };
-
+      COMPONENT_LOAD_SCREAN.removeLoadScrean();
+      keyBoardSprint.hotKey();
       this.startTimer();
       this.startRound({ skipLearnedWords: false });
     }
@@ -369,7 +380,7 @@ export default class Sprint {
         if (this.gameData.currentWordContentIndex >= 20) {
           await this.updateWordsContent();
 
-          if (this.gameData.initialPage === this.gameData.currentPage) {
+          if (this.gameData.currentPage === 29) {
             clearInterval(this.gameData.intervalId);
             this.gameResult.showComponent("sprint", this.gameData.answers);
             return;
@@ -574,3 +585,7 @@ export default class Sprint {
     this.setSprintStat();
   }
 }
+
+const contentURL = "https://rs-learnwords-example.herokuapp.com";
+const gameResult: GameResult = new GameResult(contentURL);
+export const sprint: Sprint = new Sprint(contentURL, gameResult);
