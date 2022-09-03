@@ -1,6 +1,7 @@
 import { WordContent } from "../../interfaces/interfaceServerAPI";
 import { IStatistic } from "../../interfaces/caudio-call-game";
 import { AUDIO_CALL_GAME } from "../../controller/audio-call-game/audio-call-game";
+import { LOCAL_STORAGE } from "../../controller/local-storage/local-storage";
 class AudioCallRender {
   renderFullScreanAudio(block: string) {
     const BLOCK = document.createElement("div");
@@ -35,6 +36,16 @@ class AudioCallRender {
               <li class="audio-call-rules__item">Используйте пробел для повтроного звучания слова</li>
               <li class="audio-call-rules__item">Используйте клавишу Enter для перехода к следующему слову
               </li>
+              ${
+                LOCAL_STORAGE.getDataUser()
+                  ? `
+                <li class="audio-call-rules__item">При неправильном ответе слово будет помечено как сложное и отпраяться в соответствующий раздел в учебнике
+                </li>
+                <li class="audio-call-rules__item">При правильном ответе слово будет помечено как изученное
+                </li>
+                `
+                  : ``
+              }
             </ul>
             <div class="audio-call-rules__controlls">
             <p class="audio-call-rules__complexity">Сложность</p>
@@ -105,18 +116,22 @@ class AudioCallRender {
     this.AddListenerScrean();
   }
 
-  renderFinish(dataStats: IStatistic[]) {
+  renderFinish(
+    dataStats: IStatistic[],
+    trueChoise: number,
+    falseChoise: number
+  ) {
     (<HTMLElement>document.querySelector(".main__container")).innerHTML = `
     <div class="audio-call-finish">
     <div class="audio-call-finish__body">
     <div class="audio-call-finish__title">Результат!</div>
     <div class="audio-call-finish__true">
-      <div class="audio-call-finish__sub-title">Правильные ответов </div>
+      <div class="audio-call-finish__sub-title">Правильные ответов ${trueChoise}</div>
       <ol class="audio-call-finish__list">
       </ol>
     </div>
     <div class="audio-call-finish__false">
-      <div class="audio-call-finish__sub-title">Неправильных ответов </div>
+      <div class="audio-call-finish__sub-title">Неправильных ответов ${falseChoise}</div>
       <ol class="audio-call-finish__list">
       </ol>
     </div>
@@ -137,31 +152,43 @@ class AudioCallRender {
         ".audio-call-finish__false .audio-call-finish__list"
       )
     );
-    let TRUE_CHOISE = 0;
-    let FALSE_CHOISE = 0;
-    const FALSE_LIST_TITLE = document.querySelector(
-      ".audio-call-finish__false .audio-call-finish__sub-title"
-    );
-    const TRUE_LIST_TITLE = document.querySelector(
-      ".audio-call-finish__true .audio-call-finish__sub-title"
-    );
     dataStats.forEach((e) => {
       const BLOCK: HTMLLIElement = document.createElement("li");
       BLOCK.classList.add("audio-call-finish__item");
       BLOCK.textContent = `${e.word} - ${e.wordTranslate}`;
       if (e.choise === true) {
         TRUE_LIST.append(BLOCK);
-        ++TRUE_CHOISE;
       } else {
         FALSE_LIST.append(BLOCK);
-        ++FALSE_CHOISE;
       }
     });
-    (<HTMLElement>FALSE_LIST_TITLE).innerHTML += `${FALSE_CHOISE}`;
-    (<HTMLElement>TRUE_LIST_TITLE).innerHTML += `${TRUE_CHOISE}`;
     this.renderFullScreanAudio("audio-call-finish");
     this.AddListenerAudio();
     this.AddListenerScrean();
+  }
+
+  renderMoveOn() {
+    (<HTMLElement>document.querySelector(".main__container")).innerHTML = `
+    <div class="audio-call-move-on">
+      <div class="audio-call-move-on"__body">
+       <div class="audio-call-move-on__title">Вам пора двигаться дальше!</div>
+       <div class="audio-call-move-on__sub-title">Вы уже изучили все слова на этой и предыдуших страниц. Так держать :)</div>
+       <a href="#/vocabulary" data-navigo class="audio-call-move-on__button">Вернуться к учебнику</a>
+      </div>
+    </div>
+    `;
+  }
+
+  renderNoDifficultWords() {
+    (<HTMLElement>document.querySelector(".main__container")).innerHTML = `
+    <div class="audio-call-move-on">
+      <div class="audio-call-move-on"__body">
+       <div class="audio-call-move-on__title">У вас нет ни одного сложного слова!</div>
+       <div class="audio-call-move-on__sub-title">Добавбте их сами из учебника или совершите ошибку в мини-игре и слово добавиться автоматически</div>
+       <a href="#/vocabulary" data-navigo class="audio-call-move-on__button">Вернуться к учебнику</a>
+      </div>
+    </div>
+    `;
   }
 
   setTrueOrFalse(value: number, valueTwo: number) {

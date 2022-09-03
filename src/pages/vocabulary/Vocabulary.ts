@@ -64,6 +64,7 @@ export default class Vocabulary {
               }
             });
           });
+          this.words;
         }
       } else {
         this.words = await aggregatedWordsService.getAggregatedWords(
@@ -283,7 +284,7 @@ export default class Vocabulary {
 
   addToLearned(word: FullWord) {
     const optional: OptionalUserWord = word.userWord.optional || {};
-    optional.dateWhenItBecameLearned = new Date().toISOString();
+    optional.dateWhenItBecameLearned = new Date().toLocaleDateString("en-US");
 
     return this.createOrUpdateUserWord(word, "easy", optional);
   }
