@@ -35,12 +35,12 @@ router.on("/all-games/sprint", async () => {
   const gameResult: GameResult = new GameResult(contentURL);
   const sprint: Sprint = new Sprint(contentURL, gameResult);
 
-  await sprint.createComponent();
-  await gameResult.createComponent();
+  sprint.createComponent();
+  gameResult.createComponent();
 
   COMPONENT_HEADER.createHeader();
 
-  sprint.startGame(1);
+  sprint.sprintListenerStart();
 });
 
 router.on("/vocabulary", async () => {

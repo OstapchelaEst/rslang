@@ -6,13 +6,12 @@ import {
   AggregatedWordsRequest,
   AuthorizationContent,
   FullWord,
-  OptionalUserWord,
-  UserWord,
   UserWordContent,
 } from "../../interfaces/interfaceServerAPI";
-import "./styles/card.scss";
+import "./styles/vocabulary.scss";
 import AudioPlayer from "./AudioPlayer";
 import { AUDIO_CALL_GAME } from "../../controller/audio-call-game/audio-call-game";
+import { saveUserWord } from "../../controller/utils/saveUserWord";
 
 export default class Vocabulary {
   public el: HTMLElement;
@@ -68,11 +67,11 @@ export default class Vocabulary {
         }
       } else {
         this.words = await aggregatedWordsService.getAggregatedWords(
-          userData.token,
           <AggregatedWordsRequest>{
             id: userData.userId,
             filter: JSON.stringify({ "userWord.difficulty": "hard" }),
-          }
+          },
+          userData.token
         );
       }
 
@@ -237,7 +236,21 @@ export default class Vocabulary {
                         }
                       <button class="card__button button-learned">Изученное</button>`
                   }
-                  </div>`
+                  </div>
+                  <div class="progress">
+                    <p>Ответы в играх:</p>
+                    <div class="progress__games" >
+                      <div class="progress__audiocall">
+                        <p>Аудиовызов</p>
+                        <span>0</span>
+                      </div>
+                      <div class="progress__sprint">
+                        <p>Спринт</p>
+                        <span>0</span>
+                      </div>
+                    </div>
+                  </div>
+                  `
                 : ""
             }
         </div>   
@@ -275,38 +288,12 @@ export default class Vocabulary {
   }
 
   setDifficulty(word: FullWord, difficulty: string): Promise<UserWordContent> {
-    return this.createOrUpdateUserWord(
-      word,
-      difficulty,
-      word.userWord?.optional
-    );
+    return saveUserWord(word, { difficulty });
   }
 
   addToLearned(word: FullWord) {
-    const optional: OptionalUserWord = word.userWord.optional || {};
-    optional.dateWhenItBecameLearned = new Date().toLocaleDateString("en-US");
-
-    return this.createOrUpdateUserWord(word, "easy", optional);
-  }
-
-  createOrUpdateUserWord(
-    word: FullWord,
-    difficulty: string,
-    optional: OptionalUserWord
-  ): Promise<UserWordContent> {
-    const userData: AuthorizationContent = LOCAL_STORAGE.getDataUser();
-    const userWord: UserWord = {
-      token: userData.token,
-      id: userData.userId,
-      wordId: word.id,
-      difficulty: difficulty,
-      optional: optional,
-    };
-
-    if (word.userWord) {
-      return usersWordsService.updateUserWord(userWord);
-    } else {
-      return usersWordsService.createUserWord(userWord);
-    }
+    return saveUserWord(word, {
+      optional: { dateWhenItBecameLearned: new Date().toISOString() },
+    });
   }
 }

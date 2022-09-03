@@ -1,3 +1,6 @@
+@import '../../../mixins.scss';
+@import '../../main/styles/animation.scss';
+
 .sprint {
     height: max(calc(100vh - 160px), 600px);
     margin-top: 100px;
@@ -5,6 +8,125 @@
     font-size: 3rem;
     color: #FFF;
   
+    .sprint-rules {
+      padding: 40px 0px;
+      @media (max-width: em(550)){
+        padding: adaptivSize(40,20,550,320) 0px;
+      }
+    
+      color:#FFFFFF99;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+
+      &__body{
+        max-width: 650px;
+      }
+      &__title {
+        color:#FFFFFF;
+        font-size: rem(54);
+        font-weight: 800;
+        letter-spacing: em(3);
+        text-align: center;
+        margin-bottom: 40px;
+        @media (max-width: em(550)){
+          font-size: adaptivSize(54,24,550,320);
+          margin-bottom: adaptivSize(40,15,550,320);
+        }
+    
+      }
+
+      &__info {
+        color:rgba(255, 255, 255, 0.855);
+        font-size: rem(24);
+        line-height: lh(24,27);
+        margin-bottom: 30px;
+        @media (max-width: em(550)){
+          font-size: adaptivSize(24,20,550,320);
+          margin-bottom: adaptivSize(30,15,550,320);
+        }
+      }
+
+      &__list {
+        margin-left: 25px;
+        margin-bottom: 40px;
+      }
+
+      &__item {
+        font-size: rem(20);
+        @media (max-width: em(550)){
+          font-size: adaptivSize(20,18,550,320);
+        }
+        &:not(:last-child){
+          margin-bottom: 10px;
+        }
+        position: relative;
+        &::after{
+          content:'';
+          position: absolute;
+          display: block;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background-color: #F5443B;
+          left: -15px;
+          top: 7px;
+        }
+      }
+    
+      &__controlls {
+        display: block;
+        display: flex;
+        column-gap: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+      &__complexity{
+        font-size: rem(18);
+        color: #FFFFFF90;
+      }
+      &__select{
+        outline: none;
+        border-radius: 5px;
+        padding: 0px 10px;
+        width: 75px;
+        min-height: 50px;
+        font-size: rem(24);
+        font-weight: 700;
+        box-shadow: 0px 0px 0px 3px #FFFFFF66;
+        transition: all 0.3s ease 0s;
+        background-color: transparent;
+        color: #FFFFFF;
+        & option{
+          color: #000;
+        }
+        &:focus{
+          box-shadow: 0px 0px 0px 3px #F5443B;
+        }
+      }
+
+      &__button {
+        display: block;
+        padding: 15px 25px;
+        background-color: #F5443B;
+        text-align: center;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 600;
+        font-size: rem(20);
+        box-shadow: 0px 0px 0px 0px#F5443B;
+        animation-duration: .7s;
+        @media (max-width: em(460)){
+           font-size: rem(18);
+        }
+        @media (any-hover: hover){
+           &:hover{
+              animation-name:button;
+           }
+        }
+     }
+    }
+
     .sprint__wrapper {
       gap: 40px;
     }

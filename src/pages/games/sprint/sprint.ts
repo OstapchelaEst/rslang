@@ -1,7 +1,9 @@
 import words from "../../../controller/services/words";
 import usersWords from "../../../controller/services/usersWords";
 import { LOCAL_STORAGE } from "../../../controller/local-storage/local-storage";
+import { keyBoardSprint } from "./key-board-sprint";
 import GameResult from "../gameResult/gameResult";
+import { COMPONENT_LOAD_SCREAN } from "../../../components/load-screan/load-screan";
 import { getRandomInt, getRandomTrueOrFalse } from "../utils";
 import {
   WordContent,
@@ -10,6 +12,35 @@ import {
 } from "../../../interfaces/interfaceServerAPI";
 
 export default class Sprint {
+  innerHtmlTemplateRules = `
+    <div class="sprint-rules">
+      <div class="sprint-rules__body">
+        <div class="sprint-rules__title">
+          СПРИНТ
+        </div>
+        <div class="sprint-rules__info">
+          <p>«Спринт» - это игра, с помощью которой мы узнаем как хорошо ты знаешь перевод слов.</p>
+        </div>
+        <ul class="sprint-rules__list">
+          <li class="sprint-rules__item">Используйте мышь, чтобы выбрать.</li>
+          <li class="sprint-rules__item">Используйте стрелки для выбора ответа</li>
+          <li class="sprint-rules__item">Ответь правильно три раза подряд для получения умножения очков</li>
+        </ul>
+        <div class="sprint-rules__controlls">
+          <p class="sprint-rules__complexity">Сложность</p>
+          <select name="gameLevel" id="" class="sprint-rules__select">
+            <option value="0">1</option>
+            <option value="1">2</option>
+            <option value="2">3</option>
+            <option value="3">4</option>
+            <option value="4">5</option>
+            <option value="5">6</option>
+          </select>
+            <button class="sprint-rules__button">Начать</button>
+        </div>
+      </div>
+    </div>
+  `;
   innerHtmlTemplate = `
     <div class="sprint__wrapper">
       <div class="sprint__content">
@@ -99,8 +130,38 @@ export default class Sprint {
     this.componentElem.classList.add("sprint");
   }
 
+  async createStartGameComponent() {
+    const contentElem = document.querySelector(
+      ".main__container"
+    ) as HTMLElement;
+    contentElem.innerHTML = ``;
+    contentElem.append(this.componentElem);
+    this.componentElem.innerHTML = this.innerHtmlTemplateRules;
+    this.componentElem.classList.add("sprint");
+  }
+
   createComponent() {
-    this.createThisComponent();
+    this.createStartGameComponent();
+  }
+
+  sprintListenerStart() {
+    (<HTMLButtonElement>(
+      document.querySelector(".sprint-rules__button")
+    )).addEventListener("click", () => {
+      const gameLevelSelect = this.componentElem.querySelector(
+        'select[name="gameLevel"]'
+      ) as HTMLSelectElement;
+
+      const gameLevel = +gameLevelSelect.value;
+      this.startGame(gameLevel);
+      const contentElem = document.querySelector(
+        ".main__container"
+      ) as HTMLElement;
+
+      contentElem.innerHTML = ``;
+      contentElem.append(this.componentElem);
+      this.createThisComponent();
+    });
   }
 
   async startGameWithHardWords() {
@@ -263,12 +324,12 @@ export default class Sprint {
       ".main__container"
     ) as HTMLElement;
     contentElem.innerHTML = ``;
+    COMPONENT_LOAD_SCREAN.renderLoadScrean();
     contentElem.append(this.componentElem);
 
     const pagesInGroup = 30;
     const page = getRandomInt(0, pagesInGroup - 1);
     const wordsContent = await words.getWords({ group, page });
-
     this.gameData = {
       answers: [],
       initialPage: page,
@@ -282,7 +343,8 @@ export default class Sprint {
       currentScore: 20,
       seriesCount: 0,
     };
-
+    COMPONENT_LOAD_SCREAN.removeLoadScrean();
+    keyBoardSprint.hotKey();
     this.startTimer();
     this.startRound({ skipLearnedWords: false });
   }
