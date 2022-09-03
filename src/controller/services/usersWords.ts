@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import {
   UserWordContent,
   UserWord,
@@ -23,18 +24,26 @@ class UsersWords {
     return content;
   };
 
-  getUserWordByWordId = async (user: UserWord) => {
-    const url = new URL(`users/${user.id}/words/${user.wordId}`, this.baseUrl);
+  getUserWord = async (
+    id: string,
+    wordId: string,
+    token: string
+  ): Promise<UserWordContent | null> => {
+    const url = new URL(`users/${id}/words/${wordId}`, this.baseUrl);
 
-    const response = await axios.get(url.href, {
+    const response: AxiosResponse = await axios.get(url.href, {
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
         Accept: "application/json",
+      },
+      validateStatus: (status: number) => {
+        return status === 200 || status === 404;
       },
     });
 
-    const content: UserWordContent = await response.data;
-    return content;
+    return response.status === 200
+      ? <UserWordContent>await response.data
+      : null;
   };
 
   createUserWord = async (userWord: UserWord) => {

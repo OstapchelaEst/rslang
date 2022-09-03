@@ -9,8 +9,8 @@ class AggregatedWords {
   private baseUrl = "https://rs-learnwords-example.herokuapp.com/";
 
   getAggregatedWords = async (
-    token: string,
-    request: AggregatedWordsRequest
+    request: AggregatedWordsRequest,
+    token: string
   ): Promise<FullWord[]> => {
     const url: URL = new URL(
       `users/${request.id}/aggregatedWords`,
