@@ -235,8 +235,10 @@ export default class GameResult {
           relatedUserWordContent.optional;
 
         if (gameName === "sprint") {
-          updatedOptional.sprint.totalCount += 1;
-          if (answer.result === true) updatedOptional.sprint.trueCount += 1;
+          if (updatedOptional.sprint) updatedOptional.sprint.totalCount += 1;
+          if (answer.result === true) {
+            if (updatedOptional.sprint) updatedOptional.sprint.trueCount += 1;
+          }
         }
 
         if (isWordNew === true) {
@@ -297,8 +299,10 @@ export default class GameResult {
         };
 
         if (gameName === "sprint") {
-          optional.sprint.totalCount = 1;
-          optional.sprint.trueCount = answer.result === true ? 1 : 0;
+          if (optional.sprint) optional.sprint.totalCount = 1;
+          if (optional.sprint) {
+            optional.sprint.trueCount = answer.result === true ? 1 : 0;
+          }
         }
 
         usersWords.createUserWord({

@@ -3,11 +3,11 @@ import { SONG_AUDIO_CALL } from "./song-audio-call";
 
 class KeyBoard {
   addKeyBoardChoiseListener() {
-    document.addEventListener("keydown", KEY_BOARD.KeyBoardChoise);
+    document.addEventListener("keypress", KEY_BOARD.KeyBoardChoise);
   }
 
   removeKeyBoardChoiseListener() {
-    document.removeEventListener("keydown", KEY_BOARD.KeyBoardChoise);
+    document.removeEventListener("keypress", KEY_BOARD.KeyBoardChoise);
   }
 
   KeyBoardChoise(e: KeyboardEvent) {

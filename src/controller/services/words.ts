@@ -21,6 +21,7 @@ class Words {
     });
 
     const content: Array<FullWord> = await response.data;
+
     return content;
   };
 
