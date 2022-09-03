@@ -53,6 +53,7 @@ class AudioGame {
   async startGame() {
     COMPONENT_LOAD_SCREAN.renderLoadScrean();
     AUDIO_CALL_GAME.resetValues();
+    AUDIO_CALL_GAME.page = Math.floor(Math.random() * 30);
     const GROUP_WORDS = Number(
       (<HTMLFormElement>document.querySelector(".audio-call-rules__select"))
         .value
@@ -74,7 +75,6 @@ class AudioGame {
         });
       });
     }
-    AUDIO_CALL_GAME.page = Math.floor(Math.random() * 30);
     COMPONENT_LOAD_SCREAN.removeLoadScrean();
     AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
   }
