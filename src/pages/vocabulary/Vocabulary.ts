@@ -10,6 +10,7 @@ import {
 } from "../../interfaces/interfaceServerAPI";
 import "./styles/vocabulary.scss";
 import AudioPlayer from "./AudioPlayer";
+import { AUDIO_CALL_GAME } from "../../controller/audio-call-game/audio-call-game";
 import { saveUserWord } from "../../controller/utils/saveUserWord";
 
 export default class Vocabulary {
@@ -17,10 +18,10 @@ export default class Vocabulary {
 
   private audioPlayer: AudioPlayer;
 
-  private words: FullWord[] = [];
+  public words: FullWord[] = [];
 
-  private group = "0";
-  private page = 0;
+  public group = "0";
+  public page = 0;
 
   constructor() {
     this.el = document.createElement("div");
@@ -32,11 +33,7 @@ export default class Vocabulary {
   }
 
   async render(): Promise<void> {
-    this.el.innerHTML = `
-      ${this.renderHeader()}
-      <div class="vocabulary__content"></div>
-    `;
-
+    this.el.innerHTML = `${this.renderHeader()}<div class="vocabulary__content"></div>`;
     this.refresh();
   }
 
@@ -47,7 +44,6 @@ export default class Vocabulary {
 
     if (el) {
       const userData: AuthorizationContent = LOCAL_STORAGE.getDataUser();
-
       if (this.group != "6") {
         this.words = await wordsService.getWords({
           group: Number(this.group),
@@ -67,6 +63,7 @@ export default class Vocabulary {
               }
             });
           });
+          this.words;
         }
       } else {
         this.words = await aggregatedWordsService.getAggregatedWords(
@@ -88,6 +85,20 @@ export default class Vocabulary {
   bindEvents(): void {
     this.el.addEventListener("click", async (e: Event) => {
       const target: HTMLElement = <HTMLElement>e.target;
+
+      if (target.classList.contains("vocabulary__link-audio-call")) {
+        if (!LOCAL_STORAGE.getDataUser()) {
+          e.preventDefault();
+        } else {
+          setTimeout(() => {
+            AUDIO_CALL_GAME.startGameFromVocabulary(
+              this.words,
+              this.page,
+              Number(this.group)
+            );
+          }, 0);
+        }
+      }
 
       if (
         target.classList.contains("vocabulary__link") &&
@@ -180,7 +191,7 @@ export default class Vocabulary {
           }
         </div>
         <div>
-          <a href="#" class="vocabulary__link">Аудиовызов</a>
+          <a href="#/all-games/audio-call" data-navigo class="vocabulary__link vocabulary__link-audio-call">Аудиовызов</a>
           <a href="#" class="vocabulary__link">Спринт</a>
         </div>
       </div>

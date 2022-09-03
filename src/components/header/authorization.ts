@@ -44,7 +44,7 @@ class Authorization {
         COMPONENT_LOAD_SCREAN.removeLoadScrean();
         this.unAutorizationListener();
         BUTTON.textContent = `Выйти`;
-        ("Зашёл в аккаунт!");
+        location.reload();
       })
       .catch(() => {
         COMPONENT_HEADER.renderErrorAutorization();
@@ -64,7 +64,7 @@ class Authorization {
     BUTTON.removeEventListener("click", AUTHORIZATION.unAutorization);
     LOCAL_STORAGE.removeDataUser();
     SING_IN_MODAL_WINDOW.singInListener();
-    ("Вышел из аккаунта!");
+    location.reload();
   }
 }
 
