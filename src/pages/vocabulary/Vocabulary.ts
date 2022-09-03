@@ -8,7 +8,7 @@ import {
   FullWord,
   UserWordContent,
 } from "../../interfaces/interfaceServerAPI";
-import "./styles/vocabulary.scss";
+import "./styles/card.scss";
 import AudioPlayer from "./AudioPlayer";
 import { AUDIO_CALL_GAME } from "../../controller/audio-call-game/audio-call-game";
 import { saveUserWord } from "../../controller/utils/saveUserWord";

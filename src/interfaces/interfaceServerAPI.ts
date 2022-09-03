@@ -41,9 +41,9 @@ export interface WordContent {
 }
 
 export interface OptionalUserWord {
-  dateWhenItBecameLearned?: string | null;
-  dateWhenItBecameNew?: string | null;
-  gameInWhichItBecameNew?: string | null;
+  dateWhenItBecameLearned?: string | false;
+  dateWhenItBecameNew?: string | false;
+  gameInWhichItBecameNew?: string | false;
   sprint?: {
     totalCount: number;
     trueCount: number;

@@ -255,7 +255,6 @@ class AudioGame {
         if (HAS_OPTIONS) {
           const OPTIONALS_PROPERTYS =
             this.data[this.wordNumber].userWord.optional;
-
           HAS_PROPERTY.difficulty = CHOISE === "true" ? "learned" : "hard";
 
           if (OPTIONALS_PROPERTYS.audioCall) {
@@ -267,14 +266,12 @@ class AudioGame {
               trueCount: CHOISE === "true" ? 1 : 0,
             };
           }
-          if (
-            CHOISE === "true" &&
-            !OPTIONALS_PROPERTYS.dateWhenItBecameLearned
-          ) {
+          const DATE_WORD = OPTIONALS_PROPERTYS.dateWhenItBecameLearned;
+          if (CHOISE === "false") {
+            OPTIONALS_PROPERTYS.dateWhenItBecameLearned = false;
+          } else if (DATE_WORD === false) {
             OPTIONALS_PROPERTYS.dateWhenItBecameLearned =
               new Date().toLocaleDateString("en-US");
-          } else {
-            OPTIONALS_PROPERTYS.dateWhenItBecameLearned = false;
           }
           await usersWords.updateUserWord({
             token: USER_INFO.token,
@@ -294,7 +291,7 @@ class AudioGame {
         }
       }
     }
-    this.choiseIsMade(CHOISE);
+    AUDIO_CALL_GAME.choiseIsMade(CHOISE);
   }
 
   choiseIsMade(choise: string) {

@@ -506,7 +506,7 @@ export default class Sprint {
       ".sprint__timer"
     ) as HTMLDivElement;
 
-    let secondsGameDuration = 60;
+    let secondsGameDuration = 5;
     timerElem.textContent = `${secondsGameDuration}`;
 
     const intervalId = setInterval(() => {
