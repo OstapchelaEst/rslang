@@ -59,12 +59,10 @@ export default class Vocabulary {
             userWords.some((userWord: UserWordContent) => {
               if (userWord.wordId === word.id) {
                 word.userWord = userWord;
-
                 return true;
               }
             });
           });
-          this.words;
         }
       } else {
         this.words = await aggregatedWordsService.getAggregatedWords(

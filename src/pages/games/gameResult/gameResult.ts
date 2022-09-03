@@ -213,7 +213,6 @@ export default class GameResult {
       token: this.localStorageUser.token,
       userId: this.localStorageUser.userId,
     });
-    // console.log(userWordsContent)
 
     answers.forEach(async (answer) => {
       const relatedUserWordContent = userWordsContent.find(

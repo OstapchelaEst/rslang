@@ -246,7 +246,7 @@ class AudioGame {
           token: USER_INFO.token,
           id: USER_INFO.userId,
           wordId: this.data[this.wordNumber].id,
-          difficulty: CHOISE === "true" ? "learned" : "hard",
+          difficulty: CHOISE === "true" ? "learned" : "easy",
           optional: OPTIONAL,
         });
       } else {
@@ -255,7 +255,7 @@ class AudioGame {
         if (HAS_OPTIONS) {
           const OPTIONALS_PROPERTYS =
             this.data[this.wordNumber].userWord.optional;
-          HAS_PROPERTY.difficulty = CHOISE === "true" ? "learned" : "hard";
+          HAS_PROPERTY.difficulty = CHOISE === "true" ? "learned" : "easy";
 
           if (OPTIONALS_PROPERTYS.audioCall) {
             OPTIONALS_PROPERTYS.audioCall.totalCount += 1;
@@ -277,7 +277,7 @@ class AudioGame {
             token: USER_INFO.token,
             id: USER_INFO.userId,
             wordId: this.data[this.wordNumber].id,
-            difficulty: CHOISE === "true" ? "learned" : "hard",
+            difficulty: CHOISE === "true" ? "learned" : "easy",
             optional: OPTIONALS_PROPERTYS,
           });
         } else {
@@ -285,7 +285,7 @@ class AudioGame {
             token: USER_INFO.token,
             id: USER_INFO.userId,
             wordId: this.data[this.wordNumber].id,
-            difficulty: CHOISE === "true" ? "learned" : "hard",
+            difficulty: CHOISE === "true" ? "learned" : "easy",
             optional: OPTIONAL,
           });
         }
