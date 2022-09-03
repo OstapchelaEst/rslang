@@ -170,12 +170,14 @@ class Sprint {
     const contentElem = document.querySelector(
       ".main__container"
     ) as HTMLElement;
+    COMPONENT_LOAD_SCREAN.renderLoadScrean();
     contentElem.innerHTML = ``;
     contentElem.append(this.componentElem);
-
-    const userWordsContent = await usersWords.getUserWords(
-      LOCAL_STORAGE.getDataUser()
-    );
+    this.createThisComponent();
+    const userWordsContent = await usersWords.getUserWords({
+      token: this.localStorageUser.token,
+      userId: this.localStorageUser.userId,
+    });
 
     const userHardWordsContent = userWordsContent.filter(
       (userWord) => userWord.difficulty === "hard"
@@ -201,7 +203,8 @@ class Sprint {
       currentScore: 20,
       seriesCount: 0,
     };
-
+    COMPONENT_LOAD_SCREAN.removeLoadScrean();
+    keyBoardSprint.hotKey();
     this.startTimer();
     this.startRoundWithHardWords();
   }
@@ -266,13 +269,18 @@ class Sprint {
     const contentElem = document.querySelector(
       ".main__container"
     ) as HTMLElement;
+    COMPONENT_LOAD_SCREAN.renderLoadScrean();
     contentElem.innerHTML = ``;
     contentElem.append(this.componentElem);
+    this.createThisComponent();
 
     if (localStorage.getItem("user")) {
       const [wordsContent, userWordsContent] = await Promise.all([
         words.getWords({ group, page }),
-        usersWords.getUserWords(LOCAL_STORAGE.getDataUser()),
+        usersWords.getUserWords({
+          token: this.localStorageUser.token,
+          userId: this.localStorageUser.userId,
+        }),
       ]);
 
       const userLearnedWordsContent = userWordsContent.filter(
@@ -293,7 +301,8 @@ class Sprint {
         currentScore: 20,
         seriesCount: 0,
       };
-
+      COMPONENT_LOAD_SCREAN.removeLoadScrean();
+      keyBoardSprint.hotKey();
       this.startTimer();
       this.startRound({ skipLearnedWords: true });
     } else {
@@ -312,7 +321,8 @@ class Sprint {
         currentScore: 20,
         seriesCount: 0,
       };
-
+      COMPONENT_LOAD_SCREAN.removeLoadScrean();
+      keyBoardSprint.hotKey();
       this.startTimer();
       this.startRound({ skipLearnedWords: false });
     }
@@ -368,9 +378,12 @@ class Sprint {
     if (skipLearnedWords === true && this.gameData.userLearnedWordsContent) {
       do {
         if (this.gameData.currentWordContentIndex >= 20) {
+          // eslint-disable-next-line
           await this.updateWordsContent();
 
-          if (this.gameData.initialPage === this.gameData.currentPage) {
+          // if there was a full cycle of pages in the group => end game
+          // if not => look for not learned words on this page
+          if (this.gameData.currentPage === 29) {
             clearInterval(this.gameData.intervalId);
             this.gameResult.showComponent("sprint", this.gameData.answers);
             return;
@@ -382,6 +395,7 @@ class Sprint {
         wordContentAnswer = this.gameData.wordsContent[currentWordContentIndex];
       } while (
         this.gameData.userLearnedWordsContent.some(
+          // eslint-disable-next-line
           (userLearnedWord) => userLearnedWord.wordId === wordContentAnswer.id
         )
       );
@@ -507,7 +521,7 @@ class Sprint {
       ".sprint__timer"
     ) as HTMLDivElement;
 
-    let secondsGameDuration = 60;
+    let secondsGameDuration = 10;
     timerElem.textContent = `${secondsGameDuration}`;
 
     const intervalId = setInterval(() => {

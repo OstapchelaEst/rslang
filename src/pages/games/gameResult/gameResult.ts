@@ -209,18 +209,19 @@ export default class GameResult {
     gameName: "sprint" | "audioCall",
     answers: { result: boolean; wordContent: WordContent }[]
   ) {
-    const userWordsContent = await usersWords.getUserWords(
-      LOCAL_STORAGE.getDataUser()
-    );
+    const userWordsContent = await usersWords.getUserWords({
+      token: this.localStorageUser.token,
+      userId: this.localStorageUser.userId,
+    });
+    // console.log(userWordsContent)
 
     answers.forEach(async (answer) => {
       const relatedUserWordContent = userWordsContent.find(
         (userWordContent) => userWordContent.wordId === answer.wordContent.id
       );
-
       let isWordNew: boolean;
       if (relatedUserWordContent) {
-        if (relatedUserWordContent.optional.dateWhenItBecameNew === false) {
+        if (relatedUserWordContent.optional.dateWhenItBecameLearned === false) {
           isWordNew = true;
         } else {
           isWordNew = false;
