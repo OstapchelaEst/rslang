@@ -378,11 +378,8 @@ class Sprint {
     if (skipLearnedWords === true && this.gameData.userLearnedWordsContent) {
       do {
         if (this.gameData.currentWordContentIndex >= 20) {
-          // eslint-disable-next-line
           await this.updateWordsContent();
 
-          // if there was a full cycle of pages in the group => end game
-          // if not => look for not learned words on this page
           if (this.gameData.currentPage === 29) {
             clearInterval(this.gameData.intervalId);
             this.gameResult.showComponent("sprint", this.gameData.answers);
@@ -395,7 +392,6 @@ class Sprint {
         wordContentAnswer = this.gameData.wordsContent[currentWordContentIndex];
       } while (
         this.gameData.userLearnedWordsContent.some(
-          // eslint-disable-next-line
           (userLearnedWord) => userLearnedWord.wordId === wordContentAnswer.id
         )
       );
