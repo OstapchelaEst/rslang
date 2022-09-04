@@ -52,7 +52,7 @@ class Sprint {
         </div>
         <div class="sprint__stat">
           <div class="sprint__stat-multiply">
-            Умножение: x 
+            Умножение:   
             <span class="sprint__multiplier"></span>
             <span class="sprint__stat-current-score"></span>
           </div>
@@ -516,7 +516,7 @@ class Sprint {
       ".sprint__timer"
     ) as HTMLDivElement;
 
-    let secondsGameDuration = 60;
+    let secondsGameDuration = 5;
     timerElem.textContent = `${secondsGameDuration}`;
 
     const intervalId = setInterval(() => {
@@ -553,7 +553,7 @@ class Sprint {
     ) as HTMLElement;
 
     scoreContainer.textContent = ` ${this.gameData.totalScore} `;
-    multiplierContainer.textContent = ` ${this.gameData.multiplier} `;
+    multiplierContainer.textContent = ` x${this.gameData.multiplier} `;
     currentScoreContainer.textContent = ` +${this.gameData.currentScore} `;
 
     if (this.gameData.seriesCount !== 0) {

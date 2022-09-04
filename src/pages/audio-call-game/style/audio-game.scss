@@ -33,6 +33,7 @@
     line-height: lh(24,27);
     margin-bottom: 30px;
     @media (max-width: em(550)){
+      text-align: center;
       font-size: adaptivSize(24,20,550,320);
       margin-bottom: adaptivSize(30,15,550,320);
     }
@@ -69,7 +70,8 @@
   &__controlls {
     display: block;
     display: flex;
-    column-gap: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
     justify-content: center;
     align-items: center;
   }
@@ -110,6 +112,7 @@
     animation-duration: .7s;
     @media (max-width: em(460)){
        font-size: rem(18);
+       width: 100%;
     }
     @media (any-hover: hover){
        &:hover{
