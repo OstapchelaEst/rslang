@@ -229,7 +229,8 @@ class AudioGame {
         USER_INFO,
         AUDIO_CALL_GAME.bestStreak,
         AUDIO_CALL_GAME.totalCount,
-        AUDIO_CALL_GAME.trueCount
+        AUDIO_CALL_GAME.trueCount,
+        CHOISE
       );
       const OPTIONAL: OptionalUserWord = {
         dateWhenItBecameLearned:

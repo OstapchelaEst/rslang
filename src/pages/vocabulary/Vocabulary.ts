@@ -14,6 +14,7 @@ import { sprint } from "../../pages/games/sprint/sprint";
 import { AUDIO_CALL_GAME } from "../../controller/audio-call-game/audio-call-game";
 import { saveUserWord } from "../../controller/utils/saveUserWord";
 import { SVG_VOCABULARY } from "./svg";
+import { COMPONENT_LOAD_SCREAN } from "../../components/load-screan/load-screan";
 
 export default class Vocabulary {
   public el: HTMLElement;
@@ -39,6 +40,7 @@ export default class Vocabulary {
   }
 
   async render(): Promise<void> {
+    COMPONENT_LOAD_SCREAN.renderLoadScrean();
     this.el.innerHTML = `${this.renderHeader()}<div class="vocabulary__content"></div>`;
     this.refresh();
   }
@@ -50,6 +52,10 @@ export default class Vocabulary {
 
     if (el) {
       const userData: AuthorizationContent = LOCAL_STORAGE.getDataUser();
+      if (!userData && this.group === "6") {
+        this.group = "0";
+        this.page = 0;
+      }
       if (this.group != "6") {
         this.words = await wordsService.getWords({
           group: Number(this.group),
@@ -87,6 +93,7 @@ export default class Vocabulary {
 
       el.className = `vocabulary__content vocabulary__content--group${this.group}`;
     }
+    COMPONENT_LOAD_SCREAN.removeLoadScrean();
   }
 
   bindEvents(): void {

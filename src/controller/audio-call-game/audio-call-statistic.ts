@@ -6,7 +6,8 @@ class AudioCallStatistic {
     UserData: AuthorizationContent,
     bestStreak: number,
     totalCount: number,
-    trueCount: number
+    trueCount: number,
+    choise: string
   ) {
     const DATE_NOW = new Date().toLocaleDateString("en-US");
     const OPTIONAL = {
@@ -37,8 +38,9 @@ class AudioCallStatistic {
             RESPONS_OPTIONAL[DATE_NOW].audioCall.bestStreak > bestStreak
               ? RESPONS_OPTIONAL[DATE_NOW].audioCall.bestStreak
               : bestStreak;
-          RESPONS_OPTIONAL[DATE_NOW].audioCall.totalCount += totalCount;
-          RESPONS_OPTIONAL[DATE_NOW].audioCall.trueCount += trueCount;
+          RESPONS_OPTIONAL[DATE_NOW].audioCall.totalCount += 1;
+          if (choise === "true")
+            RESPONS_OPTIONAL[DATE_NOW].audioCall.trueCount += 1;
 
           statistic.createStatistics({
             token: UserData.token,

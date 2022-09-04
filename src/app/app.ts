@@ -64,20 +64,24 @@ router.on("/vocabulary", async () => {
 });
 
 router.on("/statistics", async () => {
-  const container: HTMLElement | null =
-    document.querySelector(".main__container");
+  try {
+    const container: HTMLElement | null =
+      document.querySelector(".main__container");
 
-  if (!container) return;
+    if (!container) return;
 
-  const statistics: Statistic = new Statistic();
-  await statistics.render();
+    const statistics: Statistic = new Statistic();
+    await statistics.render();
 
-  COMPONENT_HEADER.createHeader();
+    COMPONENT_HEADER.createHeader();
 
-  container.innerHTML = "";
-  container.append(statistics.el);
+    container.innerHTML = "";
+    container.append(statistics.el);
 
-  COMPONENT_FOOTER.createFooter();
+    COMPONENT_FOOTER.createFooter();
+  } catch {
+    window.location.href = "http://localhost:8080/";
+  }
 });
 
 router.resolve();
