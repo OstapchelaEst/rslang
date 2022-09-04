@@ -45,27 +45,31 @@ export const TEAM_TEXT = {
 };
 
 export const FUNCTIONAL_TEXT = {
-  textbook: {
+  vocabulary: {
+    authorization: false,
     title: `Учебник`,
     text: `    Более 3500 тысяч слов для изучения, разбитых на разделы по уровню твоей подготовки с удобной
       навигацией.`,
-    link: ``,
+    link: `/vocabulary`,
   },
   statistics: {
+    authorization: true,
     title: `Статистика`,
     text: `       
       Отслеживай свой прогресс в индивидуальной статистике, ставь цели и вдохновляйся на и достижение
       новых результатов каждый день!
       `,
-    link: ``,
+    link: `/statistics`,
   },
-  vocabulary: {
+  difficult: {
+    authorization: true,
     title: `Словарь`,
     text: ` Создай свой персональный словарь для изучения слов - добавляй слова, которым хочешь уделить
       особое внимание и удаляй, если слово тебе уже известно.`,
     link: ``,
   },
   games: {
+    authorization: false,
     title: `Игры`,
     text: `2 увлекательных игры на развитие запоминания слов и восприятия на слух.`,
     link: `/all-games`,

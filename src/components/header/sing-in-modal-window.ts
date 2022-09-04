@@ -12,11 +12,12 @@ class SingInModalWindow {
   }
 
   async singInModalWindow() {
+    document.documentElement.classList.add("_lock");
     COMPONENT_HEADER.renderSingIn();
     SING_IN_MODAL_WINDOW.registrationModalWindow();
     SING_IN_MODAL_WINDOW.closeModalWindowListener();
     AUTHORIZATION.AuthorizationListener();
-    ("Хочу зайти в аккаунт!");
+    SING_IN_MODAL_WINDOW.addCloseModalIcon();
   }
 
   registrationModalWindow() {
@@ -25,6 +26,7 @@ class SingInModalWindow {
     )).addEventListener("click", () => {
       COMPONENT_HEADER.renderRegistration();
       VALIDATION.validationListeners();
+      SING_IN_MODAL_WINDOW.addCloseModalIcon();
     });
   }
 
@@ -40,12 +42,20 @@ class SingInModalWindow {
   }
 
   closeModalWindow() {
+    document.documentElement.classList.remove("_lock");
     (<HTMLElement>document.querySelector(".sing-in")).classList.remove(
       "active"
     );
     setTimeout(() => {
       (<HTMLElement>document.querySelector(".sing-in")).remove();
     }, 300);
+  }
+
+  addCloseModalIcon() {
+    (<HTMLElement>document.querySelector(".sing-in__close")).addEventListener(
+      "click",
+      SING_IN_MODAL_WINDOW.closeModalWindow
+    );
   }
 }
 

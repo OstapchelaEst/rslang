@@ -27,6 +27,7 @@ class Registration {
       .then(() => {
         COMPONENT_LOAD_SCREAN.removeLoadScrean();
         COMPONENT_HEADER.renderCompliteRegistration();
+        SING_IN_MODAL_WINDOW.addCloseModalIcon();
         (<HTMLElement>(
           document.querySelector(".sing-in__button-close")
         )).addEventListener("click", () => {
