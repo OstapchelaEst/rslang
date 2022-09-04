@@ -12,6 +12,12 @@ class LocalStorage {
   removeDataUser() {
     localStorage.removeItem("user");
   }
+  getVocabularyGroup(): string | null {
+    return localStorage.getItem("vocabularyGroup");
+  }
+  setVocabularyGroup(group: string): void {
+    localStorage.setItem("vocabularyGroup", group);
+  }
 }
 
 export const LOCAL_STORAGE = new LocalStorage();

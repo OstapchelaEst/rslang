@@ -31,6 +31,10 @@ export default class Vocabulary {
 
     this.audioPlayer = new AudioPlayer();
 
+    if (LOCAL_STORAGE.getVocabularyGroup()) {
+      this.group = <string>LOCAL_STORAGE.getVocabularyGroup();
+    }
+
     this.bindEvents();
   }
 
@@ -70,6 +74,7 @@ export default class Vocabulary {
           <AggregatedWordsRequest>{
             id: userData.userId,
             filter: JSON.stringify({ "userWord.difficulty": "hard" }),
+            wordsPerPage: Number.MAX_SAFE_INTEGER,
           },
           userData.token
         );
@@ -77,8 +82,10 @@ export default class Vocabulary {
 
       el.innerHTML = `
         ${this.words.map((word: FullWord) => this.renderCard(word)).join("")}
-        ${this.renderPagination()}
+        ${this.group != "6" ? this.renderPagination() : ""}
       `;
+
+      el.className = `vocabulary__content vocabulary__content--group${this.group}`;
     }
   }
 
@@ -115,6 +122,8 @@ export default class Vocabulary {
         this.group = target.dataset.group;
         this.page = 0;
         this.refresh();
+
+        LOCAL_STORAGE.setVocabularyGroup(this.group);
 
         return;
       }
@@ -185,7 +194,8 @@ export default class Vocabulary {
 
       if (target.classList.contains("button-learned")) {
         const word: FullWord = this.getWord(target);
-
+        await this.setDifficulty(word, "easy");
+        this.refresh();
         await this.addToLearned(word);
         this.refresh();
 
@@ -198,15 +208,29 @@ export default class Vocabulary {
     return `
       <div class="vocabulary__header">
         <div class="vocabulary__sections">
-          <a href="#" class="vocabulary__link active" data-group="0">Группа&nbsp;1</a>
-          <a href="#" class="vocabulary__link" data-group="1">Группа&nbsp;2</a>
-          <a href="#" class="vocabulary__link" data-group="2">Группа&nbsp;3</a>
-          <a href="#" class="vocabulary__link" data-group="3">Группа&nbsp;4</a>
-          <a href="#" class="vocabulary__link" data-group="4">Группа&nbsp;5</a>
-          <a href="#" class="vocabulary__link" data-group="5">Группа&nbsp;6</a>
+          <a href="#" class="vocabulary__link ${
+            this.group === "0" ? "active" : ""
+          }" data-group="0">Группа&nbsp;1</a>
+          <a href="#" class="vocabulary__link ${
+            this.group === "1" ? "active" : ""
+          }" data-group="1">Группа&nbsp;2</a>
+          <a href="#" class="vocabulary__link ${
+            this.group === "2" ? "active" : ""
+          }" data-group="2">Группа&nbsp;3</a>
+          <a href="#" class="vocabulary__link ${
+            this.group === "3" ? "active" : ""
+          }" data-group="3">Группа&nbsp;4</a>
+          <a href="#" class="vocabulary__link ${
+            this.group === "4" ? "active" : ""
+          }" data-group="4">Группа&nbsp;5</a>
+          <a href="#" class="vocabulary__link ${
+            this.group === "5" ? "active" : ""
+          }" data-group="5">Группа&nbsp;6</a>
           ${
             LOCAL_STORAGE.getDataUser()
-              ? `<a href="#" class="vocabulary__link" data-group="6">Сложные&nbsp;слова</a>`
+              ? `<a href="#" class="vocabulary__link ${
+                  this.group === "6" ? "active" : ""
+                }" data-group="6">Сложные&nbsp;слова</a>`
               : ""
           }
         </div>
@@ -354,8 +378,15 @@ export default class Vocabulary {
   }
 
   addToLearned(word: FullWord) {
-    return saveUserWord(word, {
-      optional: { dateWhenItBecameLearned: new Date().toISOString() },
-    });
+    if (word.userWord.difficulty !== "hard") {
+      return saveUserWord(word, {
+        optional: { dateWhenItBecameLearned: new Date().toISOString() },
+      });
+    } else {
+      return saveUserWord(word, {
+        difficulty: "easy",
+        optional: { dateWhenItBecameLearned: new Date().toISOString() },
+      });
+    }
   }
 }
