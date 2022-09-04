@@ -21,14 +21,15 @@ router.on("/", async () => {
 
 router.on("/all-games", async () => {
   COMPONENT_HEADER.createHeader();
-  COMPONENT_FOOTER.createFooter();
   ALL_GAME_PAGE.renderPage();
+  COMPONENT_FOOTER.createFooter();
 });
 
 router.on("/all-games/audio-call", async () => {
   COMPONENT_HEADER.createHeader();
   AUDIO_CALL_RENDER.renderRules();
   AUDIO_CALL_GAME.AudioCallListenerStart();
+  COMPONENT_FOOTER.removeFooter();
 });
 
 router.on("/all-games/sprint", async () => {
@@ -42,6 +43,7 @@ router.on("/all-games/sprint", async () => {
   COMPONENT_HEADER.createHeader();
 
   sprint.sprintListenerStart();
+  COMPONENT_FOOTER.removeFooter();
 });
 
 router.on("/vocabulary", async () => {

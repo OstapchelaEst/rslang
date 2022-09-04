@@ -39,9 +39,9 @@ class AudioCallRender {
               ${
                 LOCAL_STORAGE.getDataUser()
                   ? `
-                <li class="audio-call-rules__item">При неправильном ответе слово будет помечено как сложное и отпраяться в соответствующий раздел в учебнике
-                </li>
                 <li class="audio-call-rules__item">При правильном ответе слово будет помечено как изученное
+                </li>
+                <li class="audio-call-rules__item">Если вы сделаете неверный ответ на уже изученном слове оно перестанет быть изученным
                 </li>
                 `
                   : ``

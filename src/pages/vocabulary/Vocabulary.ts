@@ -209,8 +209,8 @@ export default class Vocabulary {
               : ""
           }
         </div>
-        <div>
-          <a href="#/all-games/audio-call" data-navigo class="vocabulary__link vocabulary__link-audio-call">Аудиовызов</a>
+        <div class="vocabulary__mine-games">
+          <a href="#/all-games/audio-call" data-navigo class="vocabulary__link-audio-call">Аудиовызов</a>
           <a href="/all-games/sprint" data-navigo class="game-sprint">Спринт</a>
         </div>
       </div>
@@ -218,6 +218,7 @@ export default class Vocabulary {
   }
 
   renderCard(word: FullWord): string {
+    this.renderStatisticWord(word);
     return `
       <div class="card" data-word-id="${word.id}">
         <div class="card__image">
@@ -256,24 +257,51 @@ export default class Vocabulary {
                       <button class="card__button button-learned">Изученное</button>`
                   }
                   </div>
-                  <div class="progress">
-                    <p>Ответы в играх:</p>
-                    <div class="progress__games" >
-                      <div class="progress__audiocall">
-                        <p>Аудиовызов</p>
-                        <span>0</span>
-                      </div>
-                      <div class="progress__sprint">
-                        <p>Спринт</p>
-                        <span>0</span>
-                      </div>
-                    </div>
-                  </div>
+                  ${this.renderStatisticWord(word)}
                   `
                 : ""
             }
         </div>   
       </div>
+    `;
+  }
+
+  renderStatisticWord(data: FullWord) {
+    let audioCallTrue = 0;
+    let audioCallFalse = 0;
+    let audioSprintTrue = 0;
+    let audioSprintFalse = 0;
+    if (data.userWord?.optional) {
+      const STATISTIC_AUDIO_CALL = data.userWord.optional.audioCall;
+      const STATISTIC_SPRINT = data.userWord.optional.sprint;
+      if (STATISTIC_AUDIO_CALL) {
+        audioCallTrue = STATISTIC_AUDIO_CALL.trueCount;
+        audioCallFalse =
+          STATISTIC_AUDIO_CALL.totalCount - STATISTIC_AUDIO_CALL.trueCount;
+      }
+      if (STATISTIC_SPRINT) {
+        audioSprintTrue = STATISTIC_SPRINT.trueCount;
+        audioSprintFalse =
+          STATISTIC_SPRINT.totalCount - STATISTIC_SPRINT.trueCount;
+      }
+    }
+
+    return `
+    <div class="progress">
+    <p class="progress__title">Ответы в играх:</p>
+      <div class="progress__games" >
+        <div class="progress__audiocall">
+            <p class="progress__sub-title">Аудиовызов:</p>
+            <div class="progress__true-audio-call">правильно -<span>${audioCallTrue}</span></div>
+            <div class="progress__true-audio-call">неправильно -<span>${audioCallFalse}</span></div>
+        </div>
+        <div class="progress__sprint">
+          <p class="progress__sub-title">Спринт:</p>
+          <div class="progress__true-sprint">правильно - <span>${audioSprintTrue}</span></div>
+          <div class="progress__true-false">неправильно - <span>${audioSprintFalse}</span></div>
+        </div>
+      </div>
+    </div>
     `;
   }
 

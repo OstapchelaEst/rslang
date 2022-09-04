@@ -28,6 +28,10 @@ class ComponentFooter {
 </div>`;
     (<HTMLElement>document.querySelector(".wrapper")).append(FOOTER);
   }
+  removeFooter() {
+    const FOOTER = document.querySelector(".footer");
+    if (FOOTER) FOOTER.remove();
+  }
 }
 
 export const COMPONENT_FOOTER = new ComponentFooter();

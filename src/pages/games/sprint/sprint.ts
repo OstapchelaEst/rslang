@@ -25,6 +25,16 @@ class Sprint {
           <li class="sprint-rules__item">Используйте мышь, чтобы выбрать.</li>
           <li class="sprint-rules__item">Используйте стрелки для выбора ответа</li>
           <li class="sprint-rules__item">Ответь правильно три раза подряд для получения умножения очков</li>
+          ${
+            LOCAL_STORAGE.getDataUser()
+              ? `
+            <li class="sprint-rules__item">При правильном ответе слово будет помечено как изученное
+            </li>
+            <li class="sprint-rules__item">Если вы сделаете неверный ответ на уже изученном слове оно перестанет быть изученным
+            </li>
+            `
+              : ``
+          }
         </ul>
         <div class="sprint-rules__controlls">
           <p class="sprint-rules__complexity">Сложность</p>
