@@ -8,7 +8,9 @@ class KeyBoardSprint {
       }
 
       const sprintElem = document.querySelector(".sprint") as HTMLElement;
-
+      const gameResultElem = document.querySelector(
+        ".gameResult"
+      ) as HTMLElement;
       if (sprintElem && hotKeysSprint.includes(event.code)) {
         const noBtn = sprintElem.querySelector(
           ".sprint__no"
@@ -17,9 +19,9 @@ class KeyBoardSprint {
           ".sprint__yes"
         ) as HTMLButtonElement;
 
-        if (event.code === "ArrowLeft") {
+        if (event.code === "ArrowLeft" && !gameResultElem) {
           noBtn.dispatchEvent(new Event("click"));
-        } else if (event.code === "ArrowRight") {
+        } else if (event.code === "ArrowRight" && !gameResultElem) {
           yesBtn.dispatchEvent(new Event("click"));
         }
       }

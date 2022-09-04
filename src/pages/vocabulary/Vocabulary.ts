@@ -212,7 +212,7 @@ export default class Vocabulary {
         </div>
         <div class="vocabulary__mine-games">
           <a href="#/all-games/audio-call" data-navigo class="vocabulary__link-audio-call">Аудиовызов</a>
-          <a href="/all-games/sprint" data-navigo class="game-sprint">Спринт</a>
+          <a href="#/all-games/sprint" data-navigo class="game-sprint">Спринт</a>
         </div>
       </div>
     `;

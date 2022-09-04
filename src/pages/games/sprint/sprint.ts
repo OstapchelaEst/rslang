@@ -106,6 +106,7 @@ class Sprint {
     multiplier: number;
     currentScore: number;
     seriesCount: number;
+    game: boolean;
   } = {
     answers: [],
     initialPage: 0,
@@ -118,6 +119,7 @@ class Sprint {
     multiplier: 1,
     currentScore: 20,
     seriesCount: 0,
+    game: false,
   };
 
   localStorageUser: AuthorizationContent;
@@ -212,6 +214,7 @@ class Sprint {
       multiplier: 1,
       currentScore: 20,
       seriesCount: 0,
+      game: false,
     };
     COMPONENT_LOAD_SCREAN.removeLoadScrean();
     keyBoardSprint.hotKey();
@@ -309,6 +312,7 @@ class Sprint {
         multiplier: 1,
         currentScore: 20,
         seriesCount: 0,
+        game: true,
       };
       COMPONENT_LOAD_SCREAN.removeLoadScrean();
       keyBoardSprint.hotKey();
@@ -329,6 +333,7 @@ class Sprint {
         multiplier: 1,
         currentScore: 20,
         seriesCount: 0,
+        game: true,
       };
       COMPONENT_LOAD_SCREAN.removeLoadScrean();
       keyBoardSprint.hotKey();
@@ -362,6 +367,7 @@ class Sprint {
       multiplier: 1,
       currentScore: 20,
       seriesCount: 0,
+      game: false,
     };
     COMPONENT_LOAD_SCREAN.removeLoadScrean();
     keyBoardSprint.hotKey();
@@ -589,6 +595,8 @@ class Sprint {
       }
     } else {
       this.gameData.seriesCount = 0;
+      this.gameData.multiplier = 1;
+      this.gameData.currentScore = 20;
     }
 
     this.setSprintStat();

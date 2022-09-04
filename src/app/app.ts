@@ -35,7 +35,6 @@ router.on("/all-games/audio-call", async () => {
 router.on("/all-games/sprint", async () => {
   const contentURL = "https://rs-learnwords-example.herokuapp.com";
   const gameResult: GameResult = new GameResult(contentURL);
-  // const sprint: Sprint = new Sprint(contentURL, gameResult);
 
   sprint.createComponent();
   gameResult.createComponent();
