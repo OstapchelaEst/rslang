@@ -117,7 +117,7 @@ class AudioGame {
     if (group === 0 && page === 0) return neddedWords;
     if (page === 0) {
       group--;
-      page = 19;
+      page = 29;
     } else {
       page--;
     }

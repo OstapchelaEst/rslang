@@ -170,7 +170,7 @@ class AudioCallRender {
   renderMoveOn() {
     (<HTMLElement>document.querySelector(".main__container")).innerHTML = `
     <div class="audio-call-move-on">
-      <div class="audio-call-move-on"__body">
+      <div class="audio-call-move-on__body">
        <div class="audio-call-move-on__title">Вам пора двигаться дальше!</div>
        <div class="audio-call-move-on__sub-title">Вы уже изучили все слова на этой и предыдуших страницах. Так держать :)</div>
        <a href="#/vocabulary" data-navigo class="audio-call-move-on__button">Вернуться к учебнику</a>

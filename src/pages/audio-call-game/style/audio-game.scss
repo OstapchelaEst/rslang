@@ -461,6 +461,11 @@
 
 .audio-call-move-on {
   // .audio-call-move-on__title
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   &__title {
     text-align: center;
     font-size: rem(54);
