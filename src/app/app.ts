@@ -8,6 +8,7 @@ import { AUDIO_CALL_GAME } from "../controller/audio-call-game/audio-call-game";
 import Vocabulary from "../pages/vocabulary/Vocabulary";
 import Sprint from "../pages/games/sprint/sprint";
 import GameResult from "../pages/games/gameResult/gameResult";
+import Statistic from "../pages/statistics/Statistics";
 
 const router = new Navigo("/", { hash: true });
 
@@ -56,6 +57,23 @@ router.on("/vocabulary", async () => {
 
   container.innerHTML = "";
   container.append(vocabulary.el);
+
+  COMPONENT_FOOTER.createFooter();
+});
+
+router.on("/statistics", async () => {
+  const container: HTMLElement | null =
+    document.querySelector(".main__container");
+
+  if (!container) return;
+
+  const statistics: Statistic = new Statistic();
+  await statistics.render();
+
+  COMPONENT_HEADER.createHeader();
+
+  container.innerHTML = "";
+  container.append(statistics.el);
 
   COMPONENT_FOOTER.createFooter();
 });
