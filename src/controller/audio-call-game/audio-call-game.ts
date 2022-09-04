@@ -225,6 +225,12 @@ class AudioGame {
     }
 
     if (USER_INFO) {
+      AUDIO_CALL_STATISTIC.setStatistic(
+        USER_INFO,
+        AUDIO_CALL_GAME.bestStreak,
+        AUDIO_CALL_GAME.totalCount,
+        AUDIO_CALL_GAME.trueCount
+      );
       const OPTIONAL: OptionalUserWord = {
         dateWhenItBecameLearned:
           CHOISE === "true" ? new Date().toLocaleDateString("en-US") : false,
@@ -332,15 +338,6 @@ class AudioGame {
         AUDIO_CALL_GAME.trueCount,
         AUDIO_CALL_GAME.totalCount - AUDIO_CALL_GAME.trueCount
       );
-      const USER_DATA = LOCAL_STORAGE.getDataUser();
-      if (USER_DATA) {
-        AUDIO_CALL_STATISTIC.setStatistic(
-          USER_DATA,
-          AUDIO_CALL_GAME.bestStreak,
-          AUDIO_CALL_GAME.totalCount,
-          AUDIO_CALL_GAME.trueCount
-        );
-      }
       AUDIO_CALL_GAME.addRepeatPlayListener();
       AUDIO_CALL_GAME.resetValues();
     } else {
