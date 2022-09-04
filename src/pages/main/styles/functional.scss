@@ -36,10 +36,10 @@
       grid-template-columns: repeat(4,1fr);
       row-gap: 35px;
       column-gap: 20px;
-      @media (max-width: em(1000)){
+      @media (max-width: em(1150)){
          grid-template-columns: repeat(3,1fr);
       }
-      @media (max-width: em(768)){
+      @media (max-width: em(800)){
          grid-template-columns: repeat(2,1fr);
       }
       @media (max-width: em(640)){
@@ -76,7 +76,18 @@
          font-size: rem(16);
       }
    }
+   &__authorization {
+    font-size: rem(12);
+    text-align: center;
+    color: #ffffff36;
+    font-weight: 600;
+    margin-bottom: 20px;
+    @media (max-width: em(460)){
+       font-size: rem(16);
+    }
+   }
    &__link{
+    cursor: pointer;
       & a {
          display: block;
          
@@ -97,6 +108,9 @@
                animation-name:button;
             }
          }
+      }
+      & a.disable{
+        pointer-events: none;
       }
    }
 }

@@ -1,5 +1,7 @@
 import { SVG } from "./svg-pictures";
 import { TEAM_TEXT, FUNCTIONAL_TEXT } from "./block-text";
+import { LOCAL_STORAGE } from "../../controller/local-storage/local-storage";
+import { SING_IN_MODAL_WINDOW } from "../../components/header/sing-in-modal-window";
 
 class MainPage {
   renderStartPage() {
@@ -77,20 +79,22 @@ class MainPage {
   }
 
   renderFunctionalPage() {
+    const USER_DATA = LOCAL_STORAGE.getDataUser();
     if (document.querySelector(".functional")) return;
     const PAGE = document.createElement("div");
     PAGE.classList.add("functional");
     PAGE.innerHTML = `
-    <div class="functional">
+    
       <h3 class="functional__title">Функционал</h3>
       <p class="functional__info">Зарегестрируйся, чтоб получить все возможности</p>
       <div class="functional__body">
       </div>
-    </div>
     `;
     (<HTMLElement>document.querySelector(".main__container")).append(PAGE);
     const FUNCTIONA_BODY = document.querySelector(".functional__body");
     for (const key in FUNCTIONAL_TEXT) {
+      const AUTHORIZATION =
+        FUNCTIONAL_TEXT[key as keyof typeof FUNCTIONAL_TEXT].authorization;
       const BLOCK = document.createElement("div");
       BLOCK.classList.add("functional__item");
       BLOCK.innerHTML = `
@@ -100,20 +104,42 @@ class MainPage {
       <div class="functional__text">
             ${FUNCTIONAL_TEXT[key as keyof typeof FUNCTIONAL_TEXT].text}
       </div>
+      ${
+        AUTHORIZATION
+          ? USER_DATA
+            ? ``
+            : `<div class="functional__authorization">Нужно авторизироваться</div>`
+          : ``
+      }
       <div class="functional__link">
          <a href="${
            FUNCTIONAL_TEXT[key as keyof typeof FUNCTIONAL_TEXT].link
-         }" data-navigo>Открыть</a>
+         }" data-navigo class="functional-link ${
+        AUTHORIZATION ? (USER_DATA ? `` : `disable`) : ``
+      }">Открыть</a>
       </div>
       `;
       (<HTMLElement>FUNCTIONA_BODY).append(BLOCK);
     }
   }
 
+  addListenersNoAuthorization() {
+    const ALL_DISABLE_LINKS = document.querySelectorAll(
+      ".functional-link.disable"
+    );
+    ALL_DISABLE_LINKS.forEach((e) => {
+      (<HTMLElement>e.parentElement).addEventListener(
+        "click",
+        SING_IN_MODAL_WINDOW.singInModalWindow
+      );
+    });
+  }
+
   async buildMainPage() {
     this.renderStartPage();
     this.renderFunctionalPage();
     this.renderTeamPage();
+    this.addListenersNoAuthorization();
   }
 }
 export const RENDER_BASIC_STRUCTURE = new MainPage();
