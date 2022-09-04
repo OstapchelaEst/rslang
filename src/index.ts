@@ -7,3 +7,9 @@ import "./pages/all-games/styles/all-games.scss";
 import "./pages/games/sprint/sprint.scss";
 import "./pages/games/gameResult/gameResult.scss";
 import "./app/app.ts";
+import { AUTHENTICATED } from "./controller/autentificated/autentificatedUser";
+
+AUTHENTICATED.refreshUserToken();
+setInterval(() => {
+  AUTHENTICATED.refreshUserToken();
+}, 1000000);

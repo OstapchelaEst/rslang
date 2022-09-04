@@ -2,6 +2,7 @@ import {
   User,
   CreateUserContent,
   UserWord,
+  AuthorizationContent,
 } from "../../interfaces/interfaceServerAPI";
 
 const axios = require("axios").default;
@@ -38,6 +39,19 @@ class Users {
 
     const content: { id: string; name: string; email: string } =
       await response.data;
+    return content;
+  };
+
+  refreshToken = async (id: string, token: string) => {
+    const url = new URL(`users/${id}/tokens`, this.baseUrl);
+
+    const response = await axios.get(url.href, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    });
+    const content: AuthorizationContent = await response.data;
     return content;
   };
 }
