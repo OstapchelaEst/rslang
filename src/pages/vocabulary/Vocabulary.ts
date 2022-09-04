@@ -13,6 +13,7 @@ import AudioPlayer from "./AudioPlayer";
 import { sprint } from "../../pages/games/sprint/sprint";
 import { AUDIO_CALL_GAME } from "../../controller/audio-call-game/audio-call-game";
 import { saveUserWord } from "../../controller/utils/saveUserWord";
+import { SVG_VOCABULARY } from "./svg";
 
 export default class Vocabulary {
   public el: HTMLElement;
@@ -257,11 +258,12 @@ export default class Vocabulary {
                       <button class="card__button button-learned">Изученное</button>`
                   }
                   </div>
-                  ${this.renderStatisticWord(word)}
+
                   `
                 : ""
             }
-        </div>   
+        </div>
+        ${this.renderStatisticWord(word)}   
       </div>
     `;
   }
@@ -285,22 +287,35 @@ export default class Vocabulary {
           STATISTIC_SPRINT.totalCount - STATISTIC_SPRINT.trueCount;
       }
     }
-
     return `
-    <div class="progress">
-    <p class="progress__title">Ответы в играх:</p>
-      <div class="progress__games" >
-        <div class="progress__audiocall">
-            <p class="progress__sub-title">Аудиовызов:</p>
-            <div class="progress__true-audio-call">правильно -<span>${audioCallTrue}</span></div>
-            <div class="progress__true-audio-call">неправильно -<span>${audioCallFalse}</span></div>
-        </div>
-        <div class="progress__sprint">
-          <p class="progress__sub-title">Спринт:</p>
-          <div class="progress__true-sprint">правильно - <span>${audioSprintTrue}</span></div>
-          <div class="progress__true-false">неправильно - <span>${audioSprintFalse}</span></div>
-        </div>
-      </div>
+    <div class="statistic">
+    <div class="statistic__item">
+      <p class="statistic__text">Ответы в играх:</p>
+    </div>
+    <div class="statistic__item">
+      ${SVG_VOCABULARY.true}
+    </div>
+    <div class="statistic__item">
+      ${SVG_VOCABULARY.false}
+    </div>
+    <div class="statistic__item">
+      <p class="statistic__text">Аудиовызов</p>
+    </div>
+    <div class="statistic__item">
+      <p class="statistic__audio-call-true">${audioCallTrue}</p>
+    </div>
+    <div class="statistic__item">
+      <p class="statistic__audio-call-false">${audioCallFalse}</p>
+    </div>
+    <div class="statistic__item">
+      <p class="statistic__text">Спринт</p>
+    </div>
+    <div class="statistic__item">
+      <p class="statistic__sprint-true">${audioSprintTrue}</p>
+    </div>
+    <div class="statistic__item">
+      <p class="statistic__sprint-true">${audioSprintFalse}</p>
+    </div>
     </div>
     `;
   }
