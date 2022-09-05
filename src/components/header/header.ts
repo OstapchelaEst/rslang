@@ -78,6 +78,25 @@ class ComponentHeader {
       (<HTMLElement>document.querySelector(".sing-in")).classList.add("active");
     }, 0);
   }
+  renderSingInAfterRegistration() {
+    const MODAL = document.querySelector(".sing-in");
+    (<HTMLElement>MODAL).innerHTML = `
+    <div class="sing-in__body">
+        <div class="sing-in__close">
+        <svg width="25px" height="25px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.621 8.086l-.707-.707L6.5 8.793 5.086 7.379l-.707.707L5.793 9.5l-1.414 1.414.707.707L6.5 10.207l1.414 1.414.707-.707L7.207 9.5l1.414-1.414z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M5 3l1-1h7l1 1v7l-1 1h-2v2l-1 1H3l-1-1V6l1-1h2V3zm1 2h4l1 1v4h2V3H6v2zm4 1H3v7h7V6z"/></svg>
+        </div>
+       <p class="sing-in__title">Вход в аккаунт</p>
+       <form action="#" class="sing-in__form">
+        <label for="email">Email*</label>
+        <input required type="email" autocomplete="on" id="email" class="sing-in__input-email">
+        <label for="password">Пароль*</label>
+        <input required type="password" id="password"  class="sing-in__input-password">
+        <p>Ещё не <span class="sing-in__registration">зарегистрировался?</span></p>
+        <button type="submit"  class="sing-in__input-button">Войти</button>
+      </form>
+    </div>
+    `;
+  }
   renderRegistration() {
     (<HTMLElement>document.querySelector(".sing-in__body")).innerHTML = `
     <div class="sing-in__close">
@@ -106,8 +125,10 @@ class ComponentHeader {
     <svg width="25px" height="25px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.621 8.086l-.707-.707L6.5 8.793 5.086 7.379l-.707.707L5.793 9.5l-1.414 1.414.707.707L6.5 10.207l1.414 1.414.707-.707L7.207 9.5l1.414-1.414z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M5 3l1-1h7l1 1v7l-1 1h-2v2l-1 1H3l-1-1V6l1-1h2V3zm1 2h4l1 1v4h2V3H6v2zm4 1H3v7h7V6z"/></svg>
     </div>
     <div class="sing-in__title"><p>Регистрация прошла успешно!</p></div>
+    <button class="sing-in__button-return-to-sing-in">Войти</button>
     <button class="sing-in__button-close">Закрыть</button>
     `;
+    SING_IN_MODAL_WINDOW.addListenerReturnToSingIn();
   }
   renderErrorRegistration() {
     (<HTMLElement>document.querySelector(".sing-in__body")).innerHTML = `

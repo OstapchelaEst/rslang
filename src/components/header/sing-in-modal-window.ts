@@ -57,6 +57,18 @@ class SingInModalWindow {
       SING_IN_MODAL_WINDOW.closeModalWindow
     );
   }
+
+  addListenerReturnToSingIn() {
+    document
+      .querySelector(".sing-in__button-return-to-sing-in")
+      ?.addEventListener("click", () => {
+        COMPONENT_HEADER.renderSingInAfterRegistration();
+        SING_IN_MODAL_WINDOW.registrationModalWindow();
+        SING_IN_MODAL_WINDOW.closeModalWindowListener();
+        AUTHORIZATION.AuthorizationListener();
+        SING_IN_MODAL_WINDOW.addCloseModalIcon();
+      });
+  }
 }
 
 export const SING_IN_MODAL_WINDOW = new SingInModalWindow();
