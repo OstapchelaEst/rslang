@@ -80,32 +80,40 @@ class AudioGame {
   }
 
   async startGameFromVocabulary(data: FullWord[], page: number, group: number) {
-    COMPONENT_LOAD_SCREAN.renderLoadScrean();
-    AUDIO_CALL_GAME.resetValues();
-    AUDIO_CALL_GAME.page = page;
-    const FILTRED_DATA = this.filterData(data);
-    if (FILTRED_DATA.length === 0) {
-      group === 6
-        ? AUDIO_CALL_RENDER.renderNoDifficultWords()
-        : AUDIO_CALL_RENDER.renderMoveOn();
+    if (LOCAL_STORAGE.getDataUser()) {
+      COMPONENT_LOAD_SCREAN.renderLoadScrean();
+      AUDIO_CALL_GAME.resetValues();
+      AUDIO_CALL_GAME.page = page;
+      const FILTRED_DATA = this.filterData(data);
+      if (FILTRED_DATA.length === 0) {
+        group === 6
+          ? AUDIO_CALL_RENDER.renderNoDifficultWords()
+          : AUDIO_CALL_RENDER.renderMoveOn();
+        COMPONENT_LOAD_SCREAN.removeLoadScrean();
+        return;
+      }
+
+      if (FILTRED_DATA.length != 20 && group !== 6) {
+        await AUDIO_CALL_GAME.getNidedWords(
+          group,
+          AUDIO_CALL_GAME.page,
+          20 - FILTRED_DATA.length
+        ).then((datas: FullWord[]) => {
+          AUDIO_CALL_GAME.data = FILTRED_DATA.concat(datas);
+        });
+      } else {
+        AUDIO_CALL_GAME.data = FILTRED_DATA;
+      }
+
+      AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
       COMPONENT_LOAD_SCREAN.removeLoadScrean();
-      return;
-    }
-
-    if (FILTRED_DATA.length != 20 && group !== 6) {
-      await AUDIO_CALL_GAME.getNidedWords(
-        group,
-        AUDIO_CALL_GAME.page,
-        20 - FILTRED_DATA.length
-      ).then((datas: FullWord[]) => {
-        AUDIO_CALL_GAME.data = FILTRED_DATA.concat(datas);
-      });
     } else {
-      AUDIO_CALL_GAME.data = FILTRED_DATA;
+      AUDIO_CALL_GAME.resetValues();
+      AUDIO_CALL_GAME.page = page;
+      AUDIO_CALL_GAME.wordNumber = 0;
+      AUDIO_CALL_GAME.data = data;
+      AUDIO_CALL_GAME.treatmentData(data);
     }
-
-    AUDIO_CALL_GAME.treatmentData(AUDIO_CALL_GAME.data);
-    COMPONENT_LOAD_SCREAN.removeLoadScrean();
   }
 
   async getNidedWords(
@@ -199,7 +207,6 @@ class AudioGame {
     this.showNextButton();
     const USER_INFO = LOCAL_STORAGE.getDataUser();
     const CHOISE = button.getAttribute("data-choise") || "false";
-
     this.totalCount++;
     if (CHOISE === "true") {
       button.classList.add("true");

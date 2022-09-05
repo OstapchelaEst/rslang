@@ -1,4 +1,5 @@
 import { LOCAL_STORAGE } from "../../controller/local-storage/local-storage";
+import { AUDIO_CALL_RENDER } from "../../pages/audio-call-game/audio-game-render";
 import { SVG } from "../../pages/main/svg-pictures";
 import { AUTHORIZATION } from "./authorization";
 import { SING_IN_MODAL_WINDOW } from "./sing-in-modal-window";
@@ -45,7 +46,6 @@ class ComponentHeader {
       this.removeLockAndOpenClass
     );
   }
-
   removeLockAndOpenClass() {
     if (document.documentElement.classList.contains("_lock")) {
       document.documentElement.classList.remove("_lock");
@@ -54,7 +54,6 @@ class ComponentHeader {
       document.documentElement.classList.remove("menu-open");
     }
   }
-
   renderSingIn() {
     const MODAL = document.createElement("div");
     MODAL.classList.add("sing-in");
@@ -126,14 +125,26 @@ class ComponentHeader {
     BLOCK.textContent = `Неверный логин или пароль`;
     (<HTMLElement>document.querySelector(".sing-in__form")).prepend(BLOCK);
   }
-
   async createHeader() {
     if (document.querySelector(".header")) return;
     this.renderHeader();
     this.openBurgerMenu();
-    (await LOCAL_STORAGE.getDataUser()) === null
+    this.returnToVacabularu();
+    LOCAL_STORAGE.getDataUser() === null
       ? SING_IN_MODAL_WINDOW.singInListener()
       : AUTHORIZATION.unAutorizationListener();
+  }
+
+  returnToVacabularu() {
+    const LINK_VOCABULARY = document.querySelectorAll(".menu__item")[1];
+    LINK_VOCABULARY.addEventListener("click", () => {
+      setTimeout(() => {
+        const VOCABULARY = document.querySelector(".vocabulary");
+        if (!VOCABULARY) {
+          AUDIO_CALL_RENDER.returnToVocabularu();
+        }
+      }, 0);
+    });
   }
 }
 

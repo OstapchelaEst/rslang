@@ -134,12 +134,20 @@ class MainPage {
       );
     });
   }
+  setValueVocabulary() {
+    if (LOCAL_STORAGE.getDataUser()) {
+      LOCAL_STORAGE.setVocabularyGroup("6");
+    }
+  }
 
   async buildMainPage() {
     this.renderStartPage();
     this.renderFunctionalPage();
     this.renderTeamPage();
     this.addListenersNoAuthorization();
+    document
+      .querySelectorAll('[href="/vocabulary"]')[1]
+      .addEventListener("click", this.setValueVocabulary);
   }
 }
 export const RENDER_BASIC_STRUCTURE = new MainPage();

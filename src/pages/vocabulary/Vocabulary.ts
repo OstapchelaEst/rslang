@@ -101,17 +101,12 @@ export default class Vocabulary {
       const target: HTMLElement = <HTMLElement>e.target;
 
       if (target.classList.contains("vocabulary__link-audio-call")) {
-        if (!LOCAL_STORAGE.getDataUser()) {
-          e.preventDefault();
-        } else {
-          setTimeout(() => {
-            AUDIO_CALL_GAME.startGameFromVocabulary(
-              this.words,
-              this.page,
-              Number(this.group)
-            );
-          }, 0);
-        }
+        e.preventDefault();
+        AUDIO_CALL_GAME.startGameFromVocabulary(
+          this.words,
+          this.page,
+          Number(this.group)
+        );
       }
 
       if (

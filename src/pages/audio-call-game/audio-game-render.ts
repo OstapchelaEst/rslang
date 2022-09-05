@@ -2,6 +2,9 @@ import { WordContent } from "../../interfaces/interfaceServerAPI";
 import { IStatistic } from "../../interfaces/caudio-call-game";
 import { AUDIO_CALL_GAME } from "../../controller/audio-call-game/audio-call-game";
 import { LOCAL_STORAGE } from "../../controller/local-storage/local-storage";
+import Vocabulary from "../vocabulary/Vocabulary";
+import { COMPONENT_HEADER } from "../../components/header/header";
+import { COMPONENT_FOOTER } from "../../components/footer/footer";
 class AudioCallRender {
   renderFullScreanAudio(block: string) {
     const BLOCK = document.createElement("div");
@@ -177,6 +180,9 @@ class AudioCallRender {
       </div>
     </div>
     `;
+    (<HTMLElement>(
+      document.querySelector(".audio-call-move-on__button")
+    )).addEventListener("click", this.returnToVocabularu);
   }
 
   renderNoDifficultWords() {
@@ -189,6 +195,9 @@ class AudioCallRender {
       </div>
     </div>
     `;
+    (<HTMLElement>(
+      document.querySelector(".audio-call-move-on__button")
+    )).addEventListener("click", this.returnToVocabularu);
   }
 
   setTrueOrFalse(value: number, valueTwo: number) {
@@ -222,6 +231,23 @@ class AudioCallRender {
         ? document.exitFullscreen()
         : document.documentElement.requestFullscreen();
     });
+  }
+
+  async returnToVocabularu() {
+    const container: HTMLElement | null =
+      document.querySelector(".main__container");
+
+    if (!container) return;
+
+    const vocabulary: Vocabulary = new Vocabulary();
+    await vocabulary.render();
+
+    COMPONENT_HEADER.createHeader();
+
+    container.innerHTML = "";
+    container.append(vocabulary.el);
+
+    COMPONENT_FOOTER.createFooter();
   }
 }
 

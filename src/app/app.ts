@@ -9,6 +9,7 @@ import Vocabulary from "../pages/vocabulary/Vocabulary";
 import { sprint } from "../pages/games/sprint/sprint";
 import GameResult from "../pages/games/gameResult/gameResult";
 import Statistic from "../pages/statistics/Statistics";
+import { SING_IN_MODAL_WINDOW } from "../components/header/sing-in-modal-window";
 
 const router = new Navigo("/", { hash: true });
 
@@ -80,7 +81,7 @@ router.on("/statistics", async () => {
 
     COMPONENT_FOOTER.createFooter();
   } catch {
-    window.location.href = "http://localhost:8080/";
+    SING_IN_MODAL_WINDOW.singInModalWindow();
   }
 });
 

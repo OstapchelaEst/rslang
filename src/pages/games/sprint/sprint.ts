@@ -10,6 +10,7 @@ import {
   UserWordContent,
   AuthorizationContent,
 } from "../../../interfaces/interfaceServerAPI";
+import { AUDIO_CALL_RENDER } from "../../audio-call-game/audio-game-render";
 
 class Sprint {
   innerHtmlTemplateRules = `
@@ -192,7 +193,10 @@ class Sprint {
     const userHardWordsContent = userWordsContent.filter(
       (userWord) => userWord.difficulty === "hard"
     );
-
+    if (userHardWordsContent.length === 0) {
+      COMPONENT_LOAD_SCREAN.removeLoadScrean();
+      return AUDIO_CALL_RENDER.renderNoDifficultWords();
+    }
     const hardWordsContentPromises = userHardWordsContent.map(
       async (userHardWord) =>
         words.getWordByWordId({ wordId: userHardWord.wordId })
