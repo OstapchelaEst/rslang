@@ -34,6 +34,10 @@ export default class Vocabulary {
       this.group = <string>LOCAL_STORAGE.getVocabularyGroup();
     }
 
+    if (LOCAL_STORAGE.getVocabularyPage()) {
+      this.page = LOCAL_STORAGE.getVocabularyPage();
+    }
+
     this.bindEvents();
   }
 
@@ -119,7 +123,7 @@ export default class Vocabulary {
         target.classList.add("active");
 
         this.group = target.dataset.group;
-        this.page = 0;
+        this.setPage(0);
         this.refresh();
 
         LOCAL_STORAGE.setVocabularyGroup(this.group);
@@ -148,7 +152,7 @@ export default class Vocabulary {
       }
 
       if (target.classList.contains("button-to-next")) {
-        this.page = this.page + 1;
+        this.setPage(this.page + 1);
         this.refresh();
 
         return;
@@ -156,7 +160,7 @@ export default class Vocabulary {
 
       if (target.classList.contains("button-to-previous")) {
         if (this.page > 0) {
-          this.page = this.page - 1;
+          this.setPage(this.page - 1);
           this.refresh();
         }
 
@@ -356,6 +360,11 @@ export default class Vocabulary {
     }
 
     throw new Error("Card is not linked to a word.");
+  }
+
+  setPage(page: number): void {
+    this.page = page;
+    LOCAL_STORAGE.setVocabularyPage(page);
   }
 
   setDifficulty(word: FullWord, difficulty: string): Promise<UserWordContent> {
