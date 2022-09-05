@@ -17,7 +17,7 @@ class AllGamesPage {
           <div class="all-games__text">
             Проверьте, сколько очков вы можете получить за одну минуту, делая выбор о том, что правильно, а что нет.
           </div>
-          <a href="/all-games/sprint" class="all-games__button" data-navigo>Играть!</a>
+          <a href="#/all-games/sprint" class="all-games__button" data-navigo>Играть!</a>
         </div>
         <div class="all-games__item">
           <div class="all-games__pictyre">
@@ -29,7 +29,7 @@ class AllGamesPage {
           <div class="all-games__text">
             Проверьте свои навыки восприятия английского на слух, пытаясь подобрать правильное значение после услышанного слова.
           </div>
-          <a href="/all-games/audio-call" class="all-games__button" data-navigo>Играть!</a>
+          <a href="#/all-games/audio-call" class="all-games__button" data-navigo>Играть!</a>
         </div>
       </div>
     </div>

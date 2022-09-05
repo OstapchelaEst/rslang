@@ -1,24 +1,21 @@
 export const TEAM_TEXT = {
   artem: {
-    prevNameText: `Наш team-leader`,
+    prevNameText: `Наш mentor`,
     name: `Артём`,
     gitLink: `https://github.com/RockStar666by`,
     gitImg: `https://avatars.githubusercontent.com/u/52502654?v=4`,
     text: `
-      Занимался тем и тем Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
-      libero dignissimos autipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
-      libero dignissimos aut
+      Занимался ревью кода, советы при реализации функционала, координацией команды.
       `,
   },
   dima: {
-    prevNameText: `Front-end разработчик`,
+    prevNameText: `Front-end разработчик и team-leader`,
     name: "Дмитрий",
     gitLink: `https://github.com/OstapchelaEst`,
     gitImg: `https://avatars.githubusercontent.com/u/90386861?v=4`,
     text: `            
-      Занимался тем и тем Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
-      libero dignissimos autipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
-      libero dignissimos aut`,
+      Занимался разработкой гланой страницы, компонентов header и footer, адаптив приложения, авторизация пользователя, общая страница мини-игр, статистика правильных/неправильных ответов в учебнике. Разработал игру аудиовызов.
+      Координация команды, ревью кода и фикс багов.  `,
   },
   lena: {
     prevNameText: `Front-end разработчик`,
@@ -26,9 +23,7 @@ export const TEAM_TEXT = {
     gitLink: `https://github.com/LenaStask`,
     gitImg: "https://avatars.githubusercontent.com/u/96074310?v=4",
     text: `
-      Занимался тем и тем Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
-      libero dignissimos autipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
-      libero dignissimos aut
+      Занималась созданием учебника, раздела сложные слова и страницы статистики, написанием запросов на сервер, фикс багов.
       `,
   },
   kirill: {
@@ -37,9 +32,7 @@ export const TEAM_TEXT = {
     gitLink: `https://github.com/teame92`,
     gitImg: `https://avatars.githubusercontent.com/u/50177907?v=4`,
     text: `
-      Занимался тем и тем Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
-      libero dignissimos autipsum dolor sit amet consectetur adipisicing elit. Quia eveniet,
-      libero dignissimos aut
+      Занимался разработкой игры спринт, запросов на сервер и написанием интерфейсов, фикс багов.
       `,
   },
 };

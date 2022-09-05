@@ -112,7 +112,7 @@ class MainPage {
           : ``
       }
       <div class="functional__link">
-         <a href="${
+         <a href="#${
            FUNCTIONAL_TEXT[key as keyof typeof FUNCTIONAL_TEXT].link
          }" data-navigo class="functional-link ${
         AUTHORIZATION ? (USER_DATA ? `` : `disable`) : ``
@@ -146,8 +146,8 @@ class MainPage {
     this.renderTeamPage();
     this.addListenersNoAuthorization();
     document
-      .querySelectorAll('[href="/vocabulary"]')[1]
-      .addEventListener("click", this.setValueVocabulary);
+      .querySelectorAll('[href="#/vocabulary"]')[1]
+      .addEventListener("click", RENDER_BASIC_STRUCTURE.setValueVocabulary);
   }
 }
 export const RENDER_BASIC_STRUCTURE = new MainPage();

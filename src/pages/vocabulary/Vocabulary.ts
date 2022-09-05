@@ -238,7 +238,7 @@ export default class Vocabulary {
         </div>
         <div class="vocabulary__mine-games">
           <a href="#/all-games/audio-call" data-navigo class="vocabulary__link-audio-call">Аудиовызов</a>
-          <a href="/all-games/sprint" data-navigo class="game-sprint">Спринт</a>
+          <a href="#/all-games/sprint" data-navigo class="game-sprint">Спринт</a>
         </div>
       </div>
     `;
@@ -359,7 +359,6 @@ export default class Vocabulary {
   }
 
   getWord(el: HTMLElement): FullWord {
-    console.log("AAAAAAAAAAA");
     const card: HTMLElement | null = el.closest(".card");
     if (card) {
       const wordId: string | undefined = card.dataset.wordId;
@@ -381,7 +380,6 @@ export default class Vocabulary {
   }
 
   addToLearned(word: FullWord) {
-    console.log(word);
     if (word.userWord?.difficulty !== "hard") {
       return saveUserWord(word, {
         optional: { dateWhenItBecameLearned: new Date().toISOString() },
