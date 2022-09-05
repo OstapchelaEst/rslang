@@ -48,7 +48,7 @@ class MainPage {
       <div class="team-page__body">   
       </div>
       <p class="team-page__sub-text">
-         Вместе мы трудились не покладая рук, чтоб ты смог учть англйиский комфортно и весело!
+         Вместе мы трудились не покладая рук, чтобы ты смог учить английский комфортно и весело!
       </p>
    </div>`;
     (<HTMLElement>document.querySelector(".main__container")).append(PAGE);
@@ -86,7 +86,7 @@ class MainPage {
     PAGE.innerHTML = `
     
       <h3 class="functional__title">Функционал</h3>
-      <p class="functional__info">Зарегестрируйся, чтоб получить все возможности</p>
+      <p class="functional__info">Зарегистрируйся, чтоб получить все возможности</p>
       <div class="functional__body">
       </div>
     `;
