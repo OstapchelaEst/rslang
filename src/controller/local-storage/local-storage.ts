@@ -18,6 +18,12 @@ class LocalStorage {
   setVocabularyGroup(group: string): void {
     localStorage.setItem("vocabularyGroup", group);
   }
+  getVocabularyPage(): number {
+    return Number(localStorage.getItem("vocabularyPage"));
+  }
+  setVocabularyPage(page: number): void {
+    localStorage.setItem("vocabularyPage", page.toString());
+  }
 }
 
 export const LOCAL_STORAGE = new LocalStorage();
