@@ -93,11 +93,11 @@ class AudioGame {
         return;
       }
 
-      if (FILTRED_DATA.length != 20 && group !== 6) {
+      if (FILTRED_DATA.length < 5 && group !== 6) {
         await AUDIO_CALL_GAME.getNidedWords(
           group,
           AUDIO_CALL_GAME.page,
-          20 - FILTRED_DATA.length
+          5 - FILTRED_DATA.length
         ).then((datas: FullWord[]) => {
           AUDIO_CALL_GAME.data = FILTRED_DATA.concat(datas);
         });
@@ -167,6 +167,7 @@ class AudioGame {
   }
 
   async treatmentData(data: FullWord[]) {
+    console.log(data);
     if (LOCAL_STORAGE.getDataUser()) {
       const USER_WORDS: UserWordContent[] =
         await usersWordsService.getUserWords(LOCAL_STORAGE.getDataUser());

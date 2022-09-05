@@ -11,5 +11,6 @@ import { AUTHENTICATED } from "./controller/autentificated/autentificatedUser";
 
 AUTHENTICATED.refreshUserToken();
 setInterval(() => {
+  console.log("REFRESH");
   AUTHENTICATED.refreshUserToken();
-}, 1000000);
+}, 100000);
