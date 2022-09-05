@@ -190,7 +190,7 @@ class AudioCallRender {
     <div class="audio-call-move-on">
       <div class="audio-call-move-on"__body">
        <div class="audio-call-move-on__title">У вас нет ни одного сложного слова!</div>
-       <div class="audio-call-move-on__sub-title">Добавбте их сами из учебника или совершите ошибку в мини-игре и слово добавиться автоматически</div>
+       <div class="audio-call-move-on__sub-title">Добавьте сложные слова на страницах учебника</div>
        <a href="#/vocabulary" data-navigo class="audio-call-move-on__button">Вернуться к учебнику</a>
       </div>
     </div>

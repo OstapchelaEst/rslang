@@ -139,7 +139,7 @@ export default class Vocabulary {
         const btnPage: HTMLElement = <HTMLElement>(
           document.querySelector(".pagination__button-numbered")
         );
-        const pageValue = btnPage.innerHTML;
+        const pageValue = btnPage?.innerHTML;
         if (Number(groupValue) < 6) {
           sprint.startGameFromPage({
             group: Number(groupValue),
@@ -359,6 +359,7 @@ export default class Vocabulary {
   }
 
   getWord(el: HTMLElement): FullWord {
+    console.log("AAAAAAAAAAA");
     const card: HTMLElement | null = el.closest(".card");
     if (card) {
       const wordId: string | undefined = card.dataset.wordId;
@@ -380,7 +381,8 @@ export default class Vocabulary {
   }
 
   addToLearned(word: FullWord) {
-    if (word.userWord.difficulty !== "hard") {
+    console.log(word);
+    if (word.userWord?.difficulty !== "hard") {
       return saveUserWord(word, {
         optional: { dateWhenItBecameLearned: new Date().toISOString() },
       });
