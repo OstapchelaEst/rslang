@@ -16,7 +16,7 @@ class ComponentHeader {
          <button type="button" class="menu__icon icon-menu"><span></span></button>
          <nav class="menu__body">
             <ul class="menu__list">
-               <li class="menu__item"><a href="/" class="menu__link">Наша команда</a></li>
+               <li class="menu__item"><a href="/" class="menu__link">Главная страница</a></li>
                <li class="menu__item"><a href="#vocabulary" class="menu__link">Учебник</a></li>
                <li class="menu__item"><a href="#all-games" class="menu__link">Игры</a></li>
                <li class="menu__item"><a href="#statistics" class="menu__link">Статистика</a></li>
@@ -145,6 +145,16 @@ class ComponentHeader {
         }
       }, 0);
     });
+    const LINK_STATISTIC = document.querySelectorAll(".menu__item")[3];
+    if (!LOCAL_STORAGE.getDataUser()) {
+      (<HTMLElement>LINK_STATISTIC.querySelector(".menu__link")).classList.add(
+        "disable"
+      );
+      LINK_STATISTIC.addEventListener(
+        "click",
+        SING_IN_MODAL_WINDOW.singInModalWindow
+      );
+    }
   }
 }
 
