@@ -16,17 +16,23 @@ export default class Statistic {
 
   async render() {
     const userData: AuthorizationContent = LOCAL_STORAGE.getDataUser();
-
-    const statistics: StatisticsContent =
-      await userStatisticService.getStatistics({
+    await userStatisticService
+      .getStatistics({
         token: userData.token,
         id: userData.userId,
+      })
+      .then((response) => {
+        this.el.innerHTML = this.renderStatistics(response);
+      })
+      .catch((err) => {
+        this.el.innerHTML = this.renderStatistics(err, err.response.status);
       });
-
-    this.el.innerHTML = this.renderStatistics(statistics);
   }
 
-  renderStatistics(statistics: StatisticsContent): string {
+  renderStatistics(
+    statistics: StatisticsContent,
+    status: number | null = null
+  ): string {
     let total = 0;
     let totalPercent = 0;
     let audiocallTotal = 0;
@@ -39,31 +45,33 @@ export default class Statistic {
     let sprintbestStreak = 0;
 
     const date: string = new Date().toLocaleDateString("en-US");
-    if (statistics?.optional[date]) {
-      audiocallTotal = statistics.optional[date].audioCall.totalCount;
-      sprintTotal = statistics.optional[date].sprint.totalCount;
-      audiocallTrue = statistics.optional[date].audioCall.trueCount;
-      sprintTrue = statistics.optional[date].sprint.trueCount;
-      audiocallbestStreak = statistics.optional[date].audioCall.bestStreak;
-      sprintbestStreak = statistics.optional[date].sprint.bestStreak;
+    if (status !== 404) {
+      if (statistics?.optional[date]) {
+        audiocallTotal = statistics.optional[date].audioCall.totalCount;
+        sprintTotal = statistics.optional[date].sprint.totalCount;
+        audiocallTrue = statistics.optional[date].audioCall.trueCount;
+        sprintTrue = statistics.optional[date].sprint.trueCount;
+        audiocallbestStreak = statistics.optional[date].audioCall.bestStreak;
+        sprintbestStreak = statistics.optional[date].sprint.bestStreak;
 
-      total =
-        statistics.optional[date].audioCall.totalCount +
-        statistics.optional[date].sprint.totalCount;
-      if (total !== 0) {
-        totalPercent = (audiocallTrue + sprintTrue) / total;
-      } else {
-        totalPercent = 0;
-      }
-      if (audiocallTotal !== 0) {
-        audiocallPercent = audiocallTrue / audiocallTotal;
-      } else {
-        audiocallPercent = 0;
-      }
-      if (sprintTotal !== 0) {
-        sprintPercent = sprintTrue / sprintTotal;
-      } else {
-        sprintPercent = 0;
+        total =
+          statistics.optional[date].audioCall.totalCount +
+          statistics.optional[date].sprint.totalCount;
+        if (total !== 0) {
+          totalPercent = (audiocallTrue + sprintTrue) / total;
+        } else {
+          totalPercent = 0;
+        }
+        if (audiocallTotal !== 0) {
+          audiocallPercent = audiocallTrue / audiocallTotal;
+        } else {
+          audiocallPercent = 0;
+        }
+        if (sprintTotal !== 0) {
+          sprintPercent = sprintTrue / sprintTotal;
+        } else {
+          sprintPercent = 0;
+        }
       }
     }
 
