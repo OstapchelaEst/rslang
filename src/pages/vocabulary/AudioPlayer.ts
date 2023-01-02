@@ -8,7 +8,7 @@ export default class AudioPlayer {
   }
 
   play(word: WordContent) {
-    const url = "https://rs-learnwords-example.herokuapp.com/";
+    const url = "https://rs-lang-back.onrender.com/";
 
     this.audio.src = url + word.audio;
     this.audio.play();

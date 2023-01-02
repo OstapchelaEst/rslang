@@ -8,7 +8,7 @@ import {
 const axios = require("axios").default;
 
 class UsersWords {
-  baseUrl = new URL("https://rs-learnwords-example.herokuapp.com/");
+  baseUrl = new URL("https://rs-lang-back.onrender.com/");
 
   getUserWords = async (user: AuthorizationContent) => {
     const url = new URL(`users/${user.userId}/words`, this.baseUrl);

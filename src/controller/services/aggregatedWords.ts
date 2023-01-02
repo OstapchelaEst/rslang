@@ -6,7 +6,7 @@ import {
 const axios = require("axios").default;
 
 class AggregatedWords {
-  private baseUrl = "https://rs-learnwords-example.herokuapp.com/";
+  private baseUrl = "https://rs-lang-back.onrender.com/";
 
   getAggregatedWords = async (
     request: AggregatedWordsRequest,

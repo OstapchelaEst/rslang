@@ -253,9 +253,7 @@ export default class Vocabulary {
     return `
       <div class="card" data-word-id="${word.id}">
         <div class="card__image">
-            <img src="https://rs-learnwords-example.herokuapp.com/${
-              word.image
-            }"></img>
+            <img src="https://rs-lang-back.onrender.com/${word.image}"></img>
         </div>
         <div class="card__content">
             <div class="card__word">

@@ -8,7 +8,7 @@ import {
 const axios = require("axios").default;
 
 class Users {
-  baseUrl = new URL("https://rs-learnwords-example.herokuapp.com/");
+  baseUrl = new URL("https://rs-lang-back.onrender.com/");
 
   createUser = async (user: User) => {
     const url = new URL("users", this.baseUrl);
