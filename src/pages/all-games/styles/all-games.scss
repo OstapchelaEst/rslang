@@ -1,0 +1,96 @@
+@import '../../../mixins.scss';
+@import '../../main/styles/animation.scss';
+
+.main{
+
+}
+.all-games {
+  // .all-games__body
+  &__body {
+    padding: 50px 0;
+  }
+  // .all-games__title
+  &__title {
+    color: #ffffffdb;
+    font-size: rem(54);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 60px;
+    @media (max-width: em(550)){
+      font-size: rem(30);
+      margin-bottom: adaptivSize(60,20,550,320);
+    }
+  }
+  // .all-games__inner
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(2,300px);
+    column-gap: 90px;
+    row-gap: 20px;
+    justify-content: center;
+    transition: all 0.3s ease 0s;
+    @media (max-width: em(750)){
+      column-gap: adaptivSize(90,-100,750,500); 
+    }
+    @media (max-width: em(650)){
+      grid-template-columns: repeat(1,290px);
+    }
+  }
+  // .all-games__item
+  &__item {
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid rgba(255, 255, 255, 0.636);
+    border-radius: 20px;
+  }
+  // .all-games__pictyre
+  &__pictyre {  
+  }
+  // .all-games__sub-title
+  &__sub-title {
+    color: #ffffffdb;
+    font-size: rem(36);
+    font-weight: 800;
+    margin-bottom: 15px;
+    @media (max-width: em(550)){
+        font-size: rem(24);
+    }
+  }
+  // .all-games__text
+  &__text {
+    flex:  1 1;
+    font-size: rem(20);
+    line-height: 1;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.685);
+    text-align: left;
+    margin-bottom: 20px;
+    @media (max-width: em(550)){
+      font-size: rem(18);
+  }
+  }
+  &__button{
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
+    background-color: #F5443B;
+    text-align: center;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: rem(20);
+    box-shadow: 0px 0px 0px 0px#F5443B;
+    animation-duration: .7s;
+    @media (max-width: em(460)){
+       font-size: rem(18);
+    }
+    @media (any-hover: hover){
+       &:hover{
+          animation-name:button;
+       }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+@import './../../../mixins.scss';
+
+.statistics {
+  color: rgba(255, 255, 255, 0.8);
+  max-width: fit-content;
+  margin: 0 auto;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  & h2 {
+    font-weight: 900;
+  }
+
+  &__learned-words,
+  &__right-answers{
+    & p{
+      font-size: rem(22);
+      font-weight: 600;
+    }
+  }
+  .statistics__header {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+  .statistics__content {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+  .statistics__value {
+    font-size: 5rem;
+    font-weight: 800;
+  }
+  .statistics__game {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    .statistics__game-style {
+      background: linear-gradient(180deg, #202246 -53.38%, rgba(40, 43, 87, 0.31) 100%);
+      border: 5px solid rgba(255, 255, 255, 0.303);
+      border-radius: 5px;
+      width: 16rem;
+      padding: 1rem;
+      font-weight: 600;
+      line-height: 1.08;
+      h3 {
+        font-weight: 800;
+        font-size: 20px;
+        margin-bottom: 1rem;
+        color:#f95048;
+      }
+      p{
+        margin-bottom: 10px;
+      }
+    }
+  }
+  @media (max-width: 560px) {
+    .statistics__header {
+      font-size: 2rem;
+    }
+    .statistics__content {
+      flex-direction: column;
+    }
+    .statistics__game {
+      flex-direction: column;
+      text-align: center;
+      row-gap: 1rem;
+      align-items: center;
+    }
+  }
+}
